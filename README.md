@@ -2,7 +2,7 @@
 Portal astrológico profesional. 
 
 ## ✍️ Autor
-**Jonathan contino*
+**Jonathan contino**
 
 ## 🛠️ Tecnologías
 HTML5, CSS3, JavaScript Vanilla.
