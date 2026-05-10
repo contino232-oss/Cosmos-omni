@@ -2,54 +2,69 @@ function toggleMenu() {
     document.getElementById("sidebar").classList.toggle("active");
 }
 
-function renderSistema() {
-    // 1. Análisis del Día (Interpretación recuperada)
-    const portalHoy = document.getElementById('analisis-hoy');
-    if (portalHoy) {
-        portalHoy.innerHTML = `
-            <strong>Configuración del 8 de Mayo:</strong> La Luna en Escorpio en oposición al Sol en Tauro marca una jornada de alta intensidad emocional. 
-            Es un portal para profundizar en lo que valoramos y soltar lo que ya no nutre nuestra evolución. 
-            Júpiter exaltado en Cáncer ofrece una protección especial en temas familiares y de raíces.
-        `;
+function mostrarSeccion(id) {
+    document.querySelectorAll('.vista').forEach(v => v.classList.add('seccion-oculta'));
+    document.getElementById(id).classList.remove('seccion-oculta');
+    if(window.innerWidth < 1024) toggleMenu();
+    window.scrollTo(0,0);
+}
+
+function renderPortal() {
+    const hoy = new Date();
+    document.getElementById('fecha-top').innerText = hoy.toLocaleDateString();
+    document.getElementById('portal-dia').innerText = "Portal del " + hoy.toLocaleDateString('es-ES', {day:'numeric', month:'long'});
+
+    // 1. Análisis Dinámico
+    document.getElementById('analisis-hoy').innerHTML = `<strong>Configuración:</strong> Luna en fase menguante. Plutón Retrógrado en Acuario impulsa la revisión de innovaciones y estructuras sociales.`;
+
+    // 2. Almanaque Lunar (Cálculo exacto Mayo 2026)
+    const tl = document.getElementById('render-luna');
+    let pos = 220; 
+    for(let d=1; d<=31; d++) {
+        let idx = Math.floor((pos/30)%12);
+        let s = ZODIACO[idx];
+        let fase = (d===1) ? "🌕" : (d===9) ? "🌗" : (d===16) ? "🌑" : (d===24) ? "🌓" : (d===31) ? "🌕" : "·";
+        let dignidad = (idx === 7) ? "Caída" : (idx === 3) ? "Domicilio" : "Peregrina";
+        tl.innerHTML += `<tr class="${d === hoy.getDate() ? 'hoy-fila' : ''}">
+            <td>${d}</td><td>${fase}</td><td><strong>${Math.floor(pos%30)}° ${s.n}</strong></td>
+            <td>${s.e}/${s.c}</td><td>${dignidad}</td><td>---</td>
+        </tr>`;
+        pos += 13.18;
     }
 
-    // 2. Efemérides y Configuración Planetaria
-    const te = document.getElementById('tabla-efemerides');
-    const pc = document.getElementById('grid-planetas');
-    EFEMERIDES_MAYO_2026.forEach(i => {
-        te.innerHTML += `<tr><td><strong>${i.p}</strong></td><td>${i.g}</td><td>${i.s}</td><td>${i.e}</td></tr>`;
-        pc.innerHTML += `<div class="card"><small>${i.p}</small><br><strong>${i.g} ${i.s}</strong></div>`;
+    // 3. Biblioteca de Mitos
+    const gm = document.getElementById('grid-mitos');
+    ARQUETIPOS.forEach(a => {
+        gm.innerHTML += `
+            <div class="card-mito">
+                <div class="card-h"><h4>${a.p}</h4><small>${a.dios}</small></div>
+                <p>${a.m}</p>
+                <div class="card-f"><span>Reg: ${a.r}</span><span>Rol: ${a.g}</span></div>
+            </div>`;
     });
 
-    // 3. Calendario Lunar Dinámico
-    const lc = document.getElementById('render-luna');
-    let posTotal = 232; 
-    for(let d = 1; d <= 31; d++) {
-        let idx = Math.floor((posTotal / 30) % 12);
-        let grado = Math.floor(posTotal % 30);
-        let s = ZODIACO[idx];
-        let fase = (d===1 || d===31) ? "🌕" : (d===16) ? "🌑" : (d===9) ? "🌗" : (d===24) ? "🌓" : "·";
-        
-        let vacio = { 2: "22:15-23:40", 7: "12:00-14:50", 15: "00:30-02:45", 22: "11:50-13:30", 30: "00:10-02:00" }[d] || "---";
-        
-        lc.innerHTML += `
-            <tr>
-                <td>${d}</td><td>${fase}</td><td><strong>${grado}° ${s.n}</strong></td>
-                <td>${s.e}</td><td>${s.d}</td><td style="color: #d4af37;">${vacio}</td>
-            </tr>`;
-        posTotal += 13.18;
-    }
-
-    // 4. Arquetipos Completos
-    const mc = document.getElementById('grid-mitos');
-    ARQUETIPOS.forEach(b => {
-        mc.innerHTML += `
-            <div class="mito-card">
-                <h4>${b.p}</h4>
-                <p>${b.m}</p>
-                <small style="opacity: 0.7;">Clave: ${b.k} | Arquetipo: ${b.a}</small>
+    // 4. Clima Elemental (Balance)
+    const clim = document.getElementById('render-clima');
+    const elData = [ {n:"Fuego", p:25, c:"#ff4d4d"}, {n:"Tierra", p:40, c:"#4CAF50"}, {n:"Aire", p:20, c:"#81D4FA"}, {n:"Agua", p:15, c:"#2196F3"} ];
+    elData.forEach(e => {
+        clim.innerHTML += `
+            <div class="bar-item">
+                <div class="bar-info"><span>${e.n}</span><span>${e.p}%</span></div>
+                <div class="bar-bg"><div class="bar-fill" style="width:${e.p}%; background:${e.c};"></div></div>
             </div>`;
+    });
+
+    // 5. Retrogradaciones
+    const rr = document.getElementById('render-retro');
+    RETRO_INFO.forEach(r => {
+        rr.innerHTML += `<tr><td>${r.p}</td><td>${r.r}</td><td>${r.s}</td><td style="color:var(--oro)">${r.e}</td></tr>`;
+    });
+
+    // 6. Glosario
+    const rg = document.getElementById('render-glosario');
+    GLOSARIO.forEach(g => {
+        rg.innerHTML += `<div class="glos-card"><h4>${g.t}</h4><p>${g.d}</p></div>`;
     });
 }
 
-window.onload = renderSistema;
+window.onload = renderPortal;
