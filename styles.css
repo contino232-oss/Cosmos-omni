@@ -1,43 +1,32 @@
-:root { --oro: #d4af37; --negro: #05050a; --card: #12121a; }
+:root { --oro: #d4af37; --negro: #05050a; --card: #12121c; }
 body { margin: 0; font-family: 'Montserrat', sans-serif; background: var(--negro); color: #fff; overflow-x: hidden; }
 
-/* HEADER */
 header { background: #000; padding: 15px 5%; border-bottom: 2px solid var(--oro); position: sticky; top: 0; z-index: 100; }
 .header-inner { display: flex; justify-content: space-between; align-items: center; }
 .logo { font-family: 'Cinzel', serif; color: var(--oro); font-size: 1.4rem; }
 .hamburguesa-btn { background: none; border: 1px solid var(--oro); color: var(--oro); padding: 8px 12px; cursor: pointer; }
 
-/* SIDEBAR */
-.sidebar { position: fixed; left: -100%; top: 0; width: 280px; height: 100vh; background: #0f0f15; transition: 0.4s; z-index: 1000; border-right: 1px solid var(--oro); padding-top: 50px; }
+.sidebar { position: fixed; left: -100%; top: 0; width: 280px; height: 100vh; background: #0f0f15; transition: 0.4s; z-index: 1000; border-right: 1px solid var(--oro); }
 .sidebar.active { left: 0; }
-.sidebar a { display: block; color: #fff; text-decoration: none; padding: 20px; border-bottom: 1px solid #222; font-size: 0.9rem; }
-.sidebar a:hover { background: var(--oro); color: #000; }
-.close-btn { position: absolute; top: 10px; right: 20px; background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; }
+.sidebar a { display: block; color: #fff; text-decoration: none; padding: 20px; border-bottom: 1px solid #222; font-size: 0.85rem; }
 
-/* VISTAS */
 .vista { padding: 40px 5%; max-width: 1200px; margin: 0 auto; animation: fadeIn 0.4s; }
 .seccion-oculta { display: none !important; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* DASHBOARD */
-.dashboard { display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 30px; }
-@media (min-width: 1024px) { .dashboard { grid-template-columns: 1.6fr 1fr; } }
+.card { background: var(--card); padding: 25px; border-radius: 12px; border: 1px solid #333; margin-bottom: 20px; }
+.tabla-scroll { width: 100%; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 500px; }
+th, td { padding: 12px; text-align: left; border-bottom: 1px solid #222; font-size: 0.85rem; }
+tr.hoy-fila { border-left: 4px solid var(--oro); background: rgba(212,175,55,0.1); }
 
-.tabla-scroll { width: 100%; overflow-x: auto; background: var(--card); border-radius: 12px; border: 1px solid #222; }
-table { width: 100%; border-collapse: collapse; min-width: 600px; }
-th, td { padding: 15px; text-align: left; border-bottom: 1px solid #222; font-size: 0.85rem; }
-th { color: var(--oro); text-transform: uppercase; font-size: 0.75rem; }
-tr.hoy-fila { background: rgba(212, 175, 55, 0.1); border-left: 4px solid var(--oro); }
+.acordeon-item { background: var(--card); margin-bottom: 10px; border-radius: 8px; border: 1px solid #333; }
+.acordeon-btn { width: 100%; padding: 15px 20px; background: none; border: none; color: #fff; display: flex; justify-content: space-between; cursor: pointer; font-family: 'Cinzel'; }
+.acordeon-content { padding: 20px; display: none; background: rgba(0,0,0,0.4); border-top: 1px solid #333; font-size: 0.9rem; line-height: 1.6; }
 
-/* MITOS & CLIMA */
-.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-.card-mito { background: var(--card); padding: 25px; border-radius: 10px; border-top: 3px solid var(--oro); }
-.card-f { display: flex; justify-content: space-between; margin-top: 15px; font-size: 0.8rem; color: var(--oro); border-top: 1px solid #333; padding-top: 10px; }
-
-.clima-container { max-width: 600px; background: var(--card); padding: 30px; border-radius: 15px; margin: 0 auto; }
-.bar-item { margin-bottom: 20px; }
-.bar-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: bold; }
-.bar-bg { background: #000; height: 10px; border-radius: 5px; overflow: hidden; }
+.bar-bg { background: #000; height: 8px; border-radius: 4px; margin-top: 5px; }
 .bar-fill { height: 100%; transition: 1s ease; }
 
-.glos-card { background: var(--card); padding: 20px; border-radius: 8px; border-left: 3px solid var(--oro); }
+.form-container { max-width: 600px; margin: 0 auto; background: var(--card); padding: 30px; border-radius: 10px; border: 1px solid var(--oro); }
+input, textarea { width: 100%; padding: 12px; background: #000; border: 1px solid #444; color: #fff; margin-bottom: 10px; box-sizing: border-box; }
+.btn-enviar { width: 100%; padding: 15px; background: var(--oro); border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
