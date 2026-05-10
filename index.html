@@ -3,117 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmos Omni - Portal Astrológico</title>
+    <title>Cosmos Omni 2026</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<nav id="sidebar" class="sidebar">
-    <button class="close-btn" onclick="toggleMenu()">×</button>
-    <div class="menu-links">
-        <a href="#inicio" onclick="toggleMenu()">Inicio</a>
-        <a href="#efemerides" onclick="toggleMenu()">Efemérides</a>
-        <a href="#cielo" onclick="toggleMenu()">Cielo Actual</a>
-        <a href="#arquetipos" onclick="toggleMenu()">Arquetipos</a>
-        <a href="#contacto" onclick="toggleMenu()">Contacto</a>
-    </div>
-</nav>
-
-<header>
-    <div class="header-left">
-        <button class="hamburguesa" onclick="toggleMenu()">☰</button>
-        <div class="logo">COSMOS OMNI</div>
-    </div>
-    <nav class="nav-desktop">
-        <ul>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#efemerides">Efemérides</a></li>
-            <li><a href="#cielo">Cielo Actual</a></li>
-            <li><a href="#arquetipos">Arquetipos</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-        </ul>
+    <nav id="sidebar" class="sidebar">
+        <button class="close-btn" onclick="toggleMenu()">×</button>
+        <div class="menu-content">
+            <h2 class="menu-logo">COSMOS OMNI</h2>
+            <a href="#" onclick="mostrarSeccion('inicio')">🏠 ALMANAQUE HOY</a>
+            <a href="#" onclick="mostrarSeccion('arquetipos')">📚 BIBLIOTECA DE DIOSES</a>
+            <a href="#" onclick="mostrarSeccion('clima')">🌡️ CLIMA ELEMENTAL</a>
+            <a href="#" onclick="mostrarSeccion('glosario')">📖 GLOSARIO TÉCNICO</a>
+            <a href="#" onclick="mostrarSeccion('contacto')">📩 CONTACTO</a>
+        </div>
     </nav>
-</header>
 
-<main>
-    <section id="inicio" class="full-page">
-        <div class="hero-content">
-            <h1>Portal del Día</h1>
-            <div id="analisis-hoy" class="caja-texto"></div>
+    <header>
+        <div class="header-inner">
+            <button class="hamburguesa-btn" onclick="toggleMenu()">☰ MENU</button>
+            <div class="logo">COSMOS OMNI</div>
+            <div id="fecha-top" class="fecha-header"></div>
         </div>
-        
-        <div class="calendarios-container">
-            <div class="col-tabla">
-                <h3>Ciclos de Retrogradación</h3>
-                <div class="tabla-scroll">
-                    <table>
-                        <thead><tr><th>Cuerpo</th><th>Periodo</th><th>Estado</th></tr></thead>
-                        <tbody>
-                            <tr><td>Plutón</td><td>30 Abr - 13 Oct</td><td>R</td></tr>
-                            <tr><td>Saturno</td><td>13 Jul - 28 Nov</td><td>D</td></tr>
-                        </tbody>
-                    </table>
+    </header>
+
+    <main>
+        <section id="inicio" class="vista">
+            <div class="hero">
+                <h1 id="portal-dia">Cargando...</h1>
+                <div id="analisis-hoy" class="caja-texto"></div>
+            </div>
+            
+            <div class="dashboard">
+                <div class="card">
+                    <h3>Almanaque Lunar Mayo 2026</h3>
+                    <div class="tabla-scroll">
+                        <table>
+                            <thead>
+                                <tr><th>Día</th><th>Fase</th><th>Posición</th><th>Elem/Cual</th><th>Dignidad</th><th>Vacío</th></tr>
+                            </thead>
+                            <tbody id="render-luna"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Ciclos de Retrogradación</h3>
+                    <div class="tabla-scroll">
+                        <table>
+                            <thead>
+                                <tr><th>Cuerpo</th><th>Retrogradación</th><th>Sombra</th><th>Estado</th></tr>
+                            </thead>
+                            <tbody id="render-retro"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="col-tabla">
-                <h3>Calendario Lunar (Mayo 2026)</h3>
-                <div class="tabla-scroll">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Día</th>
-                                <th>Fase</th>
-                                <th>Posición</th>
-                                <th>Elem.</th>
-                                <th>Dignidad</th>
-                                <th>Vacío (GMT-3)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="render-luna"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </section>
+        <section id="arquetipos" class="vista seccion-oculta">
+            <h2 class="titulo-vistas">Biblioteca de Arquetipos Divinos</h2>
+            <div id="grid-mitos" class="grid-container"></div>
+        </section>
 
-    <section id="efemerides" class="full-page">
-        <h2>Efemérides Geocéntricas</h2>
-        <div class="tabla-scroll">
-            <table class="tabla-tecnica">
-                <thead><tr><th>Cuerpo</th><th>Posición</th><th>Signo</th><th>Estado</th></tr></thead>
-                <tbody id="tabla-efemerides"></tbody>
-            </table>
-        </div>
-    </section>
+        <section id="clima" class="vista seccion-oculta">
+            <h2 class="titulo-vistas">Balance Elemental del Día</h2>
+            <div id="render-clima" class="clima-container"></div>
+        </section>
 
-    <section id="cielo" class="full-page">
-        <h2>Configuración Planetaria</h2>
-        <div id="grid-planetas" class="flex-container"></div>
-    </section>
+        <section id="glosario" class="vista seccion-oculta">
+            <h2 class="titulo-vistas">Glosario Astrológico</h2>
+            <div id="render-glosario" class="glosario-grid"></div>
+        </section>
 
-    <section id="arquetipos" class="full-page">
-        <h2>Biblioteca de Arquetipos</h2>
-        <div id="grid-mitos" class="grid-container"></div>
-    </section>
+        <section id="contacto" class="vista seccion-oculta">
+            <h2 class="titulo-vistas">Contacto</h2>
+            <form class="form-contacto">
+                <input type="text" placeholder="Tu Nombre">
+                <input type="email" placeholder="Correo">
+                <textarea placeholder="Consulta..."></textarea>
+                <button type="submit">Enviar al Cosmos</button>
+            </form>
+        </section>
+    </main>
 
-    <section id="contacto" class="full-page">
-        <h2>Contacto</h2>
-        <form action="#" class="formulario-estelar">
-            <input type="text" placeholder="Nombre completo" required>
-            <input type="email" placeholder="Correo electrónico" required>
-            <textarea rows="5" placeholder="Tu consulta..." required></textarea>
-            <button type="submit">Enviar Mensaje</button>
-        </form>
-    </section>
-</main>
-
-<footer>
-    <p>&copy; 2026 Cosmos Omni - Rastreo Celestial de Precisión</p>
-</footer>
-
-<script src="data.js"></script>
-<script src="script.js"></script>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
 </body>
-                </html>
+                    </html>
