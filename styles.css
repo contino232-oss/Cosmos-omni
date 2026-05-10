@@ -1,75 +1,43 @@
-:root {
-    --oro: #d4af37;
-    --profundo: #050505;
-    --texto: #f5f5f5;
-}
+:root { --oro: #d4af37; --negro: #05050a; --card: #12121a; }
+body { margin: 0; font-family: 'Montserrat', sans-serif; background: var(--negro); color: #fff; overflow-x: hidden; }
 
-html { scroll-behavior: smooth; }
+/* HEADER */
+header { background: #000; padding: 15px 5%; border-bottom: 2px solid var(--oro); position: sticky; top: 0; z-index: 100; }
+.header-inner { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: 'Cinzel', serif; color: var(--oro); font-size: 1.4rem; }
+.hamburguesa-btn { background: none; border: 1px solid var(--oro); color: var(--oro); padding: 8px 12px; cursor: pointer; }
 
-body {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    color: var(--texto);
-    background: linear-gradient(270deg, #020111, #0f0c29, #24243e);
-    background-size: 400% 400%;
-    animation: movimientoEspacial 15s ease infinite;
-    overflow-x: hidden;
-}
-
-@keyframes movimientoEspacial {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-
-header {
-    background: rgba(0,0,0,0.95);
-    padding: 1rem 5%;
-    border-bottom: 2px solid var(--oro);
-    position: sticky;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-}
-
-.header-left { display: flex; align-items: center; gap: 20px; }
-.logo { font-family: 'Cinzel', serif; color: var(--oro); font-size: 1.8rem; font-weight: bold; }
-
-.hamburguesa {
-    background: none; border: 1px solid var(--oro); color: var(--oro);
-    font-size: 1.5rem; cursor: pointer; padding: 5px 10px; border-radius: 5px;
-}
-
-.nav-desktop ul { display: flex; gap: 25px; list-style: none; margin: 0; }
-.nav-desktop a { color: var(--oro); text-decoration: none; font-weight: 600; text-transform: uppercase; font-size: 0.8rem; }
-
-.sidebar {
-    position: fixed; top: 0; left: -300px; width: 280px; height: 100vh;
-    background: #0a0a15; transition: 0.4s; z-index: 2000; padding: 30px;
-    border-right: 2px solid var(--oro);
-}
+/* SIDEBAR */
+.sidebar { position: fixed; left: -100%; top: 0; width: 280px; height: 100vh; background: #0f0f15; transition: 0.4s; z-index: 1000; border-right: 1px solid var(--oro); padding-top: 50px; }
 .sidebar.active { left: 0; }
-.close-btn { background: none; border: none; color: var(--oro); font-size: 2.5rem; cursor: pointer; float: right; }
-.menu-links { display: flex; flex-direction: column; gap: 25px; margin-top: 80px; }
-.menu-links a { color: var(--oro); text-decoration: none; font-size: 1.2rem; font-family: 'Cinzel', serif; }
+.sidebar a { display: block; color: #fff; text-decoration: none; padding: 20px; border-bottom: 1px solid #222; font-size: 0.9rem; }
+.sidebar a:hover { background: var(--oro); color: #000; }
+.close-btn { position: absolute; top: 10px; right: 20px; background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; }
 
-.full-page { min-height: 100vh; padding: 100px 10%; display: flex; flex-direction: column; align-items: center; box-sizing: border-box; }
-h2 { font-family: 'Cinzel', serif; color: var(--oro); font-size: 2.5rem; margin-bottom: 40px; }
+/* VISTAS */
+.vista { padding: 40px 5%; max-width: 1200px; margin: 0 auto; animation: fadeIn 0.4s; }
+.seccion-oculta { display: none !important; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-.caja-texto { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 10px; border-left: 4px solid var(--oro); line-height: 1.6; max-width: 800px; }
-.tabla-scroll { width: 100%; overflow-x: auto; background: rgba(0,0,0,0.4); border-radius: 10px; border: 1px solid #333; }
+/* DASHBOARD */
+.dashboard { display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 30px; }
+@media (min-width: 1024px) { .dashboard { grid-template-columns: 1.6fr 1fr; } }
+
+.tabla-scroll { width: 100%; overflow-x: auto; background: var(--card); border-radius: 12px; border: 1px solid #222; }
 table { width: 100%; border-collapse: collapse; min-width: 600px; }
-th, td { padding: 15px; border-bottom: 1px solid #222; text-align: left; }
+th, td { padding: 15px; text-align: left; border-bottom: 1px solid #222; font-size: 0.85rem; }
 th { color: var(--oro); text-transform: uppercase; font-size: 0.75rem; }
+tr.hoy-fila { background: rgba(212, 175, 55, 0.1); border-left: 4px solid var(--oro); }
 
-.flex-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; width: 100%; }
-.card { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--oro); padding: 25px; width: 160px; text-align: center; border-radius: 15px; }
+/* MITOS & CLIMA */
+.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.card-mito { background: var(--card); padding: 25px; border-radius: 10px; border-top: 3px solid var(--oro); }
+.card-f { display: flex; justify-content: space-between; margin-top: 15px; font-size: 0.8rem; color: var(--oro); border-top: 1px solid #333; padding-top: 10px; }
 
-.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; width: 100%; }
-.mito-card { background: rgba(0, 0, 0, 0.6); border: 1px solid #333; border-top: 4px solid var(--oro); padding: 25px; border-radius: 10px; }
-.mito-card h4 { color: var(--oro); margin-top: 0; font-family: 'Cinzel', serif; font-size: 1.2rem; }
+.clima-container { max-width: 600px; background: var(--card); padding: 30px; border-radius: 15px; margin: 0 auto; }
+.bar-item { margin-bottom: 20px; }
+.bar-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: bold; }
+.bar-bg { background: #000; height: 10px; border-radius: 5px; overflow: hidden; }
+.bar-fill { height: 100%; transition: 1s ease; }
 
-@media (max-width: 900px) { .nav-desktop { display: none; } }
-@media (min-width: 901px) { .hamburguesa { display: none; } }
+.glos-card { background: var(--card); padding: 20px; border-radius: 8px; border-left: 3px solid var(--oro); }
