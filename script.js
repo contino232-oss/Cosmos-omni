@@ -23,7 +23,7 @@ function toggleAcordeon(id) {
 function calcularEfemerides() {
     const anio = document.getElementById('input-anio').value;
     const res = document.getElementById('res-efem');
-    res.innerHTML = `<div class="card"><h4>Cielo de ${anio}</h4><p>Explorando alineaciones de Júpiter en Leo y Saturno en Aries para este ciclo histórico.</p></div>`;
+    res.innerHTML = `<div class="card"><h4>Cielo de ${anio}</h4><p>Explorando alineaciones históricas.</p></div>`;
 }
 
 function init() {
@@ -31,26 +31,27 @@ function init() {
     document.getElementById('fecha-top').innerText = hoy.toLocaleDateString();
     document.getElementById('portal-dia').innerText = "Portal del " + hoy.toLocaleDateString('es-ES', {day:'numeric', month:'long'});
 
-    // Resumen en Inicio
+    // Interpretación combinada
     document.getElementById('interpretacion-resumen').innerHTML = `
-        <p><strong>Configuración Destino:</strong> Luna en Acuario pidiendo libertad. Los Nodos nos piden soltar el control (Sur en Virgo) para entregarnos al flujo (Norte en Piscis). <strong>Quirón</strong> en sombra activa la revisión de viejas heridas de identidad.</p>
+        <p><strong>Configuración:</strong> Luna en Acuario. La <strong>Rueda de la Fortuna</strong> en Libra otorga fluidez social, mientras que el <strong>Infortunio</strong> en Aries nos advierte sobre la impulsividad. <strong>Lilith</strong> en Virgo nos pide sanar la obsesión por la perfección.</p>
     `;
 
-    // Render Tránsitos hoy
+    // Render Tránsitos
     const rtp = document.getElementById('render-transitos-page');
+    rtp.innerHTML = "";
     TRANSITOS_HOY.forEach(t => {
         rtp.innerHTML += `<tr onclick="irABiblioteca(${t.id})" style="cursor:pointer; background:rgba(212,175,55,0.05)">
             <td><strong>${t.p}</strong></td><td>${t.s}</td><td>${t.g}</td><td>${t.e}</td>
         </tr>`;
     });
 
-    // Render Retrogradaciones y Sombras
+    // Render Retrogradaciones
     const rr = document.getElementById('render-retrogradaciones');
     ESTADOS_RETRO.forEach(reg => {
-        rr.innerHTML += `<tr><td><strong>${reg.p}</strong></td><td><small>${reg.r}</small></td><td><small>${reg.s}</small></td><td style="color:var(--oro)">${reg.e}</td></tr>`;
+        rr.innerHTML += `<tr><td><strong>${reg.p}</strong></td><td><small>${reg.r}</small></td><td><small>${reg.s}</small></td><td>${reg.e}</td></tr>`;
     });
 
-    // Calendario Lunar Mayo 2026
+    // Calendario Lunar
     const tl = document.getElementById('render-luna');
     let pos = 220;
     for(let d=1; d<=31; d++) {
@@ -64,14 +65,19 @@ function init() {
         pos += 13.18;
     }
 
-    // Biblioteca Plegable
+    // Biblioteca Plegable con DIOSES
     const la = document.getElementById('lista-arquetipos');
+    la.innerHTML = "";
     ARQUETIPOS.forEach((a, i) => {
         la.innerHTML += `
             <div class="acordeon-item">
-                <button class="acordeon-btn" onclick="toggleAcordeon(${i})"><span>${a.p}</span><span>+</span></button>
+                <button class="acordeon-btn" onclick="toggleAcordeon(${i})">
+                    <span>${a.p} <small>(${a.d})</small></span>
+                    <span>+</span>
+                </button>
                 <div id="content-${i}" class="acordeon-content">
-                    <p><strong>Clasificación:</strong> ${a.t} | <strong>Regencia:</strong> ${a.r}</p>
+                    <p><strong>Deidad Ligada:</strong> ${a.d}</p>
+                    <p><strong>Clasificación:</strong> ${a.t} | <strong>Rige:</strong> ${a.r}</p>
                     <p>${a.m}</p>
                 </div>
             </div>`;
@@ -85,12 +91,11 @@ function init() {
     });
 }
 
-// Contacto Funcional
 const form = document.getElementById("contact-form");
 if(form) {
     form.onsubmit = e => {
         e.preventDefault();
-        document.getElementById("form-status").innerText = "¡Mensaje enviado al Cosmos! ✨ Recibirás respuesta pronto.";
+        document.getElementById("form-status").innerText = "¡Mensaje enviado al Cosmos! ✨";
         form.reset();
     };
 }
