@@ -6,18 +6,23 @@ const ZODIACO = [
 ];
 
 const ARQUETIPOS = [
-    { p: "Sol", d: "Apolo", t: "Luminar", m: "Centro de identidad y propósito heroico.", r: "Leo" },
-    { p: "Luna", d: "Artemisa", t: "Luminar", m: "Subconsciente y refugio emocional.", r: "Cáncer" },
-    { p: "Mercurio", d: "Hermes", t: "Personal", m: "Comunicación, lógica y mente analítica.", r: "Géminis/Virgo" },
-    { p: "Venus", d: "Afrodita", t: "Personal", m: "Deseo, belleza y sistema de valores.", r: "Tauro/Libra" },
-    { p: "Marte", d: "Ares", t: "Personal", m: "Acción, asertividad e impulso.", r: "Aries" },
-    { p: "Quirón", d: "El Centauro", t: "Centauro", m: "La herida que se convierte en medicina; el maestro sanador.", r: "Sagitario" },
-    { p: "Nodo Norte", d: "Dharma", t: "Matemático", m: "Dirección de evolución y aprendizaje futuro.", r: "Eje del Destino" },
-    { p: "Nodo Sur", d: "Karma", t: "Matemático", m: "Patrones conocidos que debemos integrar o soltar.", r: "Eje del Destino" },
-    { p: "Rueda Fortuna", d: "Pars Fortunae", t: "Árabe", m: "Punto de armonía, éxito y bienestar natural.", r: "Individual" },
-    { p: "Júpiter", d: "Zeus", t: "Social", m: "Expansión, suerte y abundancia.", r: "Sagitario" },
-    { p: "Saturno", d: "Cronos", t: "Social", m: "Límites, tiempo y maestría por esfuerzo.", r: "Capricornio" },
-    { p: "Plutón", d: "Hades", t: "Transpersonal", m: "Muerte, renacimiento y poder profundo.", r: "Escorpio" }
+    { p: "Sol", d: "Apolo", t: "Luminar", m: "Dios de la luz y la verdad. Representa el núcleo del ser y la vitalidad.", r: "Leo" },
+    { p: "Luna", d: "Artemisa / Selene", t: "Luminar", m: "Diosa de la caza y la noche. Rige las emociones y el instinto protector.", r: "Cáncer" },
+    { p: "Mercurio", d: "Hermes", t: "Personal", m: "Mensajero de los dioses. Rige el intelecto, el comercio y el lenguaje.", r: "Géminis/Virgo" },
+    { p: "Venus", d: "Afrodita", t: "Personal", m: "Diosa del amor y el placer. Rige las relaciones y el valor personal.", r: "Tauro/Libra" },
+    { p: "Marte", d: "Ares", t: "Personal", m: "Dios de la guerra. Representa el valor, la fuerza y la conquista.", r: "Aries" },
+    { p: "Quirón", d: "El Centauro", t: "Centauro", m: "El mentor de héroes. La llave para sanar el dolor crónico.", r: "Sagitario" },
+    { p: "Lilith", d: "Luna Negra", t: "Punto Matemático", m: "La fuerza femenina indómita, las sombras y el poder oculto.", r: "Escorpio" },
+    { p: "Nodo Norte", d: "El Dragón", t: "Eclíptico", m: "El destino y el dharma. Hacia donde debemos evolucionar.", r: "Varios" },
+    { p: "Rueda Fortuna", d: "Tique", t: "Punto Árabe", m: "Diosa de la prosperidad. Lugar de mayor bienestar y fluidez.", r: "Varios" },
+    { p: "Punto Infortunio", d: "Némesis", t: "Punto Árabe", m: "Representa el karma, los bloqueos y los desafíos que nos pulen.", r: "Varios" },
+    { p: "Ceres", d: "Deméter", t: "Asteroide", m: "Diosa de la agricultura. Rige la nutrición y la productividad.", r: "Virgo" },
+    { p: "Palas Atenea", d: "Atenea", t: "Asteroide", m: "Diosa de la sabiduría y la estrategia guerrera.", r: "Acuario" },
+    { p: "Vesta", d: "Hestia", t: "Asteroide", m: "Diosa del hogar y el fuego sagrado. Foco y devoción.", r: "Escorpio" },
+    { p: "Juno", d: "Hera", t: "Asteroide", m: "Reina de los dioses. Rige el compromiso y el matrimonio.", r: "Libra" },
+    { p: "Júpiter", d: "Zeus", t: "Social", m: "Rey del Olimpo. Rige la expansión, las leyes y la fe.", r: "Sagitario" },
+    { p: "Saturno", d: "Cronos", t: "Social", m: "Dios del tiempo. Representa la disciplina y la responsabilidad.", r: "Capricornio" },
+    { p: "Plutón", d: "Hades", t: "Transpersonal", m: "Señor del inframundo. Rige la muerte y la transmutación.", r: "Escorpio" }
 ];
 
 const VACIOS_2026 = {
@@ -27,12 +32,14 @@ const VACIOS_2026 = {
 
 const TRANSITOS_HOY = [
     { p: "Sol", s: "Tauro", g: "20°", e: "D", id: 0 },
-    { p: "Luna", s: "Acuario", g: "26°", e: "Menguante", id: 1 },
+    { p: "Luna", s: "Acuario", g: "26°", e: "M", id: 1 },
     { p: "Mercurio", s: "Aries", g: "24°", e: "Post-Sombra", id: 2 },
-    { p: "Nodo Norte", s: "Piscis", g: "15°", e: "R", id: 6 },
+    { p: "Lilith", s: "Virgo", g: "08°", e: "D", id: 6 },
+    { p: "Quirón", s: "Aries", g: "19°", e: "S", id: 5 },
+    { p: "Nodo Norte", s: "Piscis", g: "15°", e: "R", id: 7 },
     { p: "Rueda Fortuna", s: "Libra", g: "10°", e: "D", id: 8 },
-    { p: "Quirón", s: "Aries", g: "19°", e: "En Sombra", id: 5 },
-    { p: "Plutón", s: "Acuario", g: "03°", e: "Retrógrado", id: 11 }
+    { p: "Pto. Infortunio", s: "Aries", g: "12°", e: "D", id: 9 },
+    { p: "Plutón", s: "Acuario", g: "03°", e: "R", id: 16 }
 ];
 
 const ESTADOS_RETRO = [
