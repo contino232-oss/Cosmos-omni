@@ -25,59 +25,61 @@ function init() {
     document.getElementById('fecha-top').innerText = hoy.toLocaleDateString();
     document.getElementById('portal-dia').innerText = "Portal del " + hoy.toLocaleDateString('es-ES', {day:'numeric', month:'long'});
 
-    // 1. CÁLCULO AUTOMÁTICO DE LA LUNA
-    // Estimación matemática: Posición inicial (220°) + avance diario (13.18°)
+    // 1. CÁLCULO DE LUNA, FASE Y DIGNIDAD
     let posLunarHoy = 220 + (dia - 1) * 13.18;
-    let signoIndex = Math.floor((posLunarHoy / 30) % 12);
-    let gradoLunar = Math.floor(posLunarHoy % 30);
-    let lunaSigno = ZODIACO[signoIndex].n;
-    let lunaElemento = ZODIACO[signoIndex].e;
-
-    // 2. GENERACIÓN DE INTERPRETACIÓN DINÁMICA
-    let interpretacion = `Actualmente, la Luna transita por <strong>${lunaSigno}</strong> (${lunaElemento}). `;
+    let idxS = Math.floor((posLunarHoy / 30) % 12);
+    let sLuna = ZODIACO[idxS];
+    let fase = (dia < 9) ? "🌕" : (dia < 16) ? "🌗" : (dia < 24) ? "🌑" : "🌓";
     
-    if (lunaSigno === "Piscis") {
-        interpretacion += "Es un momento de alta sensibilidad y disolución del ego. Ideal para la meditación y el arte.";
-    } else if (lunaElemento === "Fuego") {
-        interpretacion += "La energía está activa e impulsiva. Momento de iniciar proyectos con pasión.";
-    } else {
-        interpretacion += "El clima astral sugiere introspección y enfoque en las bases estructurales.";
-    }
+    // Dignidad Planetaria Simple
+    let dignidadLuna = (sLuna.r === "Luna") ? "Domicilio" : (sLuna.n === "Capricornio") ? "Exilio" : "Peregrino";
 
-    interpretacion += ` El <strong>Nodo Norte en Piscis</strong> sigue marcando el destino colectivo hacia la compasión, mientras que <strong>Lilith</strong> nos reta a soltar el juicio crítico.`;
-    
-    document.getElementById('interpretacion-resumen').innerHTML = interpretacion;
+    // 2. INTERPRETACIÓN DINÁMICA
+    const interpretacion = document.getElementById('interpretacion-resumen');
+    interpretacion.innerHTML = `
+        <p>Luna en <strong>${sLuna.n}</strong> (${sLuna.e}). Estado: <strong>${dignidadLuna}</strong>. 
+        Con el Nodo Norte en Piscis y el Sur en Virgo, el cielo pide equilibrio entre caos y orden. 
+        <strong>Palas en Acuario</strong> activa ideas geniales, mientras que el <strong>Infortunio en Tauro</strong> señala precaución en gastos.</p>
+    `;
 
-    // 3. RENDER TABLA DE TRÁNSITOS ACTUALIZADA
+    // 3. RENDER TRÁNSITOS
     const rtp = document.getElementById('render-transitos-page');
-    rtp.innerHTML = "";
+    rtp.innerHTML = `<tr><td><strong>Luna ${fase}</strong></td><td>${sLuna.n}</td><td>${Math.floor(posLunarHoy%30)}°</td><td>${dignidadLuna}</td></tr>`;
     
-    // Añadir Luna Calculada
-    rtp.innerHTML += `<tr onclick="irABiblioteca(1)" style="cursor:pointer; background:rgba(212,175,55,0.1)">
-        <td><strong>Luna</strong></td><td>${lunaSigno}</td><td>${gradoLunar}°</td><td>Creciente</td>
-    </tr>`;
-
-    // Añadir el resto de planetas de data.js
-    TRANSITOS_BASE.forEach(t => {
-        rtp.innerHTML += `<tr onclick="irABiblioteca(${t.id})" style="cursor:pointer;">
-            <td><strong>${t.p}</strong></td><td>${t.s}</td><td>${t.g}</td><td>${t.e}</td>
+    TRANSITOS_MAYO.forEach(t => {
+        let sign = ZODIACO.find(z => z.n === t.s);
+        let dig = (sign && sign.r === t.p) ? "Domicilio" : "D";
+        rtp.innerHTML += `<tr onclick="irABiblioteca(${t.id})" style="cursor:pointer">
+            <td><strong>${t.p}</strong></td><td>${t.s}</td><td>${t.g}</td><td>${t.e === 'D' ? dig : t.e}</td>
         </tr>`;
     });
 
-    // 4. CALENDARIO LUNAR AUTOMÁTICO
+    // 4. TABLA DE RETROGRADACIONES
+    const rr = document.getElementById('render-retrogradaciones');
+    RETROGRADACIONES_2026.forEach(r => {
+        rr.innerHTML += `<tr>
+            <td><strong style="color:${r.c}">${r.p}</strong></td>
+            <td><small>${r.r}</small></td>
+            <td><small>${r.s}</small></td>
+            <td style="color:${r.e === 'RETRÓGRADO' ? '#ff4d4d' : '#4CAF50'}">${r.e}</td>
+        </tr>`;
+    });
+
+    // 5. CALENDARIO LUNAR (Elementos y Vacíos)
     const tl = document.getElementById('render-luna');
     let posCal = 220;
     for(let d=1; d<=31; d++) {
         let idx = Math.floor((posCal/30)%12);
         let s = ZODIACO[idx];
+        let f = (d===1) ? "🌕" : (d===9) ? "🌗" : (d===16) ? "🌑" : (d===24) ? "🌓" : "·";
         let vacio = VACIOS_2026[d] || "---";
         tl.innerHTML += `<tr class="${d === dia ? 'hoy-fila' : ''}">
-            <td>${d}</td><td>${Math.floor(posCal%30)}° ${s.n}</td><td><small>${vacio}</small></td>
+            <td>${d}</td><td>${f}</td><td>${Math.floor(posCal%30)}° ${s.n} (${s.e})</td><td><small>${vacio}</small></td>
         </tr>`;
         posCal += 13.18;
     }
 
-    // 5. BIBLIOTECA DIVINA
+    // 6. BIBLIOTECA DIVINA
     const la = document.getElementById('lista-arquetipos');
     ARQUETIPOS.forEach((a, i) => {
         la.innerHTML += `
@@ -86,11 +88,10 @@ function init() {
                     <span>${a.p} <small>(${a.d})</small></span><span>+</span>
                 </button>
                 <div id="content-${i}" class="acordeon-content">
-                    <p><strong>Deidad:</strong> ${a.d} | <strong>Regencia:</strong> ${a.r}</p>
+                    <p><strong>Deidad:</strong> ${a.d} | <strong>Rige:</strong> ${a.r}</p>
                     <p>${a.m}</p>
                 </div>
             </div>`;
     });
 }
-
 window.onload = init;
