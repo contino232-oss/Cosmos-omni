@@ -2,8 +2,7 @@ function toggleMenu() { document.getElementById("sidebar").classList.toggle("act
 
 function mostrarSeccion(id) {
     document.querySelectorAll('.vista').forEach(v => v.classList.add('seccion-oculta'));
-    const target = document.getElementById(id);
-    if(target) target.classList.remove('seccion-oculta');
+    document.getElementById(id).classList.remove('seccion-oculta');
     if(window.innerWidth < 1024) document.getElementById("sidebar").classList.remove("active");
     window.scrollTo(0,0);
 }
@@ -20,83 +19,78 @@ function toggleAcordeon(id) {
     if(!isVisible && content) content.style.display = "block";
 }
 
-function calcularEfemerides() {
-    const anio = document.getElementById('input-anio').value;
-    const res = document.getElementById('res-efem');
-    res.innerHTML = `<div class="card"><h4>Cielo de ${anio}</h4><p>Explorando alineaciones históricas.</p></div>`;
-}
-
 function init() {
     const hoy = new Date();
+    const dia = hoy.getDate();
     document.getElementById('fecha-top').innerText = hoy.toLocaleDateString();
     document.getElementById('portal-dia').innerText = "Portal del " + hoy.toLocaleDateString('es-ES', {day:'numeric', month:'long'});
 
-    // Interpretación combinada
-    document.getElementById('interpretacion-resumen').innerHTML = `
-        <p><strong>Configuración:</strong> Luna en Acuario. La <strong>Rueda de la Fortuna</strong> en Libra otorga fluidez social, mientras que el <strong>Infortunio</strong> en Aries nos advierte sobre la impulsividad. <strong>Lilith</strong> en Virgo nos pide sanar la obsesión por la perfección.</p>
-    `;
+    // 1. CÁLCULO AUTOMÁTICO DE LA LUNA
+    // Estimación matemática: Posición inicial (220°) + avance diario (13.18°)
+    let posLunarHoy = 220 + (dia - 1) * 13.18;
+    let signoIndex = Math.floor((posLunarHoy / 30) % 12);
+    let gradoLunar = Math.floor(posLunarHoy % 30);
+    let lunaSigno = ZODIACO[signoIndex].n;
+    let lunaElemento = ZODIACO[signoIndex].e;
 
-    // Render Tránsitos
+    // 2. GENERACIÓN DE INTERPRETACIÓN DINÁMICA
+    let interpretacion = `Actualmente, la Luna transita por <strong>${lunaSigno}</strong> (${lunaElemento}). `;
+    
+    if (lunaSigno === "Piscis") {
+        interpretacion += "Es un momento de alta sensibilidad y disolución del ego. Ideal para la meditación y el arte.";
+    } else if (lunaElemento === "Fuego") {
+        interpretacion += "La energía está activa e impulsiva. Momento de iniciar proyectos con pasión.";
+    } else {
+        interpretacion += "El clima astral sugiere introspección y enfoque en las bases estructurales.";
+    }
+
+    interpretacion += ` El <strong>Nodo Norte en Piscis</strong> sigue marcando el destino colectivo hacia la compasión, mientras que <strong>Lilith</strong> nos reta a soltar el juicio crítico.`;
+    
+    document.getElementById('interpretacion-resumen').innerHTML = interpretacion;
+
+    // 3. RENDER TABLA DE TRÁNSITOS ACTUALIZADA
     const rtp = document.getElementById('render-transitos-page');
     rtp.innerHTML = "";
-    TRANSITOS_HOY.forEach(t => {
-        rtp.innerHTML += `<tr onclick="irABiblioteca(${t.id})" style="cursor:pointer; background:rgba(212,175,55,0.05)">
+    
+    // Añadir Luna Calculada
+    rtp.innerHTML += `<tr onclick="irABiblioteca(1)" style="cursor:pointer; background:rgba(212,175,55,0.1)">
+        <td><strong>Luna</strong></td><td>${lunaSigno}</td><td>${gradoLunar}°</td><td>Creciente</td>
+    </tr>`;
+
+    // Añadir el resto de planetas de data.js
+    TRANSITOS_BASE.forEach(t => {
+        rtp.innerHTML += `<tr onclick="irABiblioteca(${t.id})" style="cursor:pointer;">
             <td><strong>${t.p}</strong></td><td>${t.s}</td><td>${t.g}</td><td>${t.e}</td>
         </tr>`;
     });
 
-    // Render Retrogradaciones
-    const rr = document.getElementById('render-retrogradaciones');
-    ESTADOS_RETRO.forEach(reg => {
-        rr.innerHTML += `<tr><td><strong>${reg.p}</strong></td><td><small>${reg.r}</small></td><td><small>${reg.s}</small></td><td>${reg.e}</td></tr>`;
-    });
-
-    // Calendario Lunar
+    // 4. CALENDARIO LUNAR AUTOMÁTICO
     const tl = document.getElementById('render-luna');
-    let pos = 220;
+    let posCal = 220;
     for(let d=1; d<=31; d++) {
-        let idx = Math.floor((pos/30)%12);
+        let idx = Math.floor((posCal/30)%12);
         let s = ZODIACO[idx];
-        let fase = (d===1) ? "🌕" : (d===9) ? "🌗" : (d===16) ? "🌑" : (d===24) ? "🌓" : "·";
         let vacio = VACIOS_2026[d] || "---";
-        tl.innerHTML += `<tr class="${d === hoy.getDate() ? 'hoy-fila' : ''}">
-            <td>${d}</td><td>${fase}</td><td>${Math.floor(pos%30)}° ${s.n}</td><td><small>${vacio}</small></td>
+        tl.innerHTML += `<tr class="${d === dia ? 'hoy-fila' : ''}">
+            <td>${d}</td><td>${Math.floor(posCal%30)}° ${s.n}</td><td><small>${vacio}</small></td>
         </tr>`;
-        pos += 13.18;
+        posCal += 13.18;
     }
 
-    // Biblioteca Plegable con DIOSES
+    // 5. BIBLIOTECA DIVINA
     const la = document.getElementById('lista-arquetipos');
-    la.innerHTML = "";
     ARQUETIPOS.forEach((a, i) => {
         la.innerHTML += `
             <div class="acordeon-item">
                 <button class="acordeon-btn" onclick="toggleAcordeon(${i})">
-                    <span>${a.p} <small>(${a.d})</small></span>
-                    <span>+</span>
+                    <span>${a.p} <small>(${a.d})</small></span><span>+</span>
                 </button>
                 <div id="content-${i}" class="acordeon-content">
-                    <p><strong>Deidad Ligada:</strong> ${a.d}</p>
-                    <p><strong>Clasificación:</strong> ${a.t} | <strong>Rige:</strong> ${a.r}</p>
+                    <p><strong>Deidad:</strong> ${a.d} | <strong>Regencia:</strong> ${a.r}</p>
                     <p>${a.m}</p>
                 </div>
             </div>`;
     });
-
-    // Balance Elemental
-    const clim = document.getElementById('render-clima');
-    const elData = [{n:"Fuego", p:15, c:"#ff4d4d"},{n:"Tierra", p:45, c:"#4CAF50"},{n:"Aire", p:30, c:"#81D4FA"},{n:"Agua", p:10, c:"#2196F3"}];
-    elData.forEach(e => {
-        clim.innerHTML += `<div class="bar-item"><div class="bar-info"><span>${e.n}</span><span>${e.p}%</span></div><div class="bar-bg"><div class="bar-fill" style="width:${e.p}%; background:${e.c};"></div></div></div>`;
-    });
 }
 
-const form = document.getElementById("contact-form");
-if(form) {
-    form.onsubmit = e => {
-        e.preventDefault();
-        document.getElementById("form-status").innerText = "¡Mensaje enviado al Cosmos! ✨";
-        form.reset();
-    };
-}
 window.onload = init;
