@@ -26,6 +26,13 @@ const ARQUETIPOS = [
     { p: "Júpiter", d: "Zeus", t: "Social", m: "Expansión, fe y abundancia.", r: "Sagitario" },
     { p: "Saturno", d: "Cronos", t: "Social", m: "Límites, tiempo y maestría estructural.", r: "Capricornio" },
     { p: "Plutón", d: "Hades", t: "Transpersonal", m: "Transformación radical y renacimiento.", r: "Escorpio" }
+{   p: "Urano", 
+    d: "Urano (Cielo Estrellado)", 
+    t: "Transpersonal", 
+    m: "Representa la chispa del genio, la liberación de estructuras antiguas y la intuición repentina.", 
+    r: "Acuario" 
+},
+
 ];
 
 const VACIOS_2026 = {
