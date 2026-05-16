@@ -4,7 +4,7 @@
 
 // CONFIGURACIONES Y ENDPOINTS GLOBALES
 const NASA_HORIZONS_API = "https://ssd-api.jpl.nasa.gov/horizons.api";
-const GEONAMES_USERNAME = "demo"; 
+const GEONAMES_USERNAME = "tano232"; 
 
 /* ==========================================================================
    1. SISTEMA DE NAVEGACIÓN Y MENÚS (CON AUTO-CIERRE)
