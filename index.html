@@ -7,297 +7,304 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body class="theme-dark"> <nav id="sidebar" class="sidebar">
-    <button class="close-btn" onclick="toggleMenu()">×</button>
-    <div class="menu-content">
-        <h2 class="menu-logo">COSMOS OMNI</h2>
-        <a href="#" onclick="mostrarSeccion('dashboard')">📊 DASHBOARD ASTRAL</a>
-        <a href="#" onclick="mostrarSeccion('calendario-lunar')">🌙 CALENDARIO LUNAR</a>
-        <a href="#" onclick="mostrarSeccion('cronograma')">📅 CRONOGRAMA & HITOS</a>
-        
-        <div class="menu-category">BIBLIOTECA DIVINA</div>
-        <a href="#" onclick="mostrarSeccion('enciclopedia-zodiacal')">♈ EL CÍRCULO ZODIACAL</a>
-        <a href="#" onclick="mostrarSeccion('enciclopedia-casas')">🏠 LAS 12 CASAS</a>
-        <a href="#" onclick="mostrarSeccion('enciclopedia-astros')">🪐 MANUAL DE ASTROS</a>
-        
-        <div class="menu-category">SECCIÓN MÍSTICA</div>
-        <a href="#" onclick="mostrarSeccion('tarot')">🃏 TAROT Y ARCANOS</a>
-        <a href="#" onclick="mostrarSeccion('herbolario')">🌿 HERBOLARIO MÍSTICO</a>
-        <a href="#" onclick="mostrarSeccion('guias-manuales')">📚 GUÍAS Y COMPATIBILIDAD</a>
-        
-        <a href="#" onclick="mostrarSeccion('contacto')" class="menu-footer-link">📩 CONTACTO</a>
-    </div>
-</nav>
-
-<header class="main-header-wrapper">
-    <div class="header-banner-area">
-        <button class="hamburguesa-btn" onclick="toggleMenu()">☰ MENU</button>
-        
-        <div class="logo-container">
-            <img src="img/logo-cosmos.png" alt="COSMOS OMNI - Astrología Terapéutica" class="web-logo">
+<body class="theme-dark"> 
+    
+    <nav id="sidebar" class="sidebar">
+        <button class="close-btn" onclick="toggleMenu()">×</button>
+        <div class="menu-content">
+            <h2 class="menu-logo">COSMOS OMNI</h2>
+            <a href="#" onclick="mostrarSeccion('dashboard')">📊 DASHBOARD ASTRAL</a>
+            <a href="#" onclick="mostrarSeccion('calendario-lunar')">🌙 CALENDARIO LUNAR</a>
+            <a href="#" onclick="mostrarSeccion('cronograma')">📅 CRONOGRAMA & HITOS</a>
+            
+            <div class="menu-category">BIBLIOTECA DIVINA</div>
+            <a href="#" onclick="mostrarSeccion('enciclopedia-zodiacal')">♈ EL CÍRCULO ZODIACAL</a>
+            <a href="#" onclick="mostrarSeccion('enciclopedia-casas')">🏠 LAS 12 CASAS</a>
+            <a href="#" onclick="mostrarSeccion('enciclopedia-astros')">🪐 MANUAL DE ASTROS</a>
+            
+            <div class="menu-category">SECCIÓN MÍSTICA</div>
+            <a href="#" onclick="mostrarSeccion('tarot')">🃏 TAROT Y ARCANOS</a>
+            <a href="#" onclick="mostrarSeccion('herbolario')">🌿 HERBOLARIO MÍSTICO</a>
+            <a href="#" onclick="mostrarSeccion('guias-manuales')">📚 GUÍAS Y COMPATIBILIDAD</a>
+            
+            <a href="#" onclick="mostrarSeccion('contacto')" class="menu-footer-link">📩 CONTACTO</a>
         </div>
-        
-        <button id="btn-modo-lectura" class="btn-utilidad" onclick="toggleModoLectura()">🌓 Modo Lectura</button>
-    </div>
+    </nav>
 
-    <div class="astro-data-bar">
-        <div class="data-item location">
-            <span id="geo-location">📍 Buscando cielo...</span>
-        </div>
-        <div class="data-item clocks">
-            <span class="time-box">L: <span id="time-local">00:00:00</span></span>
-            <span class="spacer">|</span>
-            <span class="time-box">S: <span id="time-sideral">00:00:00</span></span>
-        </div>
-        <div class="data-item date">
-            <span id="fecha-top">📅 16/05/2026</span>
-        </div>
-    </div>
-</header>
-
-<main>
-
-    <section id="dashboard" class="vista">
-        <div class="card-hit-del-dia" id="card-principal-dia">
-            <div class="hit-badge">⚡ TRÁNSITO CLAVE</div>
-            <h2 id="titulo-hit-dia">Cargando clima cósmico...</h2>
-            <p id="desc-hit-dia"></p>
-        </div>
-
-        <h3>El Cielo en Vivo (NASA Data)</h3>
-        
-        <div class="filtro-dashboard-box">
-            <button class="filtro-dash-btn active" onclick="filtrarTablaCielo('todos')">Todo el Cielo</button>
-            <button class="filtro-dash-btn" onclick="filtrarTablaCielo('mayores')">Planetas Mayores</button>
-            <button class="filtro-dash-btn" onclick="filtrarTablaCielo('asteroides')">☄️ Asteroides y Puntos</button>
-        </div>
-
-        <div class="tabla-scroll">
-            <table class="dashboard-table">
-                <thead>
-                    <tr>
-                        <th>Astro / Cuerpo</th>
-                        <th>Posición Actual</th>
-                        <th>Estado</th>
-                        <th>Próximo Evento</th>
-                    </tr>
-                </thead>
-                <tbody id="render-dashboard-astros">
-                    </tbody>
-            </table>
-        </div>
-    </section>
-
-    <section id="calendario-lunar" class="vista seccion-oculta">
-        <h2>Calendario Lunar Avanzado</h2>
-        
-        <div class="grid-lunar-container">
-            <div class="card-luna-actual">
-                <div id="luna-icono-dinamico" class="luna-glifo">🌑</div>
-                <h4 id="luna-fase-nombre">Nueva</h4>
-                <p>Signo Actual: <strong id="luna-signo-actual">...</strong></p>
+    <header class="main-header-wrapper">
+        <div class="header-banner-area">
+            <button class="hamburguesa-btn" onclick="toggleMenu()">☰ MENU</button>
+            
+            <div class="logo-container">
+                <img src="https://contino232-oss.github.io/cosmos-omni-2026/logo-cosmos.png" alt="COSMOS OMNI - Astrología Terapéutica" class="web-logo" onerror="this.src='https://placehold.co/120x40/1c1a17/d4af37?text=COSMOS+OMNI'">
             </div>
             
-            <div class="card-luna-datos">
-                <h3>Órbita y Próximos Hitos</h3>
-                <ul class="lista-datos-lunares">
-                    <li><strong>Apogeo:</strong> <span id="luna-apogeo">Calculando...</span></li>
-                    <li><strong>Perigeo:</strong> <span id="luna-perigeo">Calculando...</span></li>
-                    <li>🌓 <strong>Cuarto Creciente:</strong> <span id="next-creciente">...</span></li>
-                    <li>🌕 <strong>Luna Llena:</strong> <span id="next-llena">...</span></li>
-                    <li>🌗 <strong>Cuarto Menguante:</strong> <span id="next-menguante">...</span></li>
-                    <li>🌑 <strong>Luna Nueva:</strong> <span id="next-nueva">...</span></li>
-                </ul>
+            <button id="btn-modo-lectura" class="btn-utilidad" onclick="toggleModoLectura()">🌓 Modo Lectura</button>
+        </div>
+
+        <div class="astro-data-bar">
+            <div class="data-item location">
+                <span id="geo-location">📍 Buscando cielo...</span>
+            </div>
+            <div class="data-item clocks">
+                <span class="time-box">L: <span id="time-local">00:00:00</span></span>
+                <span class="spacer">|</span>
+                <span class="time-box" style="color: #81D4FA;">U: <span id="time-utc">00:00:00 UTC</span></span>
+                <span class="spacer">|</span>
+                <span class="time-box">S: <span id="time-sideral">00:00:00</span></span>
+            </div>
+            <div class="data-item date">
+                <span id="fecha-top">📅 16/05/2026</span>
             </div>
         </div>
+    </header>
 
-        <div class="card ciclo-progreso-card">
-            <h3>Progreso de la Lunación Actual</h3>
-            <div class="barra-progreso-container">
-                <div id="barra-luna-progreso" class="barra-progreso-fill"></div>
+    <main>
+        <section id="dashboard" class="vista">
+            <div class="card-hit-del-dia" id="card-principal-dia">
+                <div class="hit-badge">⚡ TRÁNSITO CLAVE</div>
+                <div id="transito-clave-clima">
+                    <h2 id="titulo-hit-dia">Cargando clima cósmico...</h2>
+                    <p id="desc-hit-dia"></p>
+                </div>
             </div>
-            <p class="data-subtext"><span id="luna-dias-ciclo">0</span> días transcurridos desde la última Luna Nueva.</p>
-        </div>
 
-        <div class="card card-alertas-lunares">
-            <div class="badge-alerta">⚠️ INTENSIDAD ASTRAL</div>
-            <h3>Eclipses y Lunaciones Extraordinarias</h3>
-            <ul id="lista-eclipses" class="lista-eclipses-links">
-                </ul>
-        </div>
+            <h3>El Cielo en Vivo (NASA Data)</h3>
+            
+            <div class="filtro-dashboard-box">
+                <button class="filtro-dash-btn active" onclick="filtrarTablaCielo('todos')">Todo el Cielo</button>
+                <button class="filtro-dash-btn" onclick="filtrarTablaCielo('mayores')">Planetas Mayores</button>
+                <button class="filtro-dash-btn" onclick="filtrarTablaCielo('asteroides')">☄️ Asteroides y Puntos</button>
+            </div>
 
-        <div class="card" style="margin-top:20px;">
-            <h3>Almanaque Lunar Mayo 2026</h3>
+            <div class="tabla-scroll">
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Astro / Cuerpo</th>
+                            <th>Signo Actual</th>
+                            <th>Posición</th>
+                            <th>Estado Dinámico</th>
+                        </tr>
+                    </thead>
+                    <tbody id="render-dashboard-astros">
+                        </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="calendario-lunar" class="vista seccion-oculta">
+            <h2>Calendario Lunar Avanzado</h2>
+            
+            <div class="grid-lunar-container">
+                <div class="card-luna-actual">
+                    <div id="luna-icono-dinamico" class="luna-glifo">🌑</div>
+                    <h4 id="luna-fase-nombre">Nueva</h4>
+                    <p>Signo Actual: <strong id="luna-signo-actual">...</strong></p>
+                </div>
+                
+                <div class="card-luna-datos">
+                    <h3>Órbita y Próximos Hitos</h3>
+                    <ul class="lista-datos-lunares">
+                        <li><strong>Apogeo:</strong> <span id="luna-apogeo">Grado 12 Sagitario</span></li>
+                        <li><strong>Perigeo:</strong> <span id="luna-perigeo">Grado 14 Géminis</span></li>
+                        <li>🌓 <strong>Cuarto Creciente:</strong> <span id="next-creciente">24 de Mayo</span></li>
+                        <li>🌕 <strong>Luna Llena:</strong> <span id="next-llena">01 de Junio</span></li>
+                        <li>🌗 <strong>Cuarto Menguante:</strong> <span id="next-menguante">09 de Junio</span></li>
+                        <li>🌑 <strong>Luna Nueva:</strong> <span id="next-nueva">16 de Junio</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card ciclo-progreso-card">
+                <h3>Progreso de la Lunación Actual</h3>
+                <div class="barra-progreso-container">
+                    <div id="barra-luna-progreso" class="barra-progreso-fill" style="width: 53%;"></div>
+                </div>
+                <p class="data-subtext"><span id="luna-dias-ciclo">15</span> días transcurridos desde la última Luna Nueva.</p>
+            </div>
+
+            <div class="card card-alertas-lunares">
+                <div class="badge-alerta">⚠️ INTENSIDAD ASTRAL</div>
+                <h3>Eclipses y Lunaciones Extraordinarias</h3>
+                <div id="render-eclipses-data" class="lista-eclipses-links">
+                    </div>
+            </div>
+
+            <div class="card" style="margin-top:20px;">
+                <h3>Almanaque Lunar Mayo 2026</h3>
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Día</th>
+                                <th>Fase</th>
+                                <th>Grado/Signo</th>
+                                <th>Vacío de Curso (GMT-3)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="render-luna">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="cronograma" class="vista seccion-oculta">
+            <h2>Cronograma Astral & Hitos</h2>
+            
+            <h3>1. Línea de Tiempo Deslizable (Ingresos y Aspectos Partil)</h3>
+            <p class="instruccion">Desliza horizontalmente para ver los próximos ingresos zodiacales e hitos planetarios.</p>
+            
+            <div class="slider-wrapper" style="margin-bottom: 15px;">
+                <div id="timeline-dinamica" style="display: flex; gap: 15px; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 10px;">
+                    </div>
+            </div>
+            <div class="timeline-controls">
+                <button class="btn-nav-timeline" onclick="scrollTimeline('izq')">◀ Anterior</button>
+                <button class="btn-nav-timeline" onclick="scrollTimeline('der')">Siguiente ▶</button>
+            </div>
+
+            <h3>2. Calendario de Retrogradaciones Avanzado</h3>
+            <div class="leyenda-cronograma">
+                <span class="leyenda-item shadow-pre">🟡 Sombra Pre-Retro</span>
+                <span class="leyenda-item retro-active">🔴 Retrógrado (Estacionario)</span>
+                <span class="leyenda-item shadow-post">🔵 Sombra Post-Retro</span>
+                <span class="leyenda-item estado-directo">🟢 Directo</span>
+            </div>
+
             <div class="tabla-scroll">
                 <table>
                     <thead>
                         <tr>
-                            <th>Día</th>
-                            <th>Fase</th>
-                            <th>Grado/Signo</th>
-                            <th>Vacío de Curso (GMT-3)</th>
+                            <th>Planeta</th>
+                            <th>Período Estacional</th>
+                            <th>Zona de Sombra (Pre/Post)</th>
+                            <th>Grado Crítico</th>
+                            <th>Estado Actual</th>
                         </tr>
                     </thead>
-                    <tbody id="render-luna"></tbody>
+                    <tbody id="render-retrogradaciones">
+                        </tbody>
                 </table>
             </div>
-        </div>
-    </section>
+            <div id="render-clima" class="clima-container" style="margin-top:20px;"></div>
+        </section>
 
-    <section id="cronograma" class="vista seccion-oculta">
-        <h2>Cronograma Astral & Hitos</h2>
-        
-        <h3>1. Línea de Tiempo Deslizable (Ingresos y Aspectos Partil)</h3>
-        <p class="instruccion">Desliza horizontalmente para ver los próximos ingresos zodiacales e hitos planetarios.</p>
-        <div class="timeline-wrapper">
-            <div id="timeline-dinamica" class="timeline-container">
+        <section id="enciclopedia-zodiacal" class="vista seccion-oculta">
+            <h2>El Círculo Zodiacal</h2>
+            <div class="buscador-box">
+                <input type="text" id="buscar-signo" placeholder="Buscar por signo o elemento (ej: Fuego)..." onkeyup="filtrarCards('signo')">
+            </div>
+            <div id="grid-signos" class="grid-plegables-container"></div>
+        </section>
+
+        <section id="enciclopedia-casas" class="vista seccion-oculta">
+            <h2>Las 12 Casas Astrológicas</h2>
+            <div class="buscador-box">
+                <input type="text" id="buscar-casa" placeholder="Buscar por palabra clave o clasificación (ej: Angular)..." onkeyup="filtrarCards('casa')">
+            </div>
+            <div id="grid-casas" class="grid-plegables-container"></div>
+        </section>
+
+        <section id="enciclopedia-astros" class="vista seccion-oculta">
+            <h2>Manual de Astros e Interpretación</h2>
+            <div id="render-biblioteca-arquetipos" class="grid-plegables-container"></div>
+        </section>
+
+        <section id="tarot" class="vista seccion-oculta">
+            <h2>Tarot & Arcanos del Destino</h2>
+            <p class="instruccion">Explora la simbología arquetípica del mazo Rider-Waite.</p>
+            <div class="tarot-nav">
+                <button class="tab-btn active" onclick="filtrarTarot('mayores')">Arcanos Mayores</button>
+                <button class="tab-btn" onclick="filtrarTarot('menores')">Arcanos Menores (Ases)</button>
+            </div>
+            <div id="galeria-tarot" class="grid-tarot-container"></div>
+        </section>
+
+        <section id="herbolario" class="vista seccion-oculta">
+            <h2>Herbolario Místico</h2>
+            <p class="instruccion">Plantas sagradas, sus correspondencias planetarias y uso terapéutico.</p>
+            <div id="render-herbolario-data" class="grid-herbolario"></div>
+        </section>
+
+        <section id="guias-manuales" class="vista seccion-oculta">
+            <h2>Guías de Consulta Rápida</h2>
+            
+            <div class="card">
+                <h3>Glosario de Aspectos (El Idioma del Cielo)</h3>
+                <ul class="glosario-lista">
+                    <li><strong>Conjunción (0°):</strong> Unión de fuerzas. Fusiones intensas en un mismo punto energético.</li>
+                    <li><strong>Oposición (180°):</strong> Tensión o espejo. Polaridades que invitan a la integración y el equilibrio.</li>
+                    <li><strong>Trígono (120°):</strong> Fluidez natural. Talentos innatos que se manifiestan de forma armónica.</li>
+                    <li><strong>Cuadratura (90°):</strong> Desafío dinámico. Crisis o fricciones que empujan a la acción y evolución.</li>
+                    <li><strong>Sextil (60°):</strong> Oportunidad abierta. Potencial disponible que requiere intención para activarse.</li>
+                </ul>
+            </div>
+
+            <div class="card" style="margin-top:20px;">
+                <h3>Tabla de Compatibilidad de Elementos</h3>
+                <div class="grid-elementos-info">
+                    <div class="elemento-card">🔥 + 💨 <strong>Fuego y Aire:</strong> El aire aviva la llama. Ideas, inspiración mutua, dinamismo y expansión mental.</div>
+                    <div class="elemento-card">💧 + ⏳ <strong>Agua y Tierra:</strong> El agua nutre la tierra estéril. Aporta intuición y profundidad emocional a la estructura material.</div>
                 </div>
-        </div>
-        <div class="timeline-controls">
-            <button class="btn-nav-timeline" onclick="scrollTimeline('izq')">◀ Anterior</button>
-            <button class="btn-nav-timeline" onclick="scrollTimeline('der')">Siguiente ▶</button>
-        </div>
-
-        <h3>2. Calendario de Retrogradaciones Avanzado</h3>
-        <div class="leyenda-cronograma">
-            <span class="leyenda-item shadow-pre">🟡 Sombra Pre-Retro</span>
-            <span class="leyenda-item retro-active">🔴 Retrógrado (Estacionario)</span>
-            <span class="leyenda-item shadow-post">🔵 Sombra Post-Retro</span>
-            <span class="leyenda-item estado-directo">🟢 Directo</span>
-        </div>
-
-        <div class="tabla-scroll">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Planeta</th>
-                        <th>Retrogradación</th>
-                        <th>Zona de Sombra (Pre/Post)</th>
-                        <th>Días Estacionarios</th>
-                        <th>Estado Actual</th>
-                    </tr>
-                </thead>
-                <tbody id="render-retrogradaciones"></tbody>
-            </table>
-        </div>
-        <div id="render-clima" class="clima-container" style="margin-top:20px;"></div>
-    </section>
-
-    <section id="enciclopedia-zodiacal" class="vista seccion-oculta">
-        <h2>El Círculo Zodiacal</h2>
-        <div class="buscador-box">
-            <input type="text" id="buscar-signo" placeholder="Buscar por signo o elemento (ej: Fuego)..." onkeyup="filtrarCards('signo')">
-        </div>
-        
-        <div id="grid-signos" class="grid-plegables-container"></div>
-    </section>
-
-    <section id="enciclopedia-casas" class="vista seccion-oculta">
-        <h2>Las 12 Casas Astrológicas</h2>
-        <div class="buscador-box">
-            <input type="text" id="buscar-casa" placeholder="Buscar por palabra clave o clasificación (ej: Angular)..." onkeyup="filtrarCards('casa')">
-        </div>
-        <div id="grid-casas" class="grid-plegables-container"></div>
-    </section>
-
-    <section id="enciclopedia-astros" class="vista seccion-oculta">
-        <h2>Manual de Astros e Interpretación</h2>
-        <div id="grid-manual-astros" class="grid-plegables-container"></div>
-    </section>
-
-    <section id="tarot" class="vista seccion-oculta">
-        <h2>Tarot & Arcanos del Destino</h2>
-        <p class="instruccion">Explora la simbología arquetípica del mazo Rider-Waite.</p>
-        <div class="tarot-nav">
-            <button class="tab-btn active" onclick="filtrarTarot('mayores')">Arcanos Mayores</button>
-            <button class="tab-btn" onclick="filtrarTarot('menores')">Arcanos Menores</button>
-        </div>
-        <div id="galeria-tarot" class="grid-tarot-container"></div>
-    </section>
-
-    <section id="herbolario" class="vista seccion-oculta">
-        <h2>Herbolario Místico</h2>
-        <p class="instruccion">Plantas sagradas, sus correspondencias planetarias y uso terapéutico.</p>
-        <div id="catalogo-herbolario" class="grid-herbolario"></div>
-    </section>
-
-    <section id="guias-manuales" class="vista seccion-oculta">
-        <h2>Guías de Consulta Rápida</h2>
-        
-        <div class="card">
-            <h3>Glosario de Aspectos (El Idioma del Cielo)</h3>
-            <ul class="glosario-lista">
-                <li><strong>Conjunción (0°):</strong> Unión de fuerzas. Fusiones intensas en un mismo punto energético.</li>
-                <li><strong>Oposición (180°):</strong> Tensión o espejo. Polaridades que invitan a la integración y el equilibrio.</li>
-                <li><strong>Trígono (120°):</strong> Fluidez natural. Talentos innatos que se manifiestan de forma armónica.</li>
-                <li><strong>Cuadratura (90°):</strong> Desafío dinámico. Crisis o fricciones que empujan a la acción y evolución.</li>
-                <li><strong>Sextil (60°):</strong> Oportunidad abierta. Potencial disponible que requiere intención para activarse.</li>
-            </ul>
-        </div>
-
-        <div class="card" style="margin-top:20px;">
-            <h3>Tabla de Compatibilidad de Elementos</h3>
-            <div class="grid-elementos-info">
-                <div class="elemento-card">🔥 + 💨 <strong>Fuego y Aire:</strong> El aire aviva la llama. Ideas, inspiración mutua, dinamismo y expansión mental.</div>
-                <div class="elemento-card">💧 + ⏳ <strong>Agua y Tierra:</strong> El agua nutre la tierra estéril. Aporta intuición y profundidad emocional a la estructura material.</div>
             </div>
-        </div>
 
-        <div class="card" style="margin-top:20px;">
-            <h3>Calculadora de Regencias</h3>
-            <p class="instruccion">Selecciona tu signo para conocer su regente tradicional y moderno:</p>
-            <div class="calculadora-regencias-box">
-                <select id="select-regencia-signo" onchange="calcularRegente()">
-                    <option value="">-- Selecciona un Signo --</option>
-                    <option value="aries">Aries</option>
-                    <option value="tauro">Tauro</option>
-                    <option value="geminis">Géminis</option>
-                    <option value="cancer">Cáncer</option>
-                    <option value="leo">Leo</option>
-                    <option value="virgo">Virgo</option>
-                    <option value="libra">Libra</option>
-                    <option value="escorpio">Escorpio</option>
-                    <option value="sagitario">Sagitario</option>
-                    <option value="capricornio">Capricornio</option>
-                    <option value="acuario">Acuario</option>
-                    <option value="piscis">Piscis</option>
-                </select>
-                <div id="resultado-regente" class="resultado-box"></div>
+            <div class="card" style="margin-top:20px;">
+                <h3>Calculadora de Regencias Co-Existentes</h3>
+                <p class="instruccion">Selecciona tu signo para conocer su regente tradicional y moderno:</p>
+                <div class="calculadora-regencias-box">
+                    <select id="select-regencia-signo" onchange="calcularRegente()">
+                        <option value="">-- Selecciona un Signo --</option>
+                        <option value="aries">Aries</option>
+                        <option value="tauro">Tauro</option>
+                        <option value="geminis">Géminis</option>
+                        <option value="cancer">Cáncer</option>
+                        <option value="leo">Leo</option>
+                        <option value="virgo">Virgo</option>
+                        <option value="libra">Libra</option>
+                        <option value="escorpio">Escorpio</option>
+                        <option value="sagitario">Sagitario</option>
+                        <option value="capricornio">Capricornio</option>
+                        <option value="acuario">Acuario</option>
+                        <option value="piscis">Piscis</option>
+                    </select>
+                    <div id="resultado-regente" class="resultado-box"></div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="efemerides" class="vista seccion-oculta">
-        <h2>Efemérides Históricas (1900 - 2100)</h2>
-        <div class="selector-fecha">
-            <input type="number" id="input-anio" min="1900" max="2100" value="2026">
-            <button onclick="calcularEfemerides()">Consultar Cielo</button>
-        </div>
-        <div id="res-efem" class="grid-container"></div>
-    </section>
+        <section id="efemerides" class="vista seccion-oculta">
+            <h2>Efemérides Históricas (1900 - 2100)</h2>
+            <div class="selector-fecha">
+                <input type="number" id="input-anio" min="1900" max="2100" value="2026">
+                <button onclick="calcularEfemerides()">Consultar Cielo</button>
+            </div>
+            <div id="res-efem" class="grid-container"></div>
+        </section>
 
-    <section id="contacto" class="vista seccion-oculta">
-        <h2>Contacto & Feedback</h2>
-        <div class="form-container">
-            <form id="contact-form">
-                <input type="text" name="name" required placeholder="Tu Nombre">
-                <input type="email" name="email" required placeholder="Tu Email">
-                <textarea name="message" rows="5" required placeholder="Tu consulta astral..."></textarea>
-                <button type="submit" class="btn-enviar">Enviar al Cosmos</button>
-            </form>
-            <div id="form-status"></div>
-        </div>
-    </section>
-</main>
+        <section id="contacto" class="vista seccion-oculta">
+            <h2>Contacto & Feedback</h2>
+            <div class="form-container">
+                <form id="contact-form">
+                    <input type="text" name="name" required placeholder="Tu Nombre">
+                    <input type="email" name="email" required placeholder="Tu Email">
+                    <textarea name="message" rows="5" required placeholder="Tu consulta astral..."></textarea>
+                    <button type="submit" class="btn-enviar">Enviar al Cosmos</button>
+                </form>
+                <div id="form-status"></div>
+            </div>
+        </section>
+    </main>
 
-<div id="astro-modal" class="modal-overlay seccion-oculta">
-    <div class="modal-content">
-        <button class="modal-close" onclick="cerrarModal()">×</button>
-        <div id="modal-dinamico-body"></div>
+    <div id="astro-modal" class="modal-overlay seccion-oculta" onclick="if(event.target===this) cerrarModal()">
+        <div class="modal-content">
+            <button class="modal-close" onclick="cerrarModal()">×</button>
+            <div id="modal-dinamico-body"></div>
+        </div>
     </div>
-</div>
 
-<script src="data.js"></script>
-<script src="script.js"></script>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
