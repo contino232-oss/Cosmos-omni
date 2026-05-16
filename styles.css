@@ -1,32 +1,445 @@
-:root { --oro: #d4af37; --negro: #05050a; --card: #12121c; }
-body { margin: 0; font-family: 'Montserrat', sans-serif; background: var(--negro); color: #fff; overflow-x: hidden; }
+/* ==========================================================================
+   1. VARIABLES GLOBALES (Soporte para Modo Oscuro y Modo Lectura)
+   ========================================================================== */
+:root {
+    /* Paleta Cosmos Oscura (Por defecto) */
+    --oro: #d4af37;
+    --bronce: #aa8433;
+    --negro: #05050a;
+    --card: #12121c;
+    --texto: #ffffff;
+    --texto-secundario: #a0a0b0;
+    --borde: #333344;
+    --fondo-header: #000000;
+    --fondo-barra: #0d0d16;
+    --shadow-pre: #e6b800;
+    --shadow-post: #4a90e2;
+}
 
-header { background: #000; padding: 15px 5%; border-bottom: 2px solid var(--oro); position: sticky; top: 0; z-index: 100; }
-.header-inner { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-family: 'Cinzel', serif; color: var(--oro); font-size: 1.4rem; }
-.hamburguesa-btn { background: none; border: 1px solid var(--oro); color: var(--oro); padding: 8px 12px; cursor: pointer; }
+/* Transmutación a Modo Lectura (Paleta basada 100% en tu Logo) */
+body.theme-light {
+    --negro: #f4f1ea;          /* Fondo arena/hueso texturado visualmente */
+    --card: #ffffff;           /* Fichas blancas puras */
+    --texto: #3c3220;          /* Letras marrón oscuro de tu logo */
+    --texto-secundario: #6e6046;
+    --borde: #dcd6cd;
+    --fondo-header: #ebe6dc;
+    --fondo-barra: #dfd9ce;
+    --oro: #aa8433;            /* Bronce más oscuro para contraste en fondo claro */
+}
 
-.sidebar { position: fixed; left: -100%; top: 0; width: 280px; height: 100vh; background: #0f0f15; transition: 0.4s; z-index: 1000; border-right: 1px solid var(--oro); }
-.sidebar.active { left: 0; }
-.sidebar a { display: block; color: #fff; text-decoration: none; padding: 20px; border-bottom: 1px solid #222; font-size: 0.85rem; }
+/* ==========================================================================
+   2. ESTILOS BASE Y ANIMACIONES
+   ========================================================================== */
+body { 
+    margin: 0; 
+    font-family: 'Montserrat', sans-serif; 
+    background: var(--negro); 
+    color: var(--texto); 
+    overflow-x: hidden; 
+    transition: background 0.3s ease, color 0.3s ease;
+}
 
-.vista { padding: 40px 5%; max-width: 1200px; margin: 0 auto; animation: fadeIn 0.4s; }
+.vista { 
+    padding: 40px 5%; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    animation: fadeIn 0.4s ease-out; 
+}
+
 .seccion-oculta { display: none !important; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-.card { background: var(--card); padding: 25px; border-radius: 12px; border: 1px solid #333; margin-bottom: 20px; }
-.tabla-scroll { width: 100%; overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; min-width: 500px; }
-th, td { padding: 12px; text-align: left; border-bottom: 1px solid #222; font-size: 0.85rem; }
-tr.hoy-fila { border-left: 4px solid var(--oro); background: rgba(212,175,55,0.1); }
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
 
-.acordeon-item { background: var(--card); margin-bottom: 10px; border-radius: 8px; border: 1px solid #333; }
-.acordeon-btn { width: 100%; padding: 15px 20px; background: none; border: none; color: #fff; display: flex; justify-content: space-between; cursor: pointer; font-family: 'Cinzel'; }
-.acordeon-content { padding: 20px; display: none; background: rgba(0,0,0,0.4); border-top: 1px solid #333; font-size: 0.9rem; line-height: 1.6; }
+/* ==========================================================================
+   3. ENCABEZADO PREMIUM & BANNER INTEGRADO
+   ========================================================================== */
+header { 
+    background: var(--fondo-header); 
+    position: sticky; 
+    top: 0; 
+    z-index: 100; 
+    border-bottom: 1px solid var(--borde);
+}
 
-.bar-bg { background: #000; height: 8px; border-radius: 4px; margin-top: 5px; }
-.bar-fill { height: 100%; transition: 1s ease; }
+.header-banner-area { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 5%;
+    background: #ffffff; /* Obligamos a blanco/crema nativo para envolver tu imagen */
+}
 
-.form-container { max-width: 600px; margin: 0 auto; background: var(--card); padding: 30px; border-radius: 10px; border: 1px solid var(--oro); }
-input, textarea { width: 100%; padding: 12px; background: #000; border: 1px solid #444; color: #fff; margin-bottom: 10px; box-sizing: border-box; }
-.btn-enviar { width: 100%; padding: 15px; background: var(--oro); border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
+.logo-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    max-height: 70px;
+}
+
+.web-logo {
+    height: auto;
+    max-height: 65px;
+    object-fit: contain;
+    width: auto;
+    max-width: 100%;
+}
+
+.hamburguesa-btn, .btn-utilidad { 
+    background: var(--negro); 
+    border: 1px solid var(--oro); 
+    color: var(--oro); 
+    padding: 8px 12px; 
+    cursor: pointer; 
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.hamburguesa-btn:hover, .btn-utilidad:hover {
+    background: var(--oro);
+    color: #fff;
+}
+
+/* Barra de Datos en Vivo */
+.astro-data-bar {
+    background: var(--fondo-barra);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 5%;
+    font-size: 0.75rem;
+    color: var(--texto-secundario);
+    border-top: 1px solid var(--borde);
+    font-weight: 500;
+}
+
+.time-box span {
+    color: var(--oro);
+    font-family: monospace;
+    font-size: 0.85rem;
+}
+
+.spacer { margin: 0 5px; color: var(--borde); }
+
+/* ==========================================================================
+   4. MENÚ LATERAL (SIDEBAR) CONCEPTUAL
+   ========================================================================== */
+.sidebar { 
+    position: fixed; 
+    left: -100%; 
+    top: 0; 
+    width: 290px; 
+    height: 100vh; 
+    background: var(--card); 
+    transition: 0.4s cubic-bezier(0.1, 0.9, 0.2, 1); 
+    z-index: 1000; 
+    border-right: 1px solid var(--oro); 
+    box-shadow: 5px 0 20px rgba(0,0,0,0.3);
+    overflow-y: auto;
+}
+
+.sidebar.active { left: 0; }
+
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background: none;
+    border: none;
+    color: var(--oro);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.menu-content { padding-top: 50px; }
+
+.menu-logo { 
+    font-family: 'Cinzel', serif; 
+    color: var(--oro); 
+    text-align: center; 
+    font-size: 1.3rem; 
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+}
+
+.menu-category {
+    background: rgba(214, 175, 55, 0.1);
+    color: var(--oro);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 8px 20px;
+    margin-top: 15px;
+    letter-spacing: 1px;
+}
+
+.sidebar a { 
+    display: block; 
+    color: var(--texto); 
+    text-decoration: none; 
+    padding: 15px 20px; 
+    border-bottom: 1px solid var(--borde); 
+    font-size: 0.85rem; 
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.sidebar a:hover { 
+    background: rgba(214, 175, 55, 0.05); 
+    padding-left: 25px; 
+    color: var(--oro);
+}
+
+/* ==========================================================================
+   5. COMPONENTES GENERALES (Cards, Tablas, Buscadores)
+   ========================================================================== */
+.card { 
+    background: var(--card); 
+    padding: 25px; 
+    border-radius: 12px; 
+    border: 1px solid var(--borde); 
+    margin-bottom: 20px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Buscador */
+.buscador-box { margin-bottom: 25px; }
+.buscador-box input {
+    width: 100%;
+    padding: 14px 20px;
+    background: var(--card);
+    border: 1px solid var(--borde);
+    border-radius: 30px;
+    color: var(--texto);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+.buscador-box input:focus {
+    border-color: var(--oro);
+    outline: none;
+    box-shadow: 0 0 10px rgba(214,175,55,0.2);
+}
+
+/* Tablas Responsivas */
+.tabla-scroll { width: 100%; overflow-x: auto; margin-bottom: 15px; }
+table { width: 100%; border-collapse: collapse; min-width: 600px; color: var(--texto); }
+th { 
+    background: rgba(0, 0, 0, 0.2); 
+    color: var(--oro); 
+    font-family: 'Cinzel', serif; 
+    font-size: 0.8rem; 
+    letter-spacing: 1px;
+}
+th, td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--borde); font-size: 0.85rem; }
+tr:hover { background: rgba(214, 175, 55, 0.02); }
+
+/* Clases específicas para diferenciar Asteroides */
+.asteroide-row { color: #c0c0c0; font-style: italic; }
+.asteroide-badge { 
+    background: linear-gradient(135deg, #a88433, #e5c07b); 
+    color: #000; 
+    padding: 2px 6px; 
+    font-size: 0.65rem; 
+    font-weight: 700; 
+    border-radius: 3px; 
+}
+
+/* ==========================================================================
+   6. SECCIONES ESPECÍFICAS (Dashboard, Luna, Timeline)
+   ========================================================================== */
+/* Card de Tránsito Clave */
+.card-hit-del-dia {
+    background: linear-gradient(135deg, #0d0d16, #1b1b2a);
+    border: 1px solid var(--oro);
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+body.theme-light .card-hit-del-dia {
+    background: linear-gradient(135deg, #fbfaf7, #ebdcc3);
+}
+.hit-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--oro);
+    color: #000;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+}
+
+/* Filtros Dashboard */
+.filtro-dashboard-box, .tarot-nav, .biblioteca-nav { 
+    display: flex; 
+    gap: 10px; 
+    margin-bottom: 20px; 
+    overflow-x: auto; 
+    padding-bottom: 5px;
+}
+.filtro-dash-btn, .tab-btn {
+    background: var(--card);
+    border: 1px solid var(--borde);
+    color: var(--texto-secundario);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+.filtro-dash-btn.active, .tab-btn.active {
+    background: var(--oro);
+    color: #000 !important;
+    border-color: var(--oro);
+    font-weight: 600;
+}
+
+/* Widget Lunar */
+.grid-lunar-container { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; margin-bottom: 20px; }
+@media (max-width: 768px) { .grid-lunar-container { grid-template-columns: 1fr; } }
+
+.card-luna-actual {
+    background: var(--card);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    text-align: center;
+    padding: 25px;
+}
+.luna-glifo { font-size: 3.5rem; margin-bottom: 10px; color: var(--oro); }
+
+/* Barra de progreso de Lunación */
+.barra-progreso-container { background: rgba(0,0,0,0.3); height: 10px; border-radius: 5px; overflow: hidden; margin: 15px 0 8px 0; border: 1px solid var(--borde); }
+.barra-progreso-fill { background: var(--oro); height: 100%; width: 0%; transition: width 1s ease-in-out; }
+
+/* Timeline Deslizable Horizontal */
+.timeline-wrapper { position: relative; width: 100%; overflow: hidden; margin-bottom: 15px; }
+.timeline-container { 
+    display: flex; 
+    gap: 15px; 
+    overflow-x: auto; 
+    padding: 10px 5px; 
+    scroll-behavior: smooth; 
+    scrollbar-width: none; 
+}
+.timeline-container::-webkit-scrollbar { display: none; }
+.timeline-card {
+    min-width: 240px;
+    background: var(--card);
+    border-left: 3px solid var(--oro);
+    border-top: 1px solid var(--borde);
+    border-right: 1px solid var(--borde);
+    border-bottom: 1px solid var(--borde);
+    padding: 15px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.timeline-controls { display: flex; gap: 10px; margin-bottom: 25px; }
+.btn-nav-timeline { background: none; border: 1px solid var(--borde); color: var(--texto); padding: 5px 12px; cursor: pointer; border-radius: 4px; font-size: 0.75rem; }
+
+/* Leyenda de Retrogradaciones */
+.leyenda-cronograma { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 15px; font-size: 0.75rem; }
+.leyenda-item { padding: 4px 8px; border-radius: 4px; font-weight: 500; }
+.shadow-pre { background: rgba(230, 184, 0, 0.15); color: #e6b800; border: 1px solid #e6b800; }
+.retro-active { background: rgba(255, 0, 0, 0.1); color: #ff4d4d; border: 1px solid #ff4d4d; }
+.shadow-post { background: rgba(74, 144, 226, 0.15); color: #4a90e2; border: 1px solid #4a90e2; }
+.estado-directo { background: rgba(0, 255, 0, 0.1); color: #2ecc71; border: 1px solid #2ecc71; }
+
+/* ==========================================================================
+   7. ENCICLOPEDIAS Y REJILLAS (Zodíaco, Tarot, Herbolario)
+   ========================================================================== */
+.grid-plegables-container { display: flex; flex-direction: column; gap: 12px; }
+
+/* HTML details/summary Card Plegable */
+details.signo-card, details.casa-card-fold {
+    background: var(--card);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+summary.signo-header {
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    list-style: none;
+    user-select: none;
+}
+summary.signo-header::-webkit-details-marker { display: none; }
+.signo-glifo { font-size: 1.3rem; margin-right: 15px; color: var(--oro); }
+.signo-keyword { margin-left: auto; font-family: 'Montserrat'; font-size: 0.8rem; color: var(--texto-secundario); font-style: italic; }
+
+.signo-content { padding: 20px; border-top: 1px solid var(--borde); background: rgba(0,0,0,0.1); font-size: 0.9rem; line-height: 1.6; }
+
+/* Fichas Técnicas de Casas */
+.grid-houses { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.casa-card { background: var(--card); border: 1px solid var(--borde); border-radius: 8px; padding: 20px; position: relative; }
+.casa-card.angular { border-top: 3px solid var(--oro); }
+.casa-keyword { display: block; font-size: 0.8rem; color: var(--texto-secundario); font-style: italic; margin-bottom: 10px; }
+.clasificacion-badge { font-size: 0.65rem; background: rgba(0,0,0,0.3); padding: 3px 6px; border-radius: 3px; color: var(--oro); position: absolute; bottom: 15px; right: 15px; }
+
+/* Rejilla de Tarot y Herbolario */
+.grid-tarot-container, .grid-herbolario { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 20px; 
+}
+
+/* ==========================================================================
+   8. COMPONENTES MÍSTICOS (Formularios, Modales)
+   ========================================================================== */
+.form-container { max-width: 600px; margin: 0 auto; background: var(--card); padding: 30px; border-radius: 12px; border: 1px solid var(--borde); }
+input, textarea, select { 
+    width: 100%; 
+    padding: 12px; 
+    background: var(--negro); 
+    border: 1px solid var(--borde); 
+    color: var(--texto); 
+    margin-bottom: 15px; 
+    box-sizing: border-box; 
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Ventana Emergente (Modal) */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(4px);
+}
+.modal-content {
+    background: var(--card);
+    border: 1px solid var(--oro);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 550px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+}
+.modal-close {
+    position: absolute;
+    top: 15px; right: 15px;
+    background: none; border: none;
+    color: var(--oro); font-size: 1.8rem;
+    cursor: pointer;
+}
