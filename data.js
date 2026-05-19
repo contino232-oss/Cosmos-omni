@@ -58,7 +58,7 @@ const CASAS_DATA = [
     { titulo: "Casa XII", palabra_clave: "El Inconsciente Colectivo", regencia: "Piscis / Neptuno", clasificacion: "Cadente", significado: "Espacio de reclusión, disolución del ego, karma kármico acumulado, sacrificios, sueños premonitorios y fusión absoluta con la Totalidad cósmica." }
 ];
 
-// 4. EL HERBOLARIO MÍSTICO / BOTÁNICA EN RA RESONANCIA ASTRAL
+// 4. EL HERBOLARIO MÍSTICO / BOTÁNICA EN RESONANCIA ASTRAL
 const HERBOLARIO_DATA = [
     { nombre: "Jazmín (Oficinale)", elemento: "Agua", planeta: "Luna", propiedades: "Apertura del tercer ojo, inducción al plano de los sueños lúcidos, alivio de tensiones lunares e incremento del magnetismo nocturno.", uso: "Infusión aromática de flores antes del descanso o sahumerio sobre el altar místico." },
     { nombre: "Oregano (Vulgare)", elemento: "Fuego", planeta: "Mercurio / Marte", propiedades: "Protección psíquica, limpieza áurica severa, corte de parásitos energéticos en el plexo solar e inyección de vigor físico.", uso: "Tintura madre en base alcohólica macerada durante un ciclo lunar completo o defumación." },
@@ -66,12 +66,12 @@ const HERBOLARIO_DATA = [
     { nombre: "Lavanda (Angustifolia)", elemento: "Aire", planeta: "Mercurio", propiedades: "Pacificación del sistema nervioso central, balance del chakra laríngeo y transmutación de ondas de ansiedad mental.", uso: "Aceite esencial puro aplicado en sienes o almohadones durante fases retrógradas." }
 ];
 
-// 5. MAZO DE TAROT RIDER-WAITE (Mayores y Menores con URLs públicas ultraestables de Wikimedia y descripciones enriquecidas)
+// 5. MAZO DE TAROT RIDER-WAITE (Mayores y Menores con URLs públicas ultraestables)
 const TAROT_DATA = [
     { id: "loco", tipo: "mayores", numero: "0", nombre: "El Loco", url_publica: "https://upload.wikimedia.org/wikipedia/commons/0/0b/RWS_Tarot_0_Fool.jpg", descripcion: "Representa los comienzos puros, el salto de fe al vacío, la libertad absoluta de ataduras terrenales, la espontaneidad ingenua y el inicio del viaje espiritual.", consejo: "Es momento de confiar en el Universo y dar ese paso sin calcular tanto. Despójate del miedo al ridículo y lánzate." },
     { id: "mago", tipo: "mayores", numero: "I", nombre: "El Mago", url_publica: "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg", descripcion: "Manifestación consciente, canalización de la luz celestial hacia la materia, fuerza de voluntad inquebrantable y maestría técnica de los elementos.", consejo: "Tenés todas las herramientas necesarias sobre tu mesa de trabajo. Enfoca tu intención y actúa ya; sos el alquimista de tu realidad." },
     { id: "sacerdotisa", tipo: "mayores", numero: "II", nombre: "La Sacerdotisa", url_publica: "https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg", descripcion: "Intuición mística profunda, misterios ocultos detrás del velo del templo, acumulación silenciosa de sabiduría y pasividad receptiva divina.", consejo: "No busques respuestas en el plano exterior. Entra en meditación silenciosa y escucha el susurro sutil de tu intuición subconsciente." },
-    { id: "emperatriz", tipo: "mayores", numero: "III", nombre: "La Emperatriz", url_publica: "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg", descripcion: "Abundancia desbordante, fertilidad material, creatividad orgánica, conexión profunda con la naturaleza, gestación y placeres sensoriales.", consejo: "Permítete disfrutar de la belleza del plano físico y nutre tus proyectos con amor. Es una fase excelente para sembrar y parir ideas." },
+    { id: "emperatriz", tipo: "mayores", numero: "III", nombre: "La Emperatriz", url_publica: "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg", descripcion: "Abundancia desbordante, fertility material, creatividad orgánica, conexión profunda con la naturaleza, gestación y placeres sensoriales.", consejo: "Permítete disfrutar de la belleza del plano físico y nutre tus proyectos con amor. Es una fase excelente para sembrar y parir ideas." },
     { id: "emperador", tipo: "mayores", numero: "IV", nombre: "El Emperador", url_publica: "https://upload.wikimedia.org/wikipedia/commons/c/c3/RWS_Tarot_04_Emperor.jpg", descripcion: "Estructura firme, leyes estables, autoridad justa, protección del territorio, enfoque analítico y establecimiento de límites claros e inamovibles.", consejo: "Asume el control y liderazgo de tu situación con templanza. Pon orden, crea un plan de acción riguroso y protege tus fronteras." },
     { id: "hierofante", tipo: "mayores", numero: "V", nombre: "El Hierofante", url_publica: "https://upload.wikimedia.org/wikipedia/commons/8/8d/RWS_Tarot_05_Hierophant.jpg", descripcion: "Saber tradicional ortodoxo, puentes espirituales institucionales, mentoría, códigos morales compartidos y ritos sagrados de pasaje.", consejo: "Busca el consejo de personas con mayor experiencia o apóyate en estructuras académicas y filosóficas consagradas." },
     { id: "enamorados", tipo: "mayores", numero: "VI", nombre: "Los Enamorados", url_publica: "https://upload.wikimedia.org/wikipedia/commons/3/3a/RWS_Tarot_06_Lovers.jpg", descripcion: "Encrucijadas existenciales, alineación sagrada de valores internos, el espejo del alma a través de las relaciones y elecciones del corazón.", consejo: "Toma decisiones basadas en la verdad de tu corazón. No busques complacer mandatos ajenos; alinea tu deseo con tus principios." },
@@ -79,7 +79,7 @@ const TAROT_DATA = [
     // Arcanos Menores
     { id: "as-espadas", tipo: "menores", numero: "As", nombre: "As de Espadas", url_publica: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Swords01.jpg", descripcion: "Gran avance intelectual, revelación de la verdad oculta, cortes quirúrgicos de lazos viciados y máxima lucidez objetiva.", consejo: "Usa la espada del intelecto para diseccionar el problema. Di la verdad cruda aunque duela; la claridad te liberará." },
     { id: "as-bastos", tipo: "menores", numero: "As", nombre: "As de Bastos", url_publica: "https://upload.wikimedia.org/wikipedia/commons/1/11/Wands01.jpg", descripcion: "Chispa inicial de pasión, dinamismo sexual y emprendedor, inspiración volcánica y coraje puro para empezar de cero.", consejo: "Sigue el pulso que enciende tus vísceras. Es el momento perfecto para iniciar un proyecto de alta demanda energética." },
-    { id: "as-copas", tipo: "menores", numero: "As", nombre: "As de Copas", url_publica: "https://upload.wikimedia.org/wikipedia/commons/3/36/Cups01.jpg", descripcion: "Despertar místico y emocional, surgimiento de amores puros, renovación de la energía psíquica y sanación del corazón ancestral.", consejo: "Abre tus canales afectivos y permítete la vulnerabilidad. Recibe el amor y el perdón con los brazos abiertos." },
+    { id: "as-copas", tipo: "menores", numero: "As", nombre: "As de Copas", url_publica: "https://upload.wikimedia.org/wikipedia/commons/3/36/Cups01.jpg", descripcion: "Despertar místico y emotional, surgimiento de amores puros, renovación de la energía psíquica y sanación del corazón ancestral.", consejo: "Abre tus canales afectivos y permítete la vulnerabilidad. Recibe el amor y el perdón con los brazos abiertos." },
     { id: "as-oros", tipo: "menores", numero: "As", nombre: "As de Oros", url_publica: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Pentalces01.jpg", descripcion: "Anclaje de prosperidad material, oportunidades de inversión sumamente fértiles, salud física fortalecida y herencias sólidas.", consejo: "Acepta los regalos del plano terrenal. Pon las manos en la tierra y construye algo duradero; el suelo está listo para producir." }
 ];
 
@@ -88,12 +88,12 @@ const TIMELINE_DATA = [
     { fecha: "26 Ene 2026", evento: "Nodo Norte ingresa a Acuario", desc: "El foco del destino colectivo se desplaza hacia las redes humanas, la disrupción y las comunidades libres de control." },
     { fecha: "14 Feb 2026", evento: "Saturno ingresa a Aries", desc: "Inicia un ciclo de reestructuración radical de la voluntad individual y de la gestión de la asertividad global." },
     { fecha: "20 Mar 2026", evento: "Equinoccio / Sol en Aries", desc: "Inicio formal del Año Astrológico 2026. Pulso vital de renovación cósmica." },
-    { attributes: "20 Abr 2026", fecha: "28 Abr 2026", evento: "Neptuno ingresa a Aries", desc: "Disolución de viejas identidades colectivas. Espiritualización del impulso y el guerrero interno." },
+    { fecha: "28 Abr 2026", evento: "Neptuno ingresa a Aries", desc: "Disolución de viejas identidades colectivas. Espiritualización del impulso y el guerrero interno." }, // CORREGIDO: Removido "attributes" roto
     { fecha: "16 May 2026", evento: "Portal del Clima Actual", desc: "Conjunción geométrica menor. Luna transitando el plano mensual de cálculos matemáticos precisos." },
     { fecha: "29 Jun 2026", evento: "Mercurio Retrógrado en Cáncer", desc: "Revisión profunda de los lazos familiares, memorias de la infancia y patrones de apego habitacional." }
 ];
 
-// 7. ECLIPSES Y LUNACIONES CRÍTICAS (Para dotar de contenido real a la sección de Intensidad Astral)
+// 7. ECLIPSES Y LUNACIONES CRÍTICAS (Para la sección de Intensidad Astral)
 const LUNACIONES_DATA = [
     { fecha: "17 Feb 2026", tipo: "Eclipse Solar Anular en Acuario", impacto: "Mutación drástica en la gestión de colectivos y redes tecnológicas globales." },
     { fecha: "03 Mar 2026", tipo: "Eclipse Lunar Total en Virgo", impacto: "Purificación masiva de dinámicas laborales, somatizaciones y rutinas obsoletas del cuerpo." },
