@@ -11,6 +11,7 @@
     --texto-secundario: #a0a0b0;
     --borde: #333344;
     --fondo-header: #000000;
+    --fondo-banner: #12121c; /* Cambiado a variable para evitar el blanco forzado */
     --fondo-barra: #0d0d16;
     --shadow-pre: #e6b800;
     --shadow-post: #4a90e2;
@@ -24,12 +25,13 @@ body.theme-light {
     --texto-secundario: #6e6046;
     --borde: #dcd6cd;
     --fondo-header: #ebe6dc;
+    --fondo-banner: #ebe6dc;   /* Adaptable al modo lectura */
     --fondo-barra: #dfd9ce;
     --oro: #aa8433;            /* Bronce más oscuro para contraste en fondo claro */
 }
 
 /* ==========================================================================
-   2. ESTILOS BASE Y ANIMACIONES
+   2. ESTILOS BASE Y ANIMACIONES (Mobile-First)
    ========================================================================== */
 body { 
     margin: 0; 
@@ -41,10 +43,16 @@ body {
 }
 
 .vista { 
-    padding: 40px 5%; 
+    padding: 20px 4%; /* Reducido para pantallas pequeñas, respira mejor */
     max-width: 1200px; 
     margin: 0 auto; 
     animation: fadeIn 0.4s ease-out; 
+}
+
+@media (min-width: 768px) {
+    .vista {
+        padding: 40px 5%; /* Retorna a tus dimensiones amplias en Desktop */
+    }
 }
 
 .seccion-oculta { display: none !important; }
@@ -69,54 +77,89 @@ header {
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    padding: 10px 5%;
-    background: #ffffff; /* Obligamos a blanco/crema nativo para envolver tu imagen */
+    padding: 10px 4%;
+    background: var(--fondo-banner); /* CORREGIDO: Ya no rompe el flujo oscuro/claro */
+    transition: background 0.3s ease;
+}
+
+.logo-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    text-decoration: none;
+    margin: 0 10px;
 }
 
 .logo-container {
-    flex-grow: 1;
     display: flex;
     justify-content: center;
-    max-height: 70px;
+    max-height: 50px; /* Reducido para mejor UX en mobile */
+    width: 100%;
 }
 
 .web-logo {
     height: auto;
-    max-height: 65px;
+    max-height: 45px;
     object-fit: contain;
     width: auto;
     max-width: 100%;
+}
+
+@media (min-width: 768px) {
+    .logo-container { max-height: 70px; }
+    .web-logo { max-height: 65px; }
+    .header-banner-area { padding: 10px 5%; }
 }
 
 .hamburguesa-btn, .btn-utilidad { 
     background: var(--negro); 
     border: 1px solid var(--oro); 
     color: var(--oro); 
-    padding: 8px 12px; 
+    padding: 8px 10px; 
     cursor: pointer; 
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 0.75rem; /* Ajuste responsivo inicial */
     border-radius: 4px;
     transition: 0.2s;
+    white-space: nowrap;
+}
+
+@media (min-width: 360px) {
+    .hamburguesa-btn, .btn-utilidad {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
 }
 
 .hamburguesa-btn:hover, .btn-utilidad:hover {
     background: var(--oro);
-    color: #fff;
+    color: #000; /* Asegura contraste al hacer hover */
 }
 
 /* Barra de Datos en Vivo */
 .astro-data-bar {
     background: var(--fondo-barra);
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; /* Apilado en móviles para evitar desbordes */
+    gap: 6px;
     align-items: center;
-    padding: 6px 5%;
+    text-align: center;
+    padding: 8px 4%;
     font-size: 0.75rem;
     color: var(--texto-secundario);
     border-top: 1px solid var(--borde);
     font-weight: 500;
+}
+
+@media (min-width: 640px) {
+    .astro-data-bar {
+        flex-direction: row; /* Layout horizontal clásico en tablets/PC */
+        justify-content: space-between;
+        padding: 6px 5%;
+        gap: 0;
+    }
 }
 
 .time-box span {
@@ -134,7 +177,7 @@ header {
     position: fixed; 
     left: -100%; 
     top: 0; 
-    width: 290px; 
+    width: 280px; 
     height: 100vh; 
     background: var(--card); 
     transition: 0.4s cubic-bezier(0.1, 0.9, 0.2, 1); 
@@ -155,9 +198,11 @@ header {
     color: var(--oro);
     font-size: 2rem;
     cursor: pointer;
+    padding: 0;
+    line-height: 1;
 }
 
-.menu-content { padding-top: 50px; }
+.menu-content { padding-top: 60px; }
 
 .menu-logo { 
     font-family: 'Cinzel', serif; 
@@ -195,16 +240,38 @@ header {
     color: var(--oro);
 }
 
+/* Capa de fondo oscura (Overlay) cuando el menú está abierto */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.sidebar-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 /* ==========================================================================
    5. COMPONENTES GENERALES (Cards, Tablas, Buscadores)
    ========================================================================== */
 .card { 
     background: var(--card); 
-    padding: 25px; 
+    padding: 20px; 
     border-radius: 12px; 
     border: 1px solid var(--borde); 
     margin-bottom: 20px; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+@media (min-width: 768px) {
+    .card { padding: 25px; }
 }
 
 /* Buscador */
@@ -240,7 +307,6 @@ th {
 th, td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--borde); font-size: 0.85rem; }
 tr:hover { background: rgba(214, 175, 55, 0.02); }
 
-/* Clases específicas para diferenciar Asteroides */
 .asteroide-row { color: #c0c0c0; font-style: italic; }
 .asteroide-badge { 
     background: linear-gradient(135deg, #a88433, #e5c07b); 
@@ -254,23 +320,25 @@ tr:hover { background: rgba(214, 175, 55, 0.02); }
 /* ==========================================================================
    6. SECCIONES ESPECÍFICAS (Dashboard, Luna, Timeline)
    ========================================================================== */
-/* Card de Tránsito Clave */
 .card-hit-del-dia {
     background: linear-gradient(135deg, #0d0d16, #1b1b2a);
     border: 1px solid var(--oro);
-    padding: 30px;
+    padding: 20px;
     border-radius: 12px;
     margin-bottom: 30px;
     position: relative;
     overflow: hidden;
 }
+@media (min-width: 768px) {
+    .card-hit-del-dia { padding: 30px; }
+}
 body.theme-light .card-hit-del-dia {
     background: linear-gradient(135deg, #fbfaf7, #ebdcc3);
 }
 .hit-badge {
-    position: absolute;
-    top: 15px;
-    right: 15px;
+    position: static; /* Cambia a estático en móviles para no encimarse con textos */
+    display: inline-block;
+    margin-bottom: 10px;
     background: var(--oro);
     color: #000;
     font-size: 0.65rem;
@@ -279,14 +347,23 @@ body.theme-light .card-hit-del-dia {
     border-radius: 20px;
     letter-spacing: 1px;
 }
+@media (min-width: 480px) {
+    .hit-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        margin-bottom: 0;
+    }
+}
 
-/* Filtros Dashboard */
+/* Filtros Contenedores */
 .filtro-dashboard-box, .tarot-nav, .biblioteca-nav { 
     display: flex; 
     gap: 10px; 
     margin-bottom: 20px; 
     overflow-x: auto; 
-    padding-bottom: 5px;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch; /* Scroll suave en dispositivos iOS antiguos */
 }
 .filtro-dash-btn, .tab-btn {
     background: var(--card);
@@ -307,8 +384,8 @@ body.theme-light .card-hit-del-dia {
 }
 
 /* Widget Lunar */
-.grid-lunar-container { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; margin-bottom: 20px; }
-@media (max-width: 768px) { .grid-lunar-container { grid-template-columns: 1fr; } }
+.grid-lunar-container { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 20px; }
+@media (min-width: 768px) { .grid-lunar-container { grid-template-columns: 1fr 2fr; } }
 
 .card-luna-actual {
     background: var(--card);
@@ -319,23 +396,20 @@ body.theme-light .card-hit-del-dia {
 }
 .luna-glifo { font-size: 3.5rem; margin-bottom: 10px; color: var(--oro); }
 
-/* Barra de progreso de Lunación */
 .barra-progreso-container { background: rgba(0,0,0,0.3); height: 10px; border-radius: 5px; overflow: hidden; margin: 15px 0 8px 0; border: 1px solid var(--borde); }
 .barra-progreso-fill { background: var(--oro); height: 100%; width: 0%; transition: width 1s ease-in-out; }
 
-/* Timeline Deslizable Horizontal */
-.timeline-wrapper { position: relative; width: 100%; overflow: hidden; margin-bottom: 15px; }
-.timeline-container { 
-    display: flex; 
-    gap: 15px; 
-    overflow-x: auto; 
-    padding: 10px 5px; 
-    scroll-behavior: smooth; 
-    scrollbar-width: none; 
+/* Timeline Horizontal Ocultando scrollbars */
+.slider-wrapper { position: relative; width: 100%; overflow: hidden; }
+#timeline-dinamica {
+    scrollbar-width: none; /* Firefox */
 }
-.timeline-container::-webkit-scrollbar { display: none; }
+#timeline-dinamica::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
 .timeline-card {
-    min-width: 240px;
+    min-width: 220px;
+    max-width: 260px;
     background: var(--card);
     border-left: 3px solid var(--oro);
     border-top: 1px solid var(--borde);
@@ -344,12 +418,13 @@ body.theme-light .card-hit-del-dia {
     padding: 15px;
     border-radius: 0 8px 8px 0;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    flex-shrink: 0; /* Evita que las tarjetas colapsen su ancho */
 }
 .timeline-controls { display: flex; gap: 10px; margin-bottom: 25px; }
-.btn-nav-timeline { background: none; border: 1px solid var(--borde); color: var(--texto); padding: 5px 12px; cursor: pointer; border-radius: 4px; font-size: 0.75rem; }
+.btn-nav-timeline { background: none; border: 1px solid var(--borde); color: var(--texto); padding: 6px 14px; cursor: pointer; border-radius: 4px; font-size: 0.75rem; transition: 0.2s; }
+.btn-nav-timeline:hover { border-color: var(--oro); color: var(--oro); }
 
-/* Leyenda de Retrogradaciones */
-.leyenda-cronograma { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 15px; font-size: 0.75rem; }
+.leyenda-cronograma { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; font-size: 0.75rem; }
 .leyenda-item { padding: 4px 8px; border-radius: 4px; font-weight: 500; }
 .shadow-pre { background: rgba(230, 184, 0, 0.15); color: #e6b800; border: 1px solid #e6b800; }
 .retro-active { background: rgba(255, 0, 0, 0.1); color: #ff4d4d; border: 1px solid #ff4d4d; }
@@ -361,7 +436,6 @@ body.theme-light .card-hit-del-dia {
    ========================================================================== */
 .grid-plegables-container { display: flex; flex-direction: column; gap: 12px; }
 
-/* HTML details/summary Card Plegable */
 details.signo-card, details.casa-card-fold {
     background: var(--card);
     border: 1px solid var(--borde);
@@ -385,24 +459,32 @@ summary.signo-header::-webkit-details-marker { display: none; }
 
 .signo-content { padding: 20px; border-top: 1px solid var(--borde); background: rgba(0,0,0,0.1); font-size: 0.9rem; line-height: 1.6; }
 
-/* Fichas Técnicas de Casas */
-.grid-houses { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-.casa-card { background: var(--card); border: 1px solid var(--borde); border-radius: 8px; padding: 20px; position: relative; }
-.casa-card.angular { border-top: 3px solid var(--oro); }
-.casa-keyword { display: block; font-size: 0.8rem; color: var(--texto-secundario); font-style: italic; margin-bottom: 10px; }
-.clasificacion-badge { font-size: 0.65rem; background: rgba(0,0,0,0.3); padding: 3px 6px; border-radius: 3px; color: var(--oro); position: absolute; bottom: 15px; right: 15px; }
-
-/* Rejilla de Tarot y Herbolario */
 .grid-tarot-container, .grid-herbolario { 
     display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-    gap: 20px; 
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Reducido para meter 2 columnas en pantallas muy pequeñas */
+    gap: 15px; 
 }
+@media (min-width: 480px) {
+    .grid-tarot-container, .grid-herbolario { 
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+    }
+}
+
+/* Elementos de Guías Rápidas */
+.grid-elementos-info { display: grid; grid-template-columns: 1fr; gap: 15px; }
+@media (min-width: 640px) {
+    .grid-elementos-info { grid-template-columns: 1fr 1fr; }
+}
+.elemento-card { background: rgba(0,0,0,0.1); padding: 15px; border-radius: 8px; border: 1px solid var(--borde); font-size: 0.85rem; line-height: 1.5; }
 
 /* ==========================================================================
    8. COMPONENTES MÍSTICOS (Formularios, Modales)
    ========================================================================== */
-.form-container { max-width: 600px; margin: 0 auto; background: var(--card); padding: 30px; border-radius: 12px; border: 1px solid var(--borde); }
+.form-container { max-width: 600px; margin: 0 auto; background: var(--card); padding: 20px; border-radius: 12px; border: 1px solid var(--borde); }
+@media (min-width: 768px) {
+    .form-container { padding: 30px; }
+}
 input, textarea, select { 
     width: 100%; 
     padding: 12px; 
@@ -413,6 +495,7 @@ input, textarea, select {
     box-sizing: border-box; 
     border-radius: 6px;
     font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
 }
 
 /* Ventana Emergente (Modal) */
@@ -429,12 +512,14 @@ input, textarea, select {
 .modal-content {
     background: var(--card);
     border: 1px solid var(--oro);
-    padding: 30px;
+    padding: 25px;
     border-radius: 12px;
-    max-width: 550px;
-    width: 90%;
+    max-width: 530px;
+    width: 88%;
     position: relative;
     box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+    max-height: 90vh;
+    overflow-y: auto; /* Permite scroll interno si la info desborda en pantallas chicas */
 }
 .modal-close {
     position: absolute;
@@ -442,4 +527,6 @@ input, textarea, select {
     background: none; border: none;
     color: var(--oro); font-size: 1.8rem;
     cursor: pointer;
+    padding: 0;
+    line-height: 1;
 }
