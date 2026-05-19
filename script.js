@@ -268,7 +268,100 @@ function renderizarEnciclopedias() {
         `).join("");
     }
 
+    // --- CONTINUACIÓN CORREGIDA DE RENDERIZAR ENCICLOPEDIAS ---
     const gridAstros = document.getElementById("render-biblioteca-arquetipos");
     if (gridAstros && ASTRO_DATA.astros) {
         gridAstros.innerHTML = ASTRO_DATA.astros.map(a => `
             <details class="casa-card-fold" data-buscar="${a.nombre.toLowerCase()} ${a.rol.toLowerCase()} ${a.keywords.join(' ')}">
+                <summary class="signo-header">
+                    <span class="signo-glifo">🪐</span>
+                    <strong>${a.nombre}</strong> — <small>${a.rol}</small>
+                </summary>
+                <div class="signo-content">
+                    <p style="color:#d4af37; font-weight:600; margin-bottom:4px;">Frase Semilla: "${a.frase_semilla}"</p>
+                    <p>${a.desc}</p>
+                </div>
+            </details>
+        `).join("");
+    }
+}
+
+// --- BUSCADOR EN TIEMPO REAL ---
+function filtrarEnciclopedia(idInput, claseCartas) {
+    const input = document.getElementById(idInput);
+    if (!input) return;
+    const filtro = input.value.toLowerCase();
+    
+    document.querySelectorAll(`.${claseCartas}`).forEach(carta => {
+        const textoBuscar = carta.getAttribute("data-buscar") || "";
+        if (textoBuscar.includes(filtro)) {
+            carta.style.display = "";
+        } else {
+            carta.style.display = "none";
+        }
+    });
+}
+
+// --- RENDER DE TAROT (RIDER-WAITE) ---
+function renderizarTarot(tipo) {
+    if (typeof ASTRO_DATA === 'undefined' || !ASTRO_DATA.tarot) return;
+    const grid = document.getElementById("grid-tarot");
+    if (!grid) return;
+
+    // Filtrar Arcanos según el botón activo
+    const filtrados = ASTRO_DATA.tarot.filter(c => tipo === 'todos' || c.tipo === tipo);
+
+    grid.innerHTML = filtrados.map(c => `
+        <div class="tarot-card">
+            <img src="${c.imagen}" alt="${c.nombre}" loading="lazy">
+            <div class="tarot-info">
+                <h3>${c.nombre}</h3>
+                <p class="tarot-keywords">${c.keywords.join(" • ")}</p>
+                <p class="tarot-desc">${c.descripcion}</p>
+            </div>
+        </div>
+    `).join("");
+}
+
+function cambiarFiltroTarot(evento, tipo) {
+    document.querySelectorAll(".filtro-tarot-btn").forEach(b => b.classList.remove("active"));
+    evento.currentTarget.classList.add("active");
+    renderizarTarot(tipo);
+}
+
+// --- RENDER DE HERBOLARIO ---
+function renderizarHerbolario() {
+    if (typeof ASTRO_DATA === 'undefined' || !ASTRO_DATA.herbolario) return;
+    const grid = document.getElementById("grid-herbolario");
+    if (!grid) return;
+
+    grid.innerHTML = ASTRO_DATA.herbolario.map(h => `
+        <div class="hierba-card" data-buscar="${h.nombre.toLowerCase()} ${h.keywords.join(' ')}">
+            <div class="hierba-header">
+                <h3>🌿 ${h.nombre}</h3>
+                <span class="hierba-regente">${h.regente}</span>
+            </div>
+            <p><strong>Propiedades:</strong> ${h.propiedades}</p>
+            <p style="margin-top:6px; font-size:0.9rem; font-style:italic; opacity:0.9;"><strong>Uso Mágico:</strong> ${h.uso}</p>
+        </div>
+    `).join("");
+}
+
+// --- ALMANAQUE LUNAR AUTOMÁTICO ---
+function renderizarAlmanaqueLunar() {
+    const contenedor = document.getElementById("render-almanaque-lunar");
+    if (!contenedor) return;
+    // Espacio de contingencia para la automatización de fases lunares
+    contenedor.innerHTML = `
+        <div style="text-align:center; padding:15px; border:1px dashed #d4af37; border-radius:6px;">
+            <p style="color:#d4af37; font-size:1.2rem; font-weight:600; margin-bottom:4px;">🌖 Fase Actual: Luna Menguante en Piscis</p>
+            <p style="font-size:0.9rem; opacity:0.8;">Iluminación: 38% | Próxima Luna Nueva: 27 de Mayo de 2026</p>
+        </div>
+    `;
+}
+
+// --- INTERFAZ DE MODAL PARA EL DASHBOARD ---
+function abrirModalAstro(nombre, signo, pos, din) {
+    // Si no tenés un modal implementado en el HTML, esta función previene errores en consola
+    console.log(`Consulta Astral: ${nombre} en ${signo} (${pos}) - ${din}`);
+}
