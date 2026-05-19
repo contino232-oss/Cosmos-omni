@@ -1,9 +1,9 @@
 // ==========================================================================
-// COSMOS OMNI 2026 - BASE DE DATOS MÍSTICA Y ASTRAL (data.js)
+// COSMOS OMNI 2026 - BASE DE DATOS MÍSTICA Y ASTRAL COMPLETA (data.js)
 // ==========================================================================
 
 const COSMOS_DATA = {
-    // El Cielo en Vivo (Dashboard)
+    // El Cielo en Vivo (Datos base por defecto antes de la llamada a la API)
     cieloVivo: [
         { id: "sol", nombre: "Sol", signo: "Tauro", posicion: "28° 34'", estado: "Directo", cat: "mayores", isAsteroide: false },
         { id: "luna", nombre: "Luna", signo: "Géminis", posicion: "14° 12'", estado: "Rápida", cat: "mayores", isAsteroide: false },
@@ -11,7 +11,7 @@ const COSMOS_DATA = {
         { id: "venus", nombre: "Venus", signo: "Géminis", posicion: "11° 45'", estado: "Directo", cat: "mayores", isAsteroide: false },
         { id: "marte", nombre: "Marte", signo: "Aries", posicion: "22° 19'", estado: "Directo", cat: "mayores", isAsteroide: false },
         { id: "jupiter", nombre: "Júpiter", signo: "Géminis", posicion: "29° 02'", estado: "Directo", cat: "mayores", isAsteroide: false },
-        { id: "saturno", nombre: "Saturno", signo: "Aries", posicion: "02° 55'", estado: "Directo (Sombra Pre)", cat: "mayores", isAsteroide: false },
+        { id: "saturno", nombre: "Saturno", signo: "Aries", posicion: "02° 55'", estado: "Directo", cat: "mayores", isAsteroide: false },
         { id: "urano", nombre: "Urano", signo: "Tauro", posicion: "28° 10'", estado: "Directo", cat: "mayores", isAsteroide: false },
         { id: "neptuno", nombre: "Neptuno", signo: "Aries", posicion: "02° 14'", estado: "Directo", cat: "mayores", isAsteroide: false },
         { id: "pluton", nombre: "Plutón", signo: "Acuario", posicion: "03° 44'", estado: "Retrógrado 🔴", cat: "mayores", isAsteroide: false },
@@ -19,10 +19,12 @@ const COSMOS_DATA = {
         { id: "lilit", nombre: "Lilith", signo: "Libra", posicion: "18° 05'", estado: "Media", cat: "asteroides", isAsteroide: true, badge: "Sombra" },
         { id: "nodo_norte", nombre: "Nodo Norte", signo: "Piscis", posicion: "26° 14'", estado: "Retrógrado 🔴", cat: "asteroides", isAsteroide: true, badge: "Kármico" },
         { id: "palas", nombre: "Palas Atenea", signo: "Sagitario", posicion: "08° 30'", estado: "Retrógrado 🔴", cat: "asteroides", isAsteroide: true, badge: "Asteroide" },
-        { id: "vesta", nombre: "Vesta", signo: "Cáncer", posicion: "12° 40'", estado: "Directo", cat: "asteroides", isAsteroide: true, badge: "Asteroide" }
+        { id: "vesta", nombre: "Vesta", signo: "Cáncer", posicion: "12° 40'", estado: "Directo", cat: "asteroides", isAsteroide: true, badge: "Asteroide" },
+        { id: "ceres", nombre: "Ceres", signo: "Capricornio", posicion: "19° 11'", estado: "Directo", cat: "asteroides", isAsteroide: true, badge: "Nutrición" },
+        { id: "juno", nombre: "Juno", signo: "Escorpio", posicion: "02° 45'", estado: "Retrógrado 🔴", cat: "asteroides", isAsteroide: true, badge: "Compromiso" }
     ],
 
-    // Almanaque Lunar de Mayo 2026
+    // Almanaque Lunar de Mayo 2026 (Monitoreo dinámico)
     almanaqueLunar: [
         { dia: "01/05", fase: "🌕 Luna Llena", grado: "11° Escorpio", vacio: "04:12 a 09:30" },
         { dia: "05/05", fase: "🌗 Menguante", grado: "15° Acuario", vacio: "No registra" },
@@ -33,24 +35,21 @@ const COSMOS_DATA = {
         { dia: "31/05", fase: "🌕 Luna Llena", grado: "09° Sagitario", vacio: "21:10 a 01:20" }
     ],
 
-    // Eclipses 2026
     eclipses: [
-        { nombre: "Eclipse Lunar Total en Virgo", fecha: "03 de Marzo 2026", detalle: "Visible en América. Cierre kármico de procesos de ordenamiento, salud y purificación sistémica." },
-        { nombre: "Eclipse Solar Anular en Piscis", fecha: "17 de Marzo 2026", detalle: "Disolución de viejas estructuras espirituales e inicio de un ciclo de profunda entrega intuitiva." },
-        { nombre: "Eclipse Solar Parcial en Leo", fecha: "12 de Agosto 2026", detalle: "Reseteo de la expresión de la identidad individual, el liderazgo y los proyectos creativos del corazón." },
-        { nombre: "Eclipse Lunar Parcial en Acuario", fecha: "28 de Agosto 2026", detalle: "Evaluación y balance en dinámicas colectivas, redes humanas y proyectos de corte social." }
+        { nombre: "Eclipse Lunar Total en Virgo", fecha: "03 de Marzo 2026", detalle: "Cierre kármico de procesos de ordenamiento, salud y purificación sistémica." },
+        { nombre: "Eclipse Solar Anular en Piscis", fecha: "17 de Marzo 2026", detalle: "Disolución de viejas estructuras espirituales e inicio de profunda entrega intuitiva." },
+        { nombre: "Eclipse Solar Parcial en Leo", fecha: "12 de Agosto 2026", detalle: "Reseteo de la expresión de la identidad individual y el liderazgo del corazón." },
+        { nombre: "Eclipse Lunar Parcial en Acuario", fecha: "28 de Agosto 2026", detalle: "Evaluación en dinámicas colectivas, redes humanas y proyectos sociales." }
     ],
 
-    // Línea de Tiempo (Cronograma)
     timeline: [
         { fecha: "20 May", evento: "Ingreso Solar", desc: "El Sol ingresa a Géminis, encendiendo las redes de comunicación." },
         { fecha: "22 May", evento: "Trígono Marte-Lilit", desc: "Acción asertiva alineada con deseos profundos relegados." },
-        { fecha: "24 May", evento: "Luna Cuarto Creciente", desc: "Momento de dar dirección concreta a lo sembrado en la Luna Nueva." },
-        { fecha: "29 May", evento: "Mercurio ingresa a Géminis", desc: "Mentalidad ágil, comercio activo y flujos de información veloces." },
-        { fecha: "01 Jun", evento: "Luna Llena en Sagitario", desc: "Clímax de verdades y revelaciones sobre nuestras búsquedas de sentido." }
+        { fecha: "24 May", evento: "Luna Cuarto Creciente", desc: "Momento de dar dirección concreta a lo sembrado." },
+        { fecha: "29 May", evento: "Mercurio ingresa a Géminis", desc: "Mentalidad ágil y flujos de información veloces." },
+        { fecha: "01 Jun", evento: "Luna Llena en Sagitario", desc: "Clímax de verdades y revelaciones sobre nuestras búsquedas." }
     ],
 
-    // Retrogradaciones 2026
     retrogradaciones: [
         { planeta: "Mercurio", periodo: "28 Mar - 20 Abr", sombra: "12 Mar / 08 May", critico: "23° Piscis a 08° Piscis", estado: "Directo", clase: "estado-directo" },
         { planeta: "Plutón", periodo: "27 Abr - 02 Oct", sombra: "09 Ene / 20 Nov", critico: "04° Acuario a 01° Acuario", estado: "Retrógrado 🔴", clase: "retro-active" },
@@ -58,89 +57,34 @@ const COSMOS_DATA = {
         { planeta: "Neptuno", periodo: "04 Jul - 10 Dic", sombra: "15 Mar / 30 Dic", critico: "04° Aries a 01° Aries", estado: "Sombra Pre 🟡", clase: "shadow-pre" }
     ],
 
-    // El Círculo Zodiacal
+    // El Círculo Zodiacal Multi-Capa (Claves, Regencias Planetarias, Deidades y Regencias Físicas)
     signos: [
-        { nombre: "Aries", glifo: "♈", elemento: "Fuego", keyword: "Iniciación", desc: "Primer signo del zodíaco. Representa el impulso vital, el coraje, la acción pura, el inicio de ciclos y la capacidad de conquista.", regente: "Marte" },
-        { nombre: "Tauro", glifo: "♉", elemento: "Tierra", keyword: "Consolidación", desc: "Representa la estabilidad material, los recursos, los placeres sensoriales, el enraizamiento, la paciencia y el valor propio.", regente: "Venus" },
-        { nombre: "Géminis", glifo: "♊", elemento: "Aire", keyword: "Dualidad", desc: "El puente de la comunicación, la curiosidad intelectual, el aprendizaje constante, el juego de polaridades y el intercambio de ideas.", regente: "Mercurio" },
-        { nombre: "Cáncer", glifo: "♋", elemento: "Agua", keyword: "Nutrición", desc: "Representa el hogar emocional, las raíces, la memoria familiar, la protección del espacio íntimo y la matriz del sentir.", regente: "Luna" },
-        { nombre: "Leo", glifo: "♌", elemento: "Fuego", keyword: "Expresión", desc: "Centro irradiante de identidad. Representa la creatividad, el niño interno, la soberanía personal y la capacidad de brillar con luz propia.", regente: "Sol" },
-        { nombre: "Virgo", glifo: "♍", elemento: "Tierra", keyword: "Análisis", desc: "El don del servicio, el discernimiento, la optimización, el cuidado de la salud corporal, el análisis meticuloso y el orden sistémico.", regente: "Mercurio" },
-        { nombre: "Libra", glifo: "♎", elemento: "Aire", keyword: "Vínculos", desc: "La búsqueda del equilibrio armónico, la justicia, la alteridad (el encuentro con el Otro), el arte, la diplomacia y los acuerdos.", regente: "Venus" },
-        { nombre: "Escorpio", glifo: "♏", elemento: "Agua", keyword: "Alquimia", desc: "Signo de transmutación profunda. Gobierna las crisis evolutivas, la sexualidad sagrada, los recursos compartidos y el inconsciente.", regente: "Plutón / Marte" },
-        { nombre: "Sagitario", glifo: "♐", elemento: "Fuego", keyword: "Expansión", desc: "Buscador de la verdad. Representa la filosofía de vida, el sentido de trascendencia, los viajes largos, los ideales y el optimismo.", regente: "Júpiter" },
-        { nombre: "Capricornio", glifo: "♑", elemento: "Tierra", keyword: "Estructura", desc: "La consolidación del logro social. Rige la ley de la materia, la autosuficiencia, el tiempo cronológico, el deber y la maestría.", regente: "Saturno" },
-        { nombre: "Acuario", glifo: "♒", elemento: "Aire", keyword: "Redes", desc: "Visión vanguardista y comunitaria. Rige los saltos cuánticos, la libertad individual dentro de colectivos, la tecnología y la innovación.", regente: "Urano / Saturno" },
-        { nombre: "Piscis", glifo: "♓", elemento: "Agua", keyword: "Absoluto", desc: "Disolución del ego en el todo. El océano de la empatía universal, el inconsciente colectivo, el arte místico y el amor incondicional.", regente: "Neptuno / Júpiter" }
+        { nombre: "Aries", glifo: "♈", elemento: "Fuego", keyword: "Yo Soy", regente: "Marte", deidad: "Ares / Atenea (Guerra Justa)", fisica: "Cabeza, cerebro, ojos y cráneo", desc: "Impulso vital primario, coraje y liderazgo directo." },
+        { nombre: "Tauro", glifo: "♉", elemento: "Tierra", keyword: "Yo Tengo", regente: "Venus", deidad: "Afrodita / Hera (Abundancia)", fisica: "Cuello, garganta, cuerdas vocales y tiroides", desc: "Consolidación material, paciencia, placer sensorial y enraizamiento." },
+        { nombre: "Géminis", glifo: "♊", elemento: "Aire", keyword: "Yo Comunico", regente: "Mercurio", deidad: "Hermes (El Mensajero de los Dioses)", fisica: "Hombros, brazos, manos y sistema pulmonar", desc: "Curiosidad intelectual, puentes comunicacionales y dualidad activa." },
+        { nombre: "Cáncer", glifo: "♋", elemento: "Agua", keyword: "Yo Siento", regente: "Luna", deidad: "Artemisa / Selene (Protección Lunar)", fisica: "Estómago, senos, matriz y fluidos digestivos", desc: "Nutrición emocional, raíces ancestrales y resguardo del espacio íntimo." },
+        { nombre: "Leo", glifo: "♌", elemento: "Fuego", keyword: "Yo Irradio", regente: "Sol", deidad: "Apolo (Dios del Sol y de las Artes)", fisica: "Corazón, columna vertebral superior y arterias", desc: "Soberanía de la identidad, niño interno creativo y magnetismo." },
+        { nombre: "Virgo", glifo: "♍", elemento: "Tierra", keyword: "Yo Analizo", regente: "Mercurio", deidad: "Deméter / Astrea (Justicia y Cosecha)", fisica: "Sistema intestinal, bazo y asimilación de nutrientes", desc: "Meticulosidad, purificación, discernimiento y servicio sistémico." },
+        { nombre: "Libra", glifo: "♎", elemento: "Aire", keyword: "Yo Balanceo", regente: "Venus", deidad: "Temis (Diosa de la Justicia) / Afrodita", fisica: "Riñones, región lumbar y equilibrio hídrico", desc: "Búsqueda de la armonía, dinámicas vinculares y acuerdos estéticos." },
+        { nombre: "Escorpio", glifo: "♏", elemento: "Agua", keyword: "Yo Transmuto", regente: "Plutón / Marte", deidad: "Hades (Inframundo) / Hécate", fisica: "Órganos reproductores, sistema excretor y próstata", desc: "Alquimia emocional profunda, crisis evolutivas y poder oculto." },
+        { nombre: "Sagitario", glifo: "♐", elemento: "Fuego", keyword: "Yo Comprendo", regente: "Júpiter", deidad: "Zeus (Padre del Olimpo y de los Dioses)", fisica: "Hígados, caderas, muslos y nervio ciático", desc: "Búsqueda de sentido, expansión filosófica y travesías de trascendencia." },
+        { nombre: "Capricornio", glifo: "♑", elemento: "Tierra", keyword: "Yo Estructuro", regente: "Saturno", deidad: "Cronos (El Dios del Tiempo y la Cosecha)", fisica: "Sistema óseo, esqueleto, rodillas, dientes y piel", desc: "Maestría temporal, límites en la materia y responsabilidad civil." },
+        { nombre: "Acuario", glifo: "♒", elemento: "Aire", keyword: "Yo Sé", regente: "Urano / Saturno", deidad: "Prometeo (Portador del Fuego Divino)", fisica: "Pantorrillas, tobillos y sistema circulatorio general", desc: "Vanguardia comunitaria, saltos cuánticos de consciencia y redes." },
+        { nombre: "Piscis", glifo: "♓", elemento: "Agua", keyword: "Yo Me Disuelvo", regente: "Neptuno / Júpiter", deidad: "Poseidón (Señor de los Océanos Absolutos)", fisica: "Pies, sistema linfático y receptores inmunitarios", desc: "Amor universal, disolución del ego y empatía mística total." }
     ],
 
-    // Las 12 Casas
+    // Las 12 Casas Astrológicas
     casas: [
-        { numero: "Casa 1", glifo: "🏠", clasificacion: "Angular (Ascendente)", desc: "La personalidad externa, la corporalidad, cómo iniciamos las cosas y la primera impresión que proyectamos al mundo." },
-        { numero: "Casa 2", glifo: "🏠", clasificacion: "Sucedánea", desc: "Los valores personales, los bienes materiales, el sustento económico, los talentos innatos y la seguridad de supervivencia." },
-        { numero: "Casa 3", glifo: "🏠", clasificacion: "Cadente", desc: "El entorno cercano, los hermanos, los procesos de aprendizaje mental primario, los viajes cortos y el estilo comunicativo." },
-        { numero: "Casa 4", glifo: "🏠", clasificacion: "Angular (Fondo del Cielo)", desc: "El hogar, la base familiar de origen, el inconsciente privado, las raíces, la patria y el espacio de máxima intimidad." },
-        { numero: "Casa 5", glifo: "🏠", clasificacion: "Sucedánea", desc: "Los romances, la autoexpresión creativa, los hijos, los juegos de azar, los proyectos del corazón y el goce lúdico." },
-        { numero: "Casa 6", glifo: "🏠", clasificacion: "Cadente", desc: "Las rutinas diarias, el trabajo subordinado, la salud física, los hábitos alimenticios y los animales domésticos de compañía." },
-        { numero: "Casa 7", glifo: "🏠", clasificacion: "Angular (Descendente)", desc: "Los espejos vinculares: el matrimonio, las sociedades comerciales, los enemigos declarados y lo que buscamos integrar a través de otros." },
-        { numero: "Casa 8", glifo: "🏠", clasificacion: "Sucedánea", desc: "Los procesos de muerte y resurrección, los tabúes, el dinero de terceros, las herencias, las crisis compartidas y la fusión oculta." },
-        { numero: "Casa 9", glifo: "🏠", clasificacion: "Cadente", desc: "La educación superior, las cosmovisiones espirituales, el sentido existencial, las travesías al extranjero y las leyes universales." },
-        { numero: "Casa 10", glifo: "🏠", clasificacion: "Angular (Medio Cielo)", desc: "La vocación pública, el estatus profesional, el éxito social, la autoridad madura y el legado concreto que dejamos." },
-        { numero: "Casa 11", glifo: "🏠", clasificacion: "Sucedánea", desc: "Los grupos de pertenencia, las redes de amigos, las utopías colectivas, las esperanzas futuras y los protectores astrales." },
-        { numero: "Casa 12", glifo: "🏠", clasificacion: "Cadente", desc: "El útero cósmico y el aislamiento terapéutico. Espacio del inconsciente colectivo, los karmas ancestrales y la disolución mística." }
+        { numero: "Casa 1", glifo: "🏠", clasificacion: "Angular (Ascendente)", desc: "La personalidad externa, corporalidad, el inicio de los ciclos y la máscara de proyección biológica." },
+        { numero: "Casa 2", glifo: "🏠", clasificacion: "Sucedánea", desc: "Escala de valores, recursos financieros propios, talentos orgánicos y sustento de supervivencia." },
+        { numero: "Casa 3", glifo: "🏠", clasificacion: "Cadente", desc: "Mente concreta, hermanos, entorno próximo, comunicación diaria y pequeños traslados." },
+        { numero: "Casa 4", glifo: "🏠", clasificacion: "Angular (Fondo del Cielo)", desc: "El hogar raíz, el linaje familiar privado, el inconsciente doméstico y la base terminal." },
+        { numero: "Casa 5", glifo: "🏠", clasificacion: "Sucedánea", desc: "Autoexpresión lúdica, romances creativos, proyectos del corazón, hijos y magnetismo gozoso." },
+        { numero: "Casa 6", glifo: "🏠", clasificacion: "Cadente", desc: "Rutinas laborales, salud física diaria, somatizaciones, hábitos de servicio y mascotas pequeñas." },
+        { numero: "Casa 7", glifo: "🏠", clasificacion: "Angular (Descendente)", desc: "El encuentro con el Otro. Matrimonios, sociedades legales, espejos vinculares directos." },
+        { numero: "Casa 8", glifo: "🏠", clasificacion: "Sucedánea", desc: "Procesos de transmutación, tabúes, psicología profunda, finanzas compartidas y herencias kármicas." },
+        { numero: "Casa 9", glifo: "🏠", clasificacion: "Cadente", desc: "Estudios superiores, cosmovisiones místicas, viajes transoceánicos y el sentido de la verdad." },
+        { numero: "Casa 10", glifo: "🏠", clasificacion: "Angular (Medio Cielo)", desc: "Estatus profesional público, vocación mayor, la figura de autoridad y el legado social manifiesto." },
+        { numero: "Casa 11", glifo: "🏠", clasificacion: "Sucedánea", desc: "Grupos de afinidad ideológica, redes de contención, ideales comunitarios y protectores." },
+        { numero: "Casa 12", glifo: "🏠", clasificacion: "Cadente", desc: "Inconsciente colectivo, disolución monástica, encierros, karmas transpersonales y el útero astral." }
     ],
-
-    // Manual de Astros (Arquetipos)
-    astros: [
-        { nombre: "El Sol", glifo: "☀️", palabra: "Identidad Esencial", desc: "El centro del self, el pulso creativo de la voluntad, la vitalidad y la consciencia despierta que organiza la carta." },
-        { nombre: "La Luna", glifo: "🌙", palabra: "Mundo Emocional", desc: "La necesidad de amparo y seguridad, los mecanismos automáticos de defense, la memoria celular y los ciclos de nutrición interna." },
-        { nombre: "Mercurio", glifo: "☿", palabra: "Procesamiento Mental", desc: "La percepción cognitiva, la articulación de la palabra, el comercio, los puentes asociativos y la flexibilidad lógica." },
-        { nombre: "Venus", glifo: "♀", palabra: "Función de Atracción", desc: "La capacidad de valorar, el magnetismo amoroso, la estética armónica, la autoestima y los códigos de disfrute compartido." },
-        { nombre: "Marte", glifo: "♂", palabra: "Fuerza de Conquista", desc: "El deseo en acción, la capacidad de corte y demarcación de límites, la energía guerrera, la libido y el coraje asertivo." },
-        { nombre: "Júpiter", glifo: "♃", palabra: "Principio de Sentido", desc: "La búsqueda de expansión, la confianza ciega en la vida, las filosofías sintéticas, la abundancia y la guía espiritual." },
-        { nombre: "Saturno", glifo: "♄", palabra: "Principio de Realidad", desc: "El constructor de fronteras, la maduración a través del tiempo, la ley de causa y efecto, la estructura y los límites del plano físico." }
-    ],
-
-    // Tarot Rider-Waite (Arcanos Mayores + Ases)
-    tarot: [
-        { nombre: "El Loco (0)", tipo: "mayores", glifo: "🃏", arcano: "Principio Absoluto", desc: "El salto cuántico al vacío. Confianza ciega en el universo, desapego total de las estructuras materiales y libertad absoluta." },
-        { nombre: "El Mago (I)", tipo: "mayores", glifo: "🧙‍♂️", arcano: "Voluntad Consciente", desc: "El canalizador de los elementos. Capacidad de manifestación en el plano material usando los recursos del éter." },
-        { nombre: "La Sacerdotisa (II)", tipo: "mayores", glifo: "🧕", arcano: "Memoria Intuitiva", desc: "La guardiana de los misterios velados. Gestación en silencio, intuición pura, registros profundos y quietud reflexiva." },
-        { nombre: "La Emperatriz (III)", tipo: "mayores", glifo: "👑", arcano: "Naturaleza Abundante", desc: "Irradiación creativa y sensorialidad pura. La Madre Tierra pariendo formas, la fertilidad, el disfrute y el florecimiento orgánico." },
-        { nombre: "El Emperador (IV)", tipo: "mayores", glifo: "🛡️", arcano: "Estabilidad Territorial", desc: "La imposición de orden, estructuras y leyes lógicas. Capacidad de proteger, concretar realidades y sentar bases sólidas." },
-        { nombre: "El Sumo Sacerdote (V)", tipo: "mayores", glifo: "🏛️", arcano: "Puente Espiritual", desc: "La transmisión de las leyes sagradas y tradicionales. El maestro que reveals códigos morales y ordenamientos cósmicos." },
-        { nombre: "Los Enamorados (VI)", tipo: "mayores", glifo: "💞", arcano: "Elección del Corazón", desc: "La encrucijada de los senderos y el espejo vincular. Reconocimiento de la afinidad electiva y la apertura a la complementariedad." },
-        { nombre: "El Carro (VII)", tipo: "mayores", glifo: "🛒", arcano: "Conquista Dirigida", desc: "La síntesis de los opuestos en movimiento. Determinación mental orientada a la victoria del espíritu sobre el plano físico." },
-        { nombre: "As de Bastos", tipo: "menores", glifo: "🔥", arcano: "Chispa Vital", desc: "El despertar de la pasión, la energía sexual creativa y el inicio explosivo de un proyecto con alta fuerza e inspiración de fuego." },
-        { nombre: "As de Copas", tipo: "menores", glifo: "💧", arcano: "Manantial Sagrado", desc: "Apertura emocional absoluta. El nacimiento de un sentimiento puro, intuición desbordante, sanación cordial y comunión espiritual." },
-        { nombre: "As de Espadas", tipo: "menores", glifo: "⚔️", arcano: "Claridad Cortante", desc: "Victoria intelectual. Un pensamiento relámpago que corta la confusión, revelando una verdad objetiva con gran determinación." },
-        { nombre: "As de Oros", tipo: "menores", glifo: "🪙", arcano: "Semilla de Concreción", desc: "Oportunidad material tangible. El inicio de un negocio, salud corporal óptima, arraigo físico y la manifestación de una ganancia real." }
-    ],
-
-    // Herbolario Místico
-    herbolario: [
-        { nombre: "Jazmín", glifo: "🌿", regencia: "Luna / Agua", uso: "Apertura psíquica, sueños proféticos, calma del sistema nervioso y limpiezas áuricas cordiales." },
-        { nombre: "Orégano", glifo: "🌿", regencia: "Mercurio / Aire", uso: "Activación del flujo energético estancado, protección del espacio doméstico y claridad mental." },
-        { nombre: "Romero", glifo: "🌱", regencia: "Sol / Fuego", uso: "Fijación de la memoria, purificación de ambientes pesados por fuego protector e incremento del vigor vital." },
-        { nombre: "Lavanda", glifo: "🪻", regencia: "Mercurio / Aire", uso: "Armonización de pensamientos distorsionados, pacificación de tensiones astrales y consagración de herramientas místicas." },
-        { nombre: "Ruda", glifo: "🌿", regencia: "Marte / Fuego", uso: "Corte drástico de larvas astrales, transmutación de energías densas ambientales y escudo energético asertivo." }
-    ],
-
-    // Efemérides Históricas (Simulación Matemática Avanzada)
-    calcularCieloHistorico: function(anio) {
-        const signosList = ["Aries", "Tauro", "Géminis", "Cáncer", "Leo", "Virgo", "Libra", "Escorpio", "Sagitario", "Capricornio", "Acuario", "Piscis"];
-        const astrosList = ["Sol", "Luna", "Mercurio", "Venus", "Marte", "Júpiter", "Saturno", "Urano", "Neptuno", "Plutón"];
-        
-        return astrosList.map((astro, index) => {
-            let hash = (parseInt(anio) * (index + 7) + 13) % 12;
-            let gradoHash = (parseInt(anio) * (index + 3)) % 30;
-            let estado = (parseInt(anio) + index) % 5 === 0 ? "Retrógrado 🔴" : "Directo";
-            return {
-                astro: astro,
-                signo: signosList[hash],
-                posicion: `${gradoHash}° ${Math.floor(gradoHash * 1.8)}'`,
-                estado: estado
-            };
-        });
-    }
-};
