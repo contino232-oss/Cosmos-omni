@@ -268,7 +268,6 @@ function renderizarEnciclopedias() {
         `).join("");
     }
 
-    // --- CONTINUACIÓN CORREGIDA DE RENDERIZAR ENCICLOPEDIAS ---
     const gridAstros = document.getElementById("render-biblioteca-arquetipos");
     if (gridAstros && ASTRO_DATA.astros) {
         gridAstros.innerHTML = ASTRO_DATA.astros.map(a => `
@@ -362,6 +361,5 @@ function renderizarAlmanaqueLunar() {
 
 // --- INTERFAZ DE MODAL PARA EL DASHBOARD ---
 function abrirModalAstro(nombre, signo, pos, din) {
-    // Si no tenés un modal implementado en el HTML, esta función previene errores en consola
     console.log(`Consulta Astral: ${nombre} en ${signo} (${pos}) - ${din}`);
 }
