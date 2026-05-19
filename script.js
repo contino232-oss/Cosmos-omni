@@ -33,7 +33,7 @@ async function conectarAPILocalizacionYAstral() {
             
             try {
                 // LLAMADA A GEONAMES API para obtener el nombre real de la comuna
-                const response = await fetch(`https://secure.geonames.org/findNearbyPlaceNameJSON?lat=${lat}&lng=${lon}&username=demo`);
+                const response = await fetch(`https://secure.geonames.org/findNearbyPlaceNameJSON?lat=${lat}&lng=${lon}&username=tano232
                 const data = await response.json();
                 if (data.geonames && data.geonames.length > 0) {
                     ciudad = data.geonames[0].name;
