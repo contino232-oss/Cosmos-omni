@@ -21,6 +21,7 @@
             <a href="#" onclick="mostrarSeccion('enciclopedia-zodiacal')">♈ EL CÍRCULO ZODIACAL</a>
             <a href="#" onclick="mostrarSeccion('enciclopedia-casas')">🏠 LAS 12 CASAS</a>
             <a href="#" onclick="mostrarSeccion('enciclopedia-astros')">🪐 MANUAL DE ASTROS</a>
+            <a href="#" onclick="mostrarSeccion('efemerides')">⏳ EFEMÉRIDES HISTÓRICAS</a>
             
             <div class="menu-category">SECCIÓN MÍSTICA</div>
             <a href="#" onclick="mostrarSeccion('tarot')">🃏 TAROT Y ARCANOS</a>
@@ -62,6 +63,7 @@
     </header>
 
     <main>
+        
         <section id="dashboard" class="vista">
             <div class="card-hit-del-dia" id="card-principal-dia">
                 <div class="hit-badge">⚡ TRÁNSITO CLAVE</div>
@@ -74,9 +76,9 @@
             <h3>El Cielo en Vivo (NASA Data)</h3>
             
             <div class="filtro-dashboard-box">
-                <button class="filtro-dash-btn active" onclick="filtrarTablaCielo('todos')">Todo el Cielo</button>
-                <button class="filtro-dash-btn" onclick="filtrarTablaCielo('mayores')">Planetas Mayores</button>
-                <button class="filtro-dash-btn" onclick="filtrarTablaCielo('asteroides')">☄️ Asteroides y Puntos</button>
+                <button class="filtro-dash-btn active" onclick="filtrarTablaCielo(event, 'todos')">Todo el Cielo</button>
+                <button class="filtro-dash-btn" onclick="filtrarTablaCielo(event, 'mayores')">Planetas Mayores</button>
+                <button class="filtro-dash-btn" onclick="filtrarTablaCielo(event, 'asteroides')">☄️ Asteroides y Puntos</button>
             </div>
 
             <div class="tabla-scroll">
@@ -213,8 +215,8 @@
             <h2>Tarot & Arcanos del Destino</h2>
             <p class="instruccion">Explora la simbología arquetípica del mazo Rider-Waite.</p>
             <div class="tarot-nav">
-                <button class="tab-btn active" onclick="filtrarTarot('mayores')">Arcanos Mayores</button>
-                <button class="tab-btn" onclick="filtrarTarot('menores')">Arcanos Menores (Ases)</button>
+                <button class="tab-btn active" onclick="filtrarTarot(event, 'mayores')">Arcanos Mayores</button>
+                <button class="tab-btn" onclick="filtrarTarot(event, 'menores')">Arcanos Menores (Ases)</button>
             </div>
             <div id="galeria-tarot" class="grid-tarot-container"></div>
         </section>
