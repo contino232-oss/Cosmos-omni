@@ -33,7 +33,7 @@ async function conectarAPILocalizacionYAstral() {
             
             try {
                 // LLAMADA A GEONAMES API para obtener el nombre real de la comuna
-                const response = await fetch(`https://secure.geonames.org/findNearbyPlaceNameJSON?lat=${lat}&lng=${lon}&username=tano232
+                const response = await fetch(`https://secure.geonames.org/findNearbyPlaceNameJSON?lat=${lat}&lng=${lon}&username=tano232`);
                 const data = await response.json();
                 if (data.geonames && data.geonames.length > 0) {
                     ciudad = data.geonames[0].name;
@@ -192,6 +192,7 @@ function filtrarTablaCielo(event, categoria) {
     renderizarDashboard(categoria);
 }
 
+// --- Renderizado del Calendario Lunar ---
 function renderizarSeccionLunar() {
     const tbody = document.getElementById('render-luna');
     if (!tbody) return;
@@ -223,6 +224,7 @@ function renderizarSeccionLunar() {
     }
 }
 
+// --- Renderizado del Cronograma de Tránsitos y Retrogradaciones ---
 function renderizarCronograma() {
     const slider = document.getElementById('timeline-dinamica');
     if (slider) {
@@ -263,6 +265,7 @@ function scrollTimeline(direccion) {
     else timeline.scrollLeft += 260;
 }
 
+// --- Renderizado de Enciclopedias (Zodíaco y Astros) ---
 function renderizarEnciclopedias() {
     const gridSignos = document.getElementById('grid-signos');
     if (gridSignos) {
@@ -415,91 +418,4 @@ function calcularEfemerides() {
     const anio = anioInput.value;
     if (anio < 1900 || anio > 2100) {
         contenedor.innerHTML = "<p style='color:red;'>Año inválido (1900-2100).</p>";
-        return;
-    }
-
-    const matrizCielo = COSMOS_DATA.calcularCieloHistorico(anio);
-    contenedor.innerHTML = "";
-
-    matrizCielo.forEach(item => {
-        const card = document.createElement('div');
-        card.className = "card";
-        card.style.marginBottom = "8px";
-        card.innerHTML = `
-            <h4 style="margin:0; color:var(--oro); font-size:0.85rem;">${item.astro}</h4>
-            <p style="margin:2px 0; font-size:0.75rem;">${item.signo} a ${item.posicion} (${item.estado})</p>
-        `;
-        contenedor.appendChild(card);
-    });
-}
-
-// ==========================================================================
-// 5. NAVEGACIÓN, MODALES Y CONFIGURACIONES COMUNES
-// ==========================================================================
-function toggleMenu() {
-    const sidebar = document.getElementById('sidebar');
-    if (sidebar) sidebar.classList.toggle('active');
-}
-
-function mostrarSeccion(seccionId) {
-    document.querySelectorAll('.vista').forEach(sec => sec.classList.add('seccion-oculta'));
-    const activa = document.getElementById(seccionId);
-    if (activa) activa.classList.remove('seccion-oculta');
-    const sidebar = document.getElementById('sidebar');
-    if (sidebar) sidebar.classList.remove('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function irAlInicio(event) {
-    event.preventDefault();
-    mostrarSeccion('dashboard');
-}
-
-function toggleModoLectura() {
-    const body = document.body;
-    const btn = document.getElementById('btn-modo-lectura');
-    if (!body || !btn) return;
-    if (body.classList.contains('theme-dark')) {
-        body.classList.remove('theme-dark');
-        body.classList.add('theme-light');
-        btn.innerHTML = "👁️ Modo Oscuro";
-    } else {
-        body.classList.remove('theme-light');
-        body.classList.add('theme-dark');
-        btn.innerHTML = "🌓 Modo Lectura";
-    }
-}
-
-function inicializarRelojes() {
-    setInterval(() => {
-        const ahora = new Date();
-        if (document.getElementById('time-local')) document.getElementById('time-local').innerText = ahora.toLocaleTimeString('es-AR');
-        if (document.getElementById('time-utc')) document.getElementById('time-utc').innerText = ahora.getUTCHours().toString().padStart(2, '0') + ":" + ahora.getUTCMinutes().toString().padStart(2, '0') + " UTC";
-        if (document.getElementById('time-sideral')) document.getElementById('time-sideral').innerText = ((ahora.getUTCHours() + 4) % 24).toString().padStart(2, '0') + ":" + ahora.getUTCMinutes().toString().padStart(2, '0') + " SID";
-    }, 1000);
-}
-
-function abrirModal(contenidoHtml) {
-    const modal = document.getElementById('astro-modal');
-    const body = document.getElementById('modal-dinamico-body');
-    if (modal && body) {
-        body.innerHTML = contenidoHtml;
-        modal.classList.remove('seccion-oculta');
-    }
-}
-
-function cerrarModal() {
-    const modal = document.getElementById('astro-modal');
-    if (modal) modal.classList.add('seccion-oculta');
-}
-
-function configurarFormularioContacto() {
-    const form = document.getElementById('contact-form');
-    if (!form) return;
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const status = document.getElementById('form-status');
-        if (status) status.innerHTML = `<p style="color:var(--oro); font-size:0.8rem; text-align:center; margin-top:10px;">✨ Mensaje lanzado al éter cósmico.</p>`;
-        form.reset();
-    });
-}
+        return
