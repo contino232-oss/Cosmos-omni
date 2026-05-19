@@ -35,9 +35,11 @@
         <div class="header-banner-area">
             <button class="hamburguesa-btn" onclick="toggleMenu()">☰ MENU</button>
             
-            <div class="logo-container">
-                <img src="https://contino232-oss.github.io/cosmos-omni-2026/logo-cosmos.png" alt="COSMOS OMNI - Astrología Terapéutica" class="web-logo" onerror="this.src='https://placehold.co/120x40/1c1a17/d4af37?text=COSMOS+OMNI'">
-            </div>
+            <a href="#" onclick="irAlInicio(event)" class="logo-link" title="Ir al Inicio">
+                <div class="logo-container">
+                    <img src="logo-cosmos.png" alt="COSMOS OMNI - Astrología Terapéutica" class="web-logo" onerror="this.src='https://placehold.co/120x40/1c1a17/d4af37?text=COSMOS+OMNI'">
+                </div>
+            </a>
             
             <button id="btn-modo-lectura" class="btn-utilidad" onclick="toggleModoLectura()">🌓 Modo Lectura</button>
         </div>
@@ -54,7 +56,7 @@
                 <span class="time-box">S: <span id="time-sideral">00:00:00</span></span>
             </div>
             <div class="data-item date">
-                <span id="fecha-top">📅 16/05/2026</span>
+                <span id="fecha-top">📅 19/05/2026</span>
             </div>
         </div>
     </header>
@@ -87,8 +89,7 @@
                             <th>Estado Dinámico</th>
                         </tr>
                     </thead>
-                    <tbody id="render-dashboard-astros">
-                        </tbody>
+                    <tbody id="render-dashboard-astros"></tbody>
                 </table>
             </div>
         </section>
@@ -127,8 +128,7 @@
             <div class="card card-alertas-lunares">
                 <div class="badge-alerta">⚠️ INTENSIDAD ASTRAL</div>
                 <h3>Eclipses y Lunaciones Extraordinarias</h3>
-                <div id="render-eclipses-data" class="lista-eclipses-links">
-                    </div>
+                <div id="render-eclipses-data" class="lista-eclipses-links"></div>
             </div>
 
             <div class="card" style="margin-top:20px;">
@@ -143,8 +143,7 @@
                                 <th>Vacío de Curso (GMT-3)</th>
                             </tr>
                         </thead>
-                        <tbody id="render-luna">
-                            </tbody>
+                        <tbody id="render-luna"></tbody>
                     </table>
                 </div>
             </div>
@@ -157,8 +156,7 @@
             <p class="instruccion">Desliza horizontalmente para ver los próximos ingresos zodiacales e hitos planetarios.</p>
             
             <div class="slider-wrapper" style="margin-bottom: 15px;">
-                <div id="timeline-dinamica" style="display: flex; gap: 15px; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 10px;">
-                    </div>
+                <div id="timeline-dinamica" style="display: flex; gap: 15px; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 10px;"></div>
             </div>
             <div class="timeline-controls">
                 <button class="btn-nav-timeline" onclick="scrollTimeline('izq')">◀ Anterior</button>
@@ -184,8 +182,7 @@
                             <th>Estado Actual</th>
                         </tr>
                     </thead>
-                    <tbody id="render-retrogradaciones">
-                        </tbody>
+                    <tbody id="render-retrogradaciones"></tbody>
                 </table>
             </div>
             <div id="render-clima" class="clima-container" style="margin-top:20px;"></div>
