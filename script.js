@@ -54,7 +54,7 @@ function filtrarCards(tipo) {
     });
 }
 
-function filtrarTablaCielo(categoria) {
+function filtrarTablaCielo(categoria, e) { // CORREGIDO: Se añade 'e' para capturar el evento nativo
     const filas = document.querySelectorAll("#render-dashboard-astros tr");
     filas.forEach(fila => {
         const esAsteroide = fila.classList.contains("asteroide-row");
@@ -67,7 +67,7 @@ function filtrarTablaCielo(categoria) {
         }
     });
     document.querySelectorAll(".filtro-dash-btn").forEach(btn => btn.classList.remove("active"));
-    if (event && event.target) event.target.classList.add("active");
+    if (e && e.target) e.target.classList.add("active");
 }
 
 /* ==========================================================================
@@ -110,9 +110,9 @@ function renderizarTarot(filtroFase = 'mayores') {
     });
 }
 
-function filtrarTarot(tipo) {
+function filtrarTarot(tipo, e) { // CORREGIDO: Se añade 'e' para capturar el evento nativo
     document.querySelectorAll('.tarot-nav .tab-btn').forEach(btn => btn.classList.remove('active'));
-    if (event && event.target) event.target.classList.add('active');
+    if (e && e.target) e.target.classList.add('active');
     renderizarTarot(tipo);
 }
 
@@ -258,7 +258,7 @@ function inicializarEnciclopedias() {
                     <summary class="signo-header" style="padding:12px; cursor:pointer; font-family:'Cinzel'; display:flex; justify-content:space-between; align-items:center;">
                         <div style="display:flex; align-items:center; gap:10px;">
                             <span style="color:var(--oro); font-size:1.4rem;">${z.g}</span>
-                            <h3 style="margin:0; font-size:1.15rem; inline-block;">${z.n}</h3>
+                            <h3 style="margin:0; font-size:1.15rem; display:inline-block;">${z.n}</h3>
                         </div>
                         <span class="signo-keyword" style="font-size:0.85rem; background:rgba(255,255,255,0.05); padding:3px 8px; border-radius:4px;">${z.e} / ${z.m}</span>
                     </summary>
@@ -419,11 +419,11 @@ function init() {
             if (typeof TRANSITOS_BASE !== 'undefined') {
                 TRANSITOS_BASE.forEach(t => {
                     let esAsteroide = ["Quirón", "Ceres", "Palas Atenea", "Vesta", "Juno", "Rueda Fortuna", "Pto. Infortunio"].includes(t.p);
-                    let rowClass = esAsteroide ? 'class="asteroide-row"' : '';
                     let badge = esAsteroide ? ' <span class="asteroide-badge" style="background:rgba(212,175,55,0.1); color:var(--oro); font-size:0.65rem; padding:1px 4px; border-radius:3px; margin-left:4px;">Punto</span>' : '';
 
+                    // CORREGIDO: Inyección directa limpia de la clase sin strings rotos intermedios
                     rda.innerHTML += `
-                        <tr ${rowClass}>
+                        <tr class="${esAsteroide ? 'asteroide-row' : ''}">
                             <td><strong>${t.p}</strong>${badge}</td>
                             <td>${t.s}</td>
                             <td>${t.g}°</td>
