@@ -11,23 +11,23 @@
     --texto-secundario: #a0a0b0;
     --borde: #333344;
     --fondo-header: #000000;
-    --fondo-banner: #12121c; /* Cambiado a variable para evitar el blanco forzado */
+    --fondo-banner: #12121c; 
     --fondo-barra: #0d0d16;
     --shadow-pre: #e6b800;
     --shadow-post: #4a90e2;
 }
 
-/* Transmutación a Modo Lectura (Paleta basada 100% en tu Logo) */
+/* Transmutación a Modo Lectura (Paleta basada 100% en el Logo) */
 body.theme-light {
-    --negro: #f4f1ea;          /* Fondo arena/hueso texturado visualmente */
-    --card: #ffffff;           /* Fichas blancas puras */
-    --texto: #3c3220;          /* Letras marrón oscuro de tu logo */
+    --negro: #f4f1ea;          
+    --card: #ffffff;           
+    --texto: #3c3220;          
     --texto-secundario: #6e6046;
     --borde: #dcd6cd;
     --fondo-header: #ebe6dc;
-    --fondo-banner: #ebe6dc;   /* Adaptable al modo lectura */
+    --fondo-banner: #ebe6dc;   
     --fondo-barra: #dfd9ce;
-    --oro: #aa8433;            /* Bronce más oscuro para contraste en fondo claro */
+    --oro: #aa8433;            
 }
 
 /* ==========================================================================
@@ -43,7 +43,7 @@ body {
 }
 
 .vista { 
-    padding: 20px 4%; /* Reducido para pantallas pequeñas, respira mejor */
+    padding: 20px 4%; 
     max-width: 1200px; 
     margin: 0 auto; 
     animation: fadeIn 0.4s ease-out; 
@@ -51,7 +51,7 @@ body {
 
 @media (min-width: 768px) {
     .vista {
-        padding: 40px 5%; /* Retorna a tus dimensiones amplias en Desktop */
+        padding: 40px 5%; 
     }
 }
 
@@ -78,7 +78,7 @@ header {
     justify-content: space-between; 
     align-items: center; 
     padding: 10px 4%;
-    background: var(--fondo-banner); /* CORREGIDO: Ya no rompe el flujo oscuro/claro */
+    background: var(--fondo-banner); 
     transition: background 0.3s ease;
 }
 
@@ -94,7 +94,7 @@ header {
 .logo-container {
     display: flex;
     justify-content: center;
-    max-height: 50px; /* Reducido para mejor UX en mobile */
+    max-height: 50px; 
     width: 100%;
 }
 
@@ -120,7 +120,7 @@ header {
     cursor: pointer; 
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-    font-size: 0.75rem; /* Ajuste responsivo inicial */
+    font-size: 0.75rem; 
     border-radius: 4px;
     transition: 0.2s;
     white-space: nowrap;
@@ -135,14 +135,14 @@ header {
 
 .hamburguesa-btn:hover, .btn-utilidad:hover {
     background: var(--oro);
-    color: #000; /* Asegura contraste al hacer hover */
+    color: #000; 
 }
 
 /* Barra de Datos en Vivo */
 .astro-data-bar {
     background: var(--fondo-barra);
     display: flex;
-    flex-direction: column; /* Apilado en móviles para evitar desbordes */
+    flex-direction: column; 
     gap: 6px;
     align-items: center;
     text-align: center;
@@ -155,7 +155,7 @@ header {
 
 @media (min-width: 640px) {
     .astro-data-bar {
-        flex-direction: row; /* Layout horizontal clásico en tablets/PC */
+        flex-direction: row; 
         justify-content: space-between;
         padding: 6px 5%;
         gap: 0;
@@ -171,11 +171,11 @@ header {
 .spacer { margin: 0 5px; color: var(--borde); }
 
 /* ==========================================================================
-   4. MENÚ LATERAL (SIDEBAR) CONCEPTUAL
+   4. MENÚ LATERAL (SIDEBAR) CORREGIDO Y ENMENDADO
    ========================================================================== */
 .sidebar { 
     position: fixed; 
-    left: -100%; 
+    left: -300px; 
     top: 0; 
     width: 280px; 
     height: 100vh; 
@@ -187,7 +187,11 @@ header {
     overflow-y: auto;
 }
 
-.sidebar.active { left: 0; }
+/* Forzar despliegue nativo tanto por clases .active como por clases .open */
+.sidebar.active, .sidebar.open { 
+    left: 0 !important;
+    transform: translateX(0) !important;
+}
 
 .close-btn {
     position: absolute;
@@ -240,7 +244,15 @@ header {
     color: var(--oro);
 }
 
-/* Capa de fondo oscura (Overlay) cuando el menú está abierto */
+/* Contenedor del Memorial al Final del Menú */
+.sidebar-memorial-section {
+    margin-top: 30px;
+    padding: 15px 10px;
+    border-top: 1px solid rgba(214, 175, 55, 0.3);
+    text-align: center;
+}
+
+/* Capa de fondo oscura (Overlay) */
 .sidebar-overlay {
     position: fixed;
     top: 0;
@@ -253,7 +265,7 @@ header {
     pointer-events: none;
     transition: opacity 0.3s ease;
 }
-.sidebar-overlay.active {
+.sidebar-overlay.active, .sidebar-overlay.open {
     opacity: 1;
     pointer-events: auto;
 }
@@ -336,7 +348,7 @@ body.theme-light .card-hit-del-dia {
     background: linear-gradient(135deg, #fbfaf7, #ebdcc3);
 }
 .hit-badge {
-    position: static; /* Cambia a estático en móviles para no encimarse con textos */
+    position: static; 
     display: inline-block;
     margin-bottom: 10px;
     background: var(--oro);
@@ -363,7 +375,7 @@ body.theme-light .card-hit-del-dia {
     margin-bottom: 20px; 
     overflow-x: auto; 
     padding-bottom: 8px;
-    -webkit-overflow-scrolling: touch; /* Scroll suave en dispositivos iOS antiguos */
+    -webkit-overflow-scrolling: touch; 
 }
 .filtro-dash-btn, .tab-btn {
     background: var(--card);
@@ -402,10 +414,10 @@ body.theme-light .card-hit-del-dia {
 /* Timeline Horizontal Ocultando scrollbars */
 .slider-wrapper { position: relative; width: 100%; overflow: hidden; }
 #timeline-dinamica {
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none; 
 }
 #timeline-dinamica::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+    display: none; 
 }
 .timeline-card {
     min-width: 220px;
@@ -418,7 +430,7 @@ body.theme-light .card-hit-del-dia {
     padding: 15px;
     border-radius: 0 8px 8px 0;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    flex-shrink: 0; /* Evita que las tarjetas colapsen su ancho */
+    flex-shrink: 0; 
 }
 .timeline-controls { display: flex; gap: 10px; margin-bottom: 25px; }
 .btn-nav-timeline { background: none; border: 1px solid var(--borde); color: var(--texto); padding: 6px 14px; cursor: pointer; border-radius: 4px; font-size: 0.75rem; transition: 0.2s; }
@@ -461,7 +473,7 @@ summary.signo-header::-webkit-details-marker { display: none; }
 
 .grid-tarot-container, .grid-herbolario { 
     display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Reducido para meter 2 columnas en pantallas muy pequeñas */
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
     gap: 15px; 
 }
 @media (min-width: 480px) {
@@ -519,7 +531,7 @@ input, textarea, select {
     position: relative;
     box-shadow: 0 5px 25px rgba(0,0,0,0.5);
     max-height: 90vh;
-    overflow-y: auto; /* Permite scroll interno si la info desborda en pantallas chicas */
+    overflow-y: auto; 
 }
 .modal-close {
     position: absolute;
