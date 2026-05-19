@@ -29,6 +29,12 @@
             <a href="#" onclick="mostrarSeccion('guias-manuales')">📚 GUÍAS Y COMPATIBILIDAD</a>
             
             <a href="#" onclick="mostrarSeccion('contacto')" class="menu-footer-link">📩 CONTACTO</a>
+
+            <div class="sidebar-memorial-section" style="margin-top: 30px; padding: 15px 10px; border-top: 1px solid rgba(214, 175, 55, 0.3); text-align: center;">
+                <img src="Screenshot_20260519-012949.png" alt="Naza - Mi otra mitad" style="width: 100%; max-width: 180px; border-radius: 8px; border: 1px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.5); margin-bottom: 8px;" onerror="this.style.display='none'">
+                <p style="font-family: 'Cinzel', serif; font-size: 0.8rem; color: #d4af37; letter-spacing: 1px; margin: 0;">Naza, mi hermano, mi otra mitad</p>
+                <p style="font-size: 0.7rem; opacity: 0.6; margin: 4px 0 0 0;">Siempre en el mapa cósmico</p>
+            </div>
         </div>
     </nav>
 
@@ -38,7 +44,7 @@
             
             <a href="#" onclick="irAlInicio(event)" class="logo-link" title="Ir al Inicio">
                 <div class="logo-container">
-                    <img src="logo-cosmos.png" alt="COSMOS OMNI - Astrología Terapéutica" class="web-logo" onerror="this.src='https://placehold.co/120x40/1c1a17/d4af37?text=COSMOS+OMNI'">
+                    <img src="logo-cosmos.png" alt="COSMOS OMNI" class="web-logo" onerror="this.src='https://placehold.co/120x40/1c1a17/d4af37?text=COSMOS+OMNI'">
                 </div>
             </a>
             
@@ -73,6 +79,11 @@
                 </div>
             </div>
 
+            <div class="rueda-astral-container" style="display: flex; flex-direction: column; align-items: center; margin: 25px 0; background: rgba(15, 15, 25, 0.4); padding: 20px; border-radius: 8px; border: 1px solid rgba(214, 175, 55, 0.2);">
+                <h3 style="font-family: 'Cinzel', serif; color: #d4af37; margin-bottom: 15px; letter-spacing: 1px;">Rueda Astral</h3>
+                <canvas id="wheel-canvas" width="360" height="360" style="max-width: 100%; background: #0b0b12; border-radius: 50%; box-shadow: 0 0 20px rgba(214,175,55,0.15); border: 2px solid #d4af37;"></canvas>
+            </div>
+
             <h3>El Cielo en Vivo (NASA Data)</h3>
             
             <div class="filtro-dashboard-box">
@@ -103,7 +114,7 @@
                 <div class="card-luna-actual">
                     <div id="luna-icono-dinamico" class="luna-glifo">🌑</div>
                     <h4 id="luna-fase-nombre">Nueva</h4>
-                    <p>Signo Actual: <strong id="luna-signo-actual">...</strong></p>
+                    <p>Signo Actual: <strong id="luna-signo-actual">Cáncer ♋</strong></p>
                 </div>
                 
                 <div class="card-luna-datos">
@@ -122,19 +133,22 @@
             <div class="card ciclo-progreso-card">
                 <h3>Progreso de la Lunación Actual</h3>
                 <div class="barra-progreso-container">
-                    <div id="barra-luna-progreso" class="barra-progreso-fill" style="width: 53%;"></div>
+                    <div id="barra-luna-progreso" class="barra-progreso-fill" style="width: 15%;"></div>
                 </div>
-                <p class="data-subtext"><span id="luna-dias-ciclo">15</span> días transcurridos desde la última Luna Nueva.</p>
+                <p class="data-subtext"><span id="luna-dias-ciclo">3</span> días transcurridos desde la última Luna Nueva.</p>
             </div>
 
             <div class="card card-alertas-lunares">
                 <div class="badge-alerta">⚠️ INTENSIDAD ASTRAL</div>
                 <h3>Eclipses y Lunaciones Extraordinarias</h3>
-                <div id="render-eclipses-data" class="lista-eclipses-links"></div>
+                <div id="render-eclipses-data" class="lista-eclipses-links">
+                    <div style="padding: 8px 0; border-bottom: 1px dashed #333;"><strong>Próximo Eclipse Lunar:</strong> 03 de Marzo de 2026 en el signo de Virgo ♍</div>
+                    <div style="padding: 8px 0;"><strong>Próximo Eclipse Solar:</strong> 12 de Agosto de 2026 en el signo de Leo ♌</div>
+                </div>
             </div>
 
             <div class="card" style="margin-top:20px;">
-                <h3>Almanaque Lunar Mayo 2026</h3>
+                <h3>Almanaque Lunar Mayo / Junio 2026</h3>
                 <div class="tabla-scroll">
                     <table>
                         <thead>
@@ -158,7 +172,8 @@
             <p class="instruccion">Desliza horizontalmente para ver los próximos ingresos zodiacales e hitos planetarios.</p>
             
             <div class="slider-wrapper" style="margin-bottom: 15px;">
-                <div id="timeline-dinamica" style="display: flex; gap: 15px; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 10px;"></div>
+                <div id="timeline-dinamica" style="display: flex; gap: 15px; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 10px;">
+                    </div>
             </div>
             <div class="timeline-controls">
                 <button class="btn-nav-timeline" onclick="scrollTimeline('izq')">◀ Anterior</button>
