@@ -90,7 +90,7 @@ const COSMOS_DATA = {
     // Biblioteca de Arquetipos de Astros y Asteroides Expandida con Deidades y Palabras Clave
     astros: [
         { nombre: "El Sol", glifo: "☀️", palabra: "Yo Existo / Consciencia", deidad: "Apolo", desc: "El centro radiante de la identidad, el pulso voluntario y vital que organiza toda la carta natal." },
-        { nombre: "La Luna", glifo: "🌙", palabra: "Yo Protejo / Reacción", deidad: "Artemisa", desc: "El refugio emocional, los automatismos de defensa inconscientes y los ciclos de memoria biológica." },
+        { nombre: "La Luna", glifo: "🌙", palabra: "Yo Protejo / Reacción", deidad: "Artemisa", desc: "El refugio emocional, los automatismos de defense inconscientes y los ciclos de memoria biológica." },
         { nombre: "Mercurio", glifo: "☿", palabra: "Yo Comunico / Pensamiento", deidad: "Hermes", desc: "El procesamiento cognitivo, la transmisión de la palabra, los enlaces comerciales y la plasticidad mental." },
         { nombre: "Venus", glifo: "♀", palabra: "Yo Atraigo / Deseo", deidad: "Afrodita", desc: "La función de magnetismo vincular, el auto-esquema de valor, la estética, la armonía y la apertura al placer." },
         { nombre: "Marte", glifo: "♂", palabra: "Yo Conquisto / Acción", deidad: "Ares", desc: "La fuerza de penetración, el coraje asertivo, la demarcación de límites territoriales, el enojo y la libido activa." },
@@ -122,46 +122,6 @@ const COSMOS_DATA = {
         { id: "12_colgado", nombre: "El Colgado (XII)", tipo: "mayores", glifo: "🤸", arcano: "Inversión de Perspectiva", img: "img/tarot/12_colgado.jpg", desc: "Sacrificio iniciático del ego. Detención absoluta del movimiento externo, rendición espiritual y el don de ver el mundo al revés." },
         { id: "13_muerte", nombre: "La Muerte (XIII)", tipo: "mayores", glifo: "💀", arcano: "Poda Transmutadora", desc: "Corte radical de lo obsoleto. Muerte psicológica, fin de un ciclo estructural profundo y arado de la tierra para el renacimiento." },
         { id: "14_templanza", nombre: "La Templanza (XIV)", tipo: "mayores", glifo: "⚱️", arcano: "Alquimia de Fluidos", desc: "Mezcla armónica de polaridades. Sanación angelical, paciencia molecular, transmutación suave y balance de los cuerpos sutiles." },
-        { id: "15_diablo", nombre: "El Diablo (XV)", tipo: "mayores", glifo: "😈", arcano: "Fuerza Sombría", desc: "Fascinación con la materia, cadenas inconscientes, magnetismo sexual denso, tabúes liberados y el oro del inframundo psíquico." },
+        { id: "15_diablo", nombre: "El Diablo (XV)", tipo: "mayores", glifo: "😈", arcano: "Fuerza Sombría", desc: "Fascinación con la materia, cadenas unconscious, magnetismo sexual denso, tabúes liberados y el oro del inframundo psíquico." },
         { id: "16_torre", nombre: "La Torre (XVI)", tipo: "mayores", glifo: "💥", arcano: "Rayo de Liberación", desc: "Fractura drástica de las cárceles mentales construidas por el ego. Caída de falsas estructuras y revelación de la verdad." },
-        { id: "17_estrella", nombre: "La Estrella (XVII)", tipo: "mayores", glifo: "⭐", arcano: "Fuga de Esperanza", desc: "Conexión directa con los hilos invisibles del cosmos. Inspiración pura, sanación de heridas antiguas, entrega y guía estelar." },
-        { id: "18_luna_t", nombre: "La Luna (XVIII)", tipo: "mayores", glifo: "🐺", arcano: "Océano Inconsciente", desc: "Noche oscura del alma. Espejismos, miedos ancestrales, potencial mediúmnico, distorsiones ilusorias y fantasías sagradas." },
-        { id: "19_sol_t", nombre: "El Sol (XIX)", tipo: "mayores", glifo: "👶", arcano: "Claridad Manifiesta", desc: "Éxito absoluto, vitalidad recuperada, fraternidad transparente, disolución de sombras y la dicha del renacer radiante." },
-        { id: "20_juicio", nombre: "El Juicio (XX)", tipo: "mayores", glifo: "🎺", arcano: "Despertar Vocacional", desc: "Llamado del éter. Resurrección de etapas muertas, balance terminal, absolución de culpas pasadas y elevación de consciencia." },
-        { id: "21_mundo", nombre: "El Mundo (XXI)", tipo: "mayores", glifo: "🌍", arcano: "Danza Terminal", desc: "Integración holística perfecta del Mandala. Cierre de un ciclo macrocósmico con maestría absoluta y coronación del ser." },
-        // ASES
-        { id: "as_bastos", nombre: "As de Bastos", tipo: "menores", glifo: "🔥", arcano: "Chispa Primordial", desc: "Erupción de voluntad volcánica, deseo sexual, vigor creativo e inicio potente en el elemento Fuego." },
-        { id: "as_copas", nombre: "As de Copas", tipo: "menores", glifo: "💧", arcano: "Manantial del Sentir", desc: "Apertura cordial absoluta, intuición desbordante, concepción, sanación emocional y comunión mística en Agua." },
-        { id: "as_espadas", nombre: "As de Espadas", tipo: "menores", glifo: "⚔️", arcano: "Relámpago Mental", desc: "Verdad cortante indiscutible, agudeza cognitiva, quiebre de la confusión y victoria de la razón en Aire." },
-        { id: "as_oros", nombre: "As de Oros", tipo: "menores", glifo: "🪙", arcano: "Semilla Material", desc: "Oportunidad financiera tangible, arraigo biológico óptimo, manifestación de recursos y riqueza en Tierra." }
-    ],
-
-    // Herbolario Místico Expandido (Imágenes en vivo de Unsplash estables)
-    herbolario: [
-        { nombre: "Jazmín", glifo: "🌿", regencia: "Luna / Agua", img: "https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=400&q=80", uso: "Apertura psíquica radical, inducción a sueños proféticos clarificadores, pacificación del sistema nervioso central y despojo áurico." },
-        { nombre: "Orégano", glifo: "🌿", regencia: "Mercurio / Aire", img: "https://images.unsplash.com/photo-1608797178974-15b35a61d121?auto=format&fit=crop&w=400&q=80", uso: "Activación inmediata del flujo pránico estancado, cortes de lazos parásitos en el plano astral inferior y blindaje del campo hogareño." },
-        { nombre: "Romero", glifo: "🌱", regencia: "Sol / Fuego", img: "https://images.unsplash.com/photo-1515543904379-3d757afe72e2?auto=format&fit=crop&w=400&q=80", uso: "Fijación mental y concentración gnóstica, limpieza drástica de miasmas por fuego protector e incremento masivo de la fuerza áurica." },
-        { nombre: "Lavanda", glifo: "🪻", regencia: "Mercurio / Aire", img: "https://images.unsplash.com/photo-1528826725849-df60a22e9c66?auto=format&fit=crop&w=400&q=80", uso: "Armonización de ondas mentales distorsionadas, sellado de fugas energéticas astrales y consagración ritual de altares místicos." },
-        { nombre: "Ruda", glifo: "🌿", regencia: "Marte / Fuego", img: "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?auto=format&fit=crop&w=400&q=80", uso: "Destrucción fulminante de larvas y parásitos energéticos, inversión de corrientes densas ambientales y escudo marciano inquebrantable." },
-        { nombre: "Menta", glifo: "🌱", regencia: "Venus / Aire", img: "https://images.unsplash.com/photo-1626804475315-9644b37a2fe4?auto=format&fit=crop&w=400&q=80", uso: "Atracción de prosperidad material y flujos de abundancia, purificación de canales perceptivos y frescura mental ante crisis." },
-        { nombre: "Salvia", glifo: "🌿", regencia: "Júpiter / Tierra", img: "https://images.unsplash.com/photo-1601610491492-49f39000676d?auto=format&fit=crop&w=400&q=80", uso: "Sahumado ancestral de sabiduría, corte de contratos kármicos obsoletos, longevidad celular y limpieza de memorias de dolor." }
-    ],
-
-    // Algoritmo determinista de simulación de efemérides planetarias
-    calcularCieloHistorico: function(anio) {
-        const signosList = ["Aries", "Tauro", "Géminis", "Cáncer", "Leo", "Virgo", "Libra", "Escorpio", "Sagitario", "Capricornio", "Acuario", "Piscis"];
-        const astrosList = ["Sol", "Luna", "Mercurio", "Venus", "Marte", "Júpiter", "Saturno", "Urano", "Neptuno", "Plutón", "Quirón", "Lilith", "Nodo Norte"];
-        
-        return astrosList.map((astro, index) => {
-            let hash = (parseInt(anio) * (index + 9) + 23) % 12;
-            let gradoHash = (parseInt(anio) * (index + 7)) % 30;
-            let estado = (parseInt(anio) + index) % 6 === 0 ? "Retrógrado 🔴" : "Directo";
-            return {
-                astro: astro,
-                signo: signosList[hash],
-                posicion: `${gradoHash}° ${Math.floor(gradoHash * 1.5)}'`,
-                estado: estado
-            };
-        });
-    }
-};
+        { id: "17_estrella", nombre: "La Estrella (XVII)", tipo: "mayores", glifo: "⭐", arcano: "Fuga de Esperanza", desc: "Conexión directa con los hilos invisibles del cosmos. Inspiración
