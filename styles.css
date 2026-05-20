@@ -1,16 +1,17 @@
 /* ==========================================================================
-   1. VARIABLES GLOBALES (Transmutadas a la Paleta Violeta Astral y Oro)
+   1. VARIABLES GLOBALES (Preservadas con Paleta Violeta Astral y Oro)
    ========================================================================== */
 :root {
-    /* Paleta Cosmos Mística Premium (Inspirada en tu maqueta) */
     --oro: #d4af37;
     --oro-brillante: #ffd700;
     --violeta-profundo: #090614;
     --violeta-cosmos: #160f33;
+    --fondo-barra: #06040d;          /* Tono denso y oscuro para las barras fijas */
     --card-glass: rgba(22, 15, 48, 0.55);
     --texto: #f4efff;
     --texto-secundario: #bda8df;
     --borde-purple: rgba(179, 102, 255, 0.25);
+    --borde: rgba(212, 175, 55, 0.2); 
     --alerta-roja: #ff3355;
     
     /* Estados de Retrogradación */
@@ -18,21 +19,28 @@
     --shadow-post: #4a90e2;
 }
 
-/* Soporte para Modo Lectura intacto */
+/* Soporte nativo para Modo Lectura intacto */
 body.theme-light {
     --violeta-profundo: #f4f1ea;          
+    --fondo-barra: #e1dad0;
     --card-glass: #ffffff;           
     --texto: #3c3220;          
     --texto-secundario: #6e6046;
     --borde-purple: #dcd6cd;
+    --borde: rgba(170, 132, 51, 0.3);
     --oro: #aa8433;            
 }
 
 /* ==========================================================================
    2. ESTILOS BASE Y RENDERS (Atmósfera Espacial Sutil)
    ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body { 
     margin: 0; 
+    padding: 0;
     font-family: 'Montserrat', sans-serif; 
     background-color: var(--violeta-profundo); 
     background-image: 
@@ -40,18 +48,21 @@ body {
         radial-gradient(circle at 85% 75%, #130a2e 0%, var(--violeta-profundo) 100%);
     background-attachment: fixed;
     color: var(--texto); 
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     overflow-x: hidden; 
     transition: background 0.3s ease, color 0.3s ease;
 }
 
 .vista { 
-    padding: 25px 4%; 
-    max-width: 1200px; 
+    padding: 25px 2%; 
+    max-width: 1400px; 
     margin: 0 auto; 
+    width: 100%;
     animation: fadeIn 0.4s ease-out; 
 }
 
-@media (min-width: 768px) { .vista { padding: 40px 5%; } }
 .seccion-oculta { display: none !important; }
 
 @keyframes fadeIn { 
@@ -60,113 +71,192 @@ body {
 }
 
 /* ==========================================================================
-   3. ENCABEZADO PREMIUM & BANNER INTEGRADO (Tal cual la Maqueta)
-   ========================================================================== */
-header { 
-    background: rgba(11, 8, 24, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    position: sticky; 
-    top: 0; 
-    z-index: 100; 
-    border-bottom: 1px solid var(--borde-purple);
-}
-
-.header-banner-area { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 12px 4%;
-    background: transparent;
-}
-
-.logo-link { display: flex; justify-content: center; align-items: center; flex-grow: 1; text-decoration: none; margin: 0 10px; }
-.logo-container { display: flex; justify-content: center; max-height: 55px; width: 100%; }
-.web-logo { height: auto; max-height: 50px; object-fit: contain; width: auto; max-width: 100%; }
-
-@media (min-width: 768px) {
-    .logo-container { max-height: 75px; }
-    .web-logo { max-height: 70px; }
-    .header-banner-area { padding: 12px 5%; }
-}
-
-.hamburguesa-btn, .btn-utilidad { 
-    background: rgba(27, 18, 59, 0.6); 
-    border: 1px solid var(--oro); 
-    color: var(--oro); 
-    padding: 8px 14px; 
-    cursor: pointer; 
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 0.8rem; 
-    border-radius: 6px;
-    transition: all 0.25s ease;
-    white-space: nowrap;
-    box-shadow: 0 0 8px rgba(212, 175, 55, 0.1);
-}
-
-.hamburguesa-btn:hover, .btn-utilidad:hover { background: var(--oro); color: #000; box-shadow: 0 0 12px rgba(212, 175, 55, 0.3); }
-
-.astro-data-bar {
-    background: rgba(7, 5, 15, 0.9);
-    display: flex;
-    flex-direction: column; 
-    gap: 6px;
-    align-items: center;
-    text-align: center;
-    padding: 8px 4%;
-    font-size: 0.75rem;
-    color: var(--texto-secundario);
-    border-top: 1px solid var(--borde-purple);
-    font-weight: 500;
-}
-@media (min-width: 640px) { .astro-data-bar { flex-direction: row; justify-content: space-between; padding: 6px 5%; gap: 0; } }
-
-.time-box span { color: var(--oro); font-family: monospace; font-size: 0.85rem; }
-.spacer { margin: 0 6px; color: var(--borde-purple); }
-
-/* ==========================================================================
-   4. MENÚ LATERAL (SIDEBAR) PRESERVADO
+   3. BARRA LATERAL FIJA (Maquetado de Escritorio e Integración de Naza)
    ========================================================================== */
 .sidebar { 
     position: fixed; 
-    left: -300px; 
+    left: 0; 
     top: 0; 
-    width: 280px; 
+    width: 260px; 
     height: 100vh; 
-    background: #0d091a; 
-    transition: 0.4s cubic-bezier(0.1, 0.9, 0.2, 1); 
-    z-index: 1000; 
-    border-right: 1px solid var(--oro); 
+    background: var(--fondo-barra); 
+    border-right: 1px solid var(--borde-purple); 
     box-shadow: 5px 0 25px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000; 
     overflow-y: auto;
+    transition: left 0.4s cubic-bezier(0.1, 0.9, 0.2, 1);
 }
-.sidebar.active, .sidebar.open { left: 0 !important; transform: translateX(0) !important; }
-.close-btn { position: absolute; right: 15px; top: 15px; background: none; border: none; color: var(--oro); font-size: 2rem; cursor: pointer; }
-.menu-content { padding-top: 60px; }
-.menu-logo { font-family: 'Cinzel', serif; color: var(--oro); text-align: center; font-size: 1.3rem; margin-bottom: 25px; letter-spacing: 2px; }
-.menu-category { background: rgba(179, 102, 255, 0.15); color: var(--oro); font-size: 0.7rem; font-weight: 700; padding: 8px 20px; margin-top: 15px; letter-spacing: 1px; }
-.sidebar a { display: block; color: var(--texto); text-decoration: none; padding: 15px 20px; border-bottom: 1px solid var(--borde-purple); font-size: 0.85rem; font-weight: 500; transition: 0.2s; }
-.sidebar a:hover { background: rgba(179, 102, 255, 0.08); padding-left: 25px; color: var(--oro); }
 
-.sidebar-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 999; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-.sidebar-overlay.active, .sidebar-overlay.open { opacity: 1; pointer-events: auto; }
+.menu-content { 
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-top: 10px; 
+}
+
+.nav-link-item { 
+    display: block; 
+    color: var(--texto); 
+    text-decoration: none; 
+    padding: 14px 25px; 
+    border-bottom: 1px solid rgba(179, 102, 255, 0.1); 
+    font-size: 0.85rem; 
+    font-weight: 600; 
+    letter-spacing: 2px;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease; 
+}
+
+.nav-link-item:hover, .nav-link-item.active { 
+    background: rgba(179, 102, 255, 0.08); 
+    padding-left: 30px; 
+    color: var(--oro); 
+    border-left: 3px solid var(--oro);
+}
+
+/* Estilos protectores para la sección memorial de Naza */
+.sidebar-memorial-section {
+    background: rgba(7, 4, 18, 0.4);
+}
+
+/* CONTENEDOR CENTRAL DE CONTENIDO: Se desplaza para dar paso a la Sidebar fija */
+.main-content {
+    margin-left: 260px;
+    padding: 20px 30px;
+    width: calc(100% - 260px);
+    flex-grow: 1;
+}
 
 /* ==========================================================================
-   5. CONTENEDORES DE VIDRIO TRANSLÚCIDO (Glassmorphism Maqueta)
+   4. ENCABEZADO SUPERIOR DE UTILIDADES
    ========================================================================== */
-.card, details.signo-card, details.casa-card-fold, .elemento-card, .form-container { 
+.main-header-wrapper { 
+    background: rgba(11, 8, 24, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--borde-purple);
+    z-index: 900;
+}
+
+/* ==========================================================================
+   5. COMPONENTES DE VIDRIO TRANSLÚCIDO (Glassmorphism de tu Maqueta)
+   ========================================================================== */
+.card, details.signo-card, details.casa-card-fold, .elemento-card, .form-container,
+.panel-box, .panel-box-tabla, .clima-mini, .card-hit-del-dia, .card-alertas-lunares { 
     background: var(--card-glass) !important; 
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    padding: 22px; 
+    padding: 20px; 
     border-radius: 14px !important; 
     border: 1px solid var(--borde-purple) !important; 
     margin-bottom: 20px; 
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
 }
 
-/* Buscador */
+/* Reajuste Premium para el Hit del Día */
+.card-hit-del-dia {
+    background: linear-gradient(135deg, #160e33 0%, #0c0821 100%) !important;
+    border: 1px solid var(--oro) !important;
+    position: relative;
+    overflow: hidden;
+}
+.hit-badge {
+    display: inline-block; margin-bottom: 10px;
+    background: var(--oro); color: #000;
+    font-size: 0.65rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; letter-spacing: 1px;
+}
+
+/* Caja de Alertas de Intensidad */
+.card-alertas-lunares {
+    border: 1px solid var(--alerta-roja) !important;
+    background: rgba(35, 10, 20, 0.4) !important;
+}
+.badge-alerta {
+    display: inline-block; background: var(--alerta-roja); color: #fff;
+    font-size: 0.65rem; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px;
+}
+
+/* ==========================================================================
+   6. GRID DEL DASHBOARD CRUCIAL (Las 3 Columnas Reales de la Imagen)
+   ========================================================================== */
+.dashboard-grid-layout {
+    display: grid;
+    grid-template-columns: 290px 1fr 350px; /* Paneles Izq, Centro fluido, Tabla Der */
+    gap: 25px;
+    align-items: start;
+    margin-top: 10px;
+}
+
+/* COLUMNA 1: PANELES E INDICADORES LEFT */
+.columna-izquierda-paneles {
+    display: flex;
+    flex-direction: column;
+}
+
+.relojes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.reloj-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    border-bottom: 1px solid rgba(179, 102, 255, 0.15);
+    padding-bottom: 6px;
+}
+
+.reloj-row strong {
+    color: var(--oro-brillante);
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+/* COLUMNA 2: ÁREA CENTRAL DEL GRÁFICO (Acople exacto de rueda.jpg) */
+.columna-central-grafico {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 480px;
+}
+
+.canvas-wrapper {
+    position: relative;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    /* Tu imagen real montada nativamente sin interferir con el trazo del Canvas */
+    background: url('rueda.jpg') no-repeat center center;
+    background-size: contain;
+    box-shadow: 0 0 35px rgba(179, 102, 255, 0.2);
+    border: 2px solid var(--oro);
+}
+
+#wheel-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+    background: transparent !important; /* Volvemos transparente el canvas para que se vea tu rueda de fondo */
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* COLUMNA 3: TABLA DERECHA */
+.columna-derecha-tabla {
+    position: sticky;
+    top: 100px;
+}
+
+/* ==========================================================================
+   7. TABLAS, BUSCADORES Y DETALLES INTERNOS (Tu Estética Completa)
+   ========================================================================== */
 .buscador-box input {
     width: 100%; padding: 14px 22px;
     background: rgba(15, 10, 33, 0.7);
@@ -176,68 +266,21 @@ header {
 }
 .buscador-box input:focus { border-color: var(--oro); outline: none; box-shadow: 0 0 12px rgba(212,175,55,0.3); }
 
-/* Tablas Responsivas */
 .tabla-scroll { width: 100%; overflow-x: auto; margin-bottom: 15px; border-radius: 8px; }
-table { width: 100%; border-collapse: collapse; min-width: 600px; color: var(--texto); background: rgba(12, 8, 28, 0.4); }
-th { background: rgba(7, 4, 18, 0.6); color: var(--oro); font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 1px; border-bottom: 2px solid var(--borde-purple); }
-th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--borde-purple); font-size: 0.88rem; }
+table { width: 100%; border-collapse: collapse; color: var(--texto); background: rgba(12, 8, 28, 0.4); }
+th { background: rgba(7, 4, 18, 0.6); color: var(--oro); font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 1px; border-bottom: 2px solid var(--borde-purple); }
+th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--borde-purple); font-size: 0.82rem; }
 tr:hover { background: rgba(179, 102, 255, 0.08); }
 
-/* ==========================================================================
-   6. SECCIONES DE LA MAQUETA (Alertas de Eclipses y Bloques de Clima)
-   ========================================================================== */
-.card-hit-del-dia {
-    background: linear-gradient(135deg, #160e33 0%, #0c0821 100%);
-    border: 1px solid var(--oro);
-    padding: 25px; border-radius: 14px; margin-bottom: 30px; position: relative; overflow: hidden;
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
-}
-.hit-badge {
-    display: inline-block; margin-bottom: 12px;
-    background: var(--oro); color: #000;
-    font-size: 0.7rem; font-weight: 700; padding: 5px 12px; border-radius: 20px; letter-spacing: 1px;
-}
-@media (min-width: 480px) { .hit-badge { position: absolute; top: 20px; right: 20px; margin-bottom: 0; } }
-
-/* Alertas de Intensidad / Eclipses Maqueta */
-.card-alertas-lunares {
-    border: 1px solid var(--alerta-roja) !important;
-    background: rgba(35, 10, 20, 0.4) !important;
-    box-shadow: 0 0 15px rgba(255, 51, 85, 0.1) !important;
-}
-.badge-alerta {
-    display: inline-block; background: var(--alerta-roja); color: #fff;
-    font-size: 0.65rem; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px;
-}
-
-/* Filtros */
-.filtro-dashboard-box, .tarot-nav { display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 8px; }
+.filtro-dashboard-box, .tarot-nav { display: flex; gap: 8px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 5px; }
 .filtro-dash-btn, .tab-btn {
     background: rgba(30, 20, 64, 0.5); border: 1px solid var(--borde-purple);
-    color: var(--texto-secundario); padding: 8px 18px; border-radius: 20px;
-    cursor: pointer; white-space: nowrap; font-size: 0.8rem; font-weight: 600; transition: 0.25s;
+    color: var(--texto-secundario); padding: 6px 14px; border-radius: 20px;
+    cursor: pointer; white-space: nowrap; font-size: 0.75rem; font-weight: 600; transition: 0.25s;
 }
 .filtro-dash-btn.active, .tab-btn.active { background: var(--oro); color: #000 !important; border-color: var(--oro); }
 
-/* ==========================================================================
-   7. RUEDA ASTRAL DIDÁCTICA (Estilo Elementos y Círculos Concéntricos)
-   ========================================================================== */
-.rueda-astral-container {
-    display: flex; flex-direction: column; align-items: center; margin: 30px 0;
-    background: rgba(11, 7, 26, 0.6) !important; padding: 25px;
-    border-radius: 16px; border: 1px solid var(--borde-purple);
-}
-/* Forzar que el Canvas mantenga proporciones impecables y no se deforme */
-#wheel-canvas {
-    max-width: 380px; width: 100% !important; height: auto !important;
-    aspect-ratio: 1 / 1; background: #070410; border-radius: 50%;
-    box-shadow: 0 0 30px rgba(179, 102, 255, 0.15); border: 2px solid var(--oro);
-    margin: 0 auto; display: block;
-}
-
-/* ==========================================================================
-   8. CRONOGRAMAS, REJILLAS Y COMPONENTES MÍSTICOS
-   ========================================================================== */
+/* Rejillas y Auxiliares de Otras Secciones */
 .grid-lunar-container { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 20px; }
 @media (min-width: 768px) { .grid-lunar-container { grid-template-columns: 1fr 2fr; } }
 .card-luna-actual { background: rgba(14, 9, 33, 0.6); border: 1px solid var(--borde-purple); border-radius: 12px; text-align: center; padding: 25px; }
@@ -245,7 +288,13 @@ tr:hover { background: rgba(179, 102, 255, 0.08); }
 .barra-progreso-container { background: rgba(0,0,0,0.4); height: 10px; border-radius: 5px; overflow: hidden; margin: 15px 0 8px 0; border: 1px solid var(--borde-purple); }
 .barra-progreso-fill { background: linear-gradient(90deg, var(--oro), #fff); height: 100%; width: 0%; transition: width 1s ease; }
 
-/* Sliders de Hitos Horizontales */
+.grid-plegables-container, .grid-tarot-container, .grid-herbolario, .grid-container { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 20px; 
+    margin-top: 20px; 
+}
+
 .timeline-card {
     min-width: 220px; max-width: 260px; background: rgba(22, 14, 51, 0.8);
     border-left: 3px solid var(--oro); border-top: 1px solid var(--borde-purple);
@@ -253,23 +302,49 @@ tr:hover { background: rgba(179, 102, 255, 0.08); }
     padding: 16px; border-radius: 0 10px 10px 0; flex-shrink: 0;
 }
 
-/* Rejillas de Tarot y Herbolario */
-.grid-tarot-container, .grid-herbolario { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; }
-@media (min-width: 480px) { .grid-tarot-container, .grid-herbolario { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; } }
-
-/* Títulos en Oro Viejo con fuente Cinzel */
 h1, h2, h3, h4, h5, .menu-logo, summary strong {
     font-family: 'Cinzel', serif; color: var(--oro) !important;
     letter-spacing: 1.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
-/* Modales */
+/* Modales y Formularios */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 3, 13, 0.85); display: flex; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(6px); }
 .modal-content { background: #110a26; border: 1px solid var(--oro); padding: 25px; border-radius: 14px; max-width: 530px; width: 88%; position: relative; box-shadow: 0 8px 32px rgba(0,0,0,0.7); max-height: 90vh; overflow-y: auto; }
 .modal-close { position: absolute; top: 15px; right: 15px; background: none; border: none; color: var(--oro); font-size: 1.8rem; cursor: pointer; }
 
-/* Inputs y Selectores de Formularios */
 input, textarea, select { width: 100%; padding: 12px; background: rgba(10, 6, 23, 0.8); border: 1px solid var(--borde-purple); color: #fff; margin-bottom: 15px; box-sizing: border-box; border-radius: 6px; font-family: 'Montserrat', sans-serif; }
 input:focus, textarea:focus, select:focus { border-color: var(--oro); outline: none; }
 .btn-enviar { background: var(--oro); color: #000; border: none; padding: 12px 24px; font-weight: 600; border-radius: 6px; cursor: pointer; transition: 0.2s; width: 100%; font-family: 'Montserrat'; }
 .btn-enviar:hover { background: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+
+/* Controladores para Ocultar elementos de menú antiguo */
+.menu-toggle-container, .close-btn { display: none; }
+
+/* ==========================================================================
+   8. RESPONSIVE: Adaptación Inteligente para Pantallas Chicas o Celulares
+   ========================================================================== */
+@media (max-width: 1150px) {
+    .dashboard-grid-layout {
+        grid-template-columns: 1fr;
+    }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 15px;
+    }
+    .main-header-wrapper {
+        margin-left: 0 !important;
+    }
+    .sidebar {
+        left: -300px; /* Aquí vuelve a colapsar como antes si la pantalla es chica */
+    }
+    .sidebar.active, .sidebar.open {
+        left: 0 !important;
+    }
+    .menu-toggle-container, .close-btn {
+        display: block;
+    }
+    footer {
+        margin-left: 0 !important;
+    }
+}
