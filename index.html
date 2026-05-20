@@ -30,7 +30,7 @@
             
             <a href="#" onclick="mostrarSeccion('contacto')" class="menu-footer-link">📩 CONTACTO</a>
 
-            <div class="sidebar-memorial-section" style="margin-top: 30px; padding: 15px 10px; border-top: 1px solid rgba(214, 175, 55, 0.3); text-align: center;">
+            <div class="sidebar-memorial-section">
                 <img src="Screenshot_20260519-012949.png" alt="Naza - Mi otra mitad" style="width: 100%; max-width: 180px; border-radius: 8px; border: 1px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.5); margin-bottom: 8px;" onerror="this.style.display='none'">
                 <p style="font-family: 'Cinzel', serif; font-size: 0.8rem; color: #d4af37; letter-spacing: 1px; margin: 0;">Naza, mi hermano, mi otra mitad</p>
                 <p style="font-size: 0.7rem; opacity: 0.6; margin: 4px 0 0 0;">Siempre en el mapa cósmico</p>
@@ -79,12 +79,20 @@
                 </div>
             </div>
 
-            <div class="rueda-astral-container" style="display: flex; flex-direction: column; align-items: center; margin: 25px 0; background: rgba(15, 15, 25, 0.4); padding: 20px; border-radius: 8px; border: 1px solid rgba(214, 175, 55, 0.2);">
-                <h3 style="font-family: 'Cinzel', serif; color: #d4af37; margin-bottom: 15px; letter-spacing: 1px;">Rueda Astral</h3>
-                <canvas id="wheel-canvas" width="360" height="360" style="max-width: 100%; background: #0b0b12; border-radius: 50%; box-shadow: 0 0 20px rgba(214,175,55,0.15); border: 2px solid #d4af37;"></canvas>
+            <div class="rueda-astral-container">
+                <h3 style="margin-top: 0; margin-bottom: 15px;">Rueda Astral</h3>
+                <canvas id="wheel-canvas" width="360" height="360"></canvas>
             </div>
 
-            <h3>El Cielo en Vivo (NASA Data)</h3>
+            <div class="card card-alertas-lunares" style="margin-bottom: 25px;">
+                <div class="badge-alerta">⚠️ ALERTA DE INTENSIDAD</div>
+                <h3 style="margin: 0 0 8px 0; font-size: 1.1rem; color: #fff !important;">Eclipses Activos & Lunaciones</h3>
+                <p style="margin: 0; font-size: 0.88rem; opacity: 0.9; line-height: 1.4;">
+                    Próximo hito de alta carga emocional e histórica en el eje Virgo-Piscis. Revisa los aspectos partiles en tu sección de hitos.
+                </p>
+            </div>
+
+            <h3>El Cielo en Vivo</h3>
             
             <div class="filtro-dashboard-box">
                 <button class="filtro-dash-btn active" onclick="filtrarTablaCielo(event, 'todos')">Todo el Cielo</button>
@@ -142,7 +150,7 @@
                 <div class="badge-alerta">⚠️ INTENSIDAD ASTRAL</div>
                 <h3>Eclipses y Lunaciones Extraordinarias</h3>
                 <div id="render-eclipses-data" class="lista-eclipses-links">
-                    <div style="padding: 8px 0; border-bottom: 1px dashed #333;"><strong>Próximo Eclipse Lunar:</strong> 03 de Marzo de 2026 en el signo de Virgo ♍</div>
+                    <div style="padding: 8px 0; border-bottom: 1px dashed rgba(255,255,255,0.1);"><strong>Próximo Eclipse Lunar:</strong> 03 de Marzo de 2026 en el signo de Virgo ♍</div>
                     <div style="padding: 8px 0;"><strong>Próximo Eclipse Solar:</strong> 12 de Agosto de 2026 en el signo de Leo ♌</div>
                 </div>
             </div>
@@ -168,12 +176,11 @@
         <section id="cronograma" class="vista seccion-oculta">
             <h2>Cronograma Astral & Hitos</h2>
             
-            <h3>1. Línea de Tiempo Deslizable (Ingresos y Aspectos Partil)</h3>
+            <h3>1. Línea de Timeline (Ingresos y Aspectos Partil)</h3>
             <p class="instruccion">Desliza horizontalmente para ver los próximos ingresos zodiacales e hitos planetarios.</p>
             
             <div class="slider-wrapper" style="margin-bottom: 15px;">
-                <div id="timeline-dinamica" style="display: flex; gap: 15px; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 10px;">
-                    </div>
+                <div id="timeline-dinamica" style="display: flex; gap: 15px; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 10px;"></div>
             </div>
             <div class="timeline-controls">
                 <button class="btn-nav-timeline" onclick="scrollTimeline('izq')">◀ Anterior</button>
@@ -250,9 +257,6 @@
                 <ul class="glosario-lista">
                     <li><strong>Conjunción (0°):</strong> Unión de fuerzas. Fusiones intensas en un mismo punto energético.</li>
                     <li><strong>Oposición (180°):</strong> Tensión o espejo. Polaridades que invitan a la integración y el equilibrio.</li>
-                    <li><strong>Trígono (120°):</strong> Fluidez natural. Talentos innatos que se manifiestan de forma armónica.</li>
-                    <li><strong>Cuadratura (90°):</strong> Desafío dinámico. Crisis o fricciones que empujan a la acción y evolución.</li>
-                    <li><strong>Sextil (60°):</strong> Oportunidad abierta. Potencial disponible que requiere intención para activarse.</li>
                 </ul>
             </div>
 
@@ -273,15 +277,6 @@
                         <option value="aries">Aries</option>
                         <option value="tauro">Tauro</option>
                         <option value="geminis">Géminis</option>
-                        <option value="cancer">Cáncer</option>
-                        <option value="leo">Leo</option>
-                        <option value="virgo">Virgo</option>
-                        <option value="libra">Libra</option>
-                        <option value="escorpio">Escorpio</option>
-                        <option value="sagitario">Sagitario</option>
-                        <option value="capricornio">Capricornio</option>
-                        <option value="acuario">Acuario</option>
-                        <option value="piscis">Piscis</option>
                     </select>
                     <div id="resultado-regente" class="resultado-box"></div>
                 </div>
@@ -317,6 +312,15 @@
             <div id="modal-dinamico-body"></div>
         </div>
     </div>
+
+    <footer style="text-align: center; padding: 50px 20px; background: #06040d; border-top: 1px solid var(--oro); margin-top: 60px;">
+        <div class="logo-final-footer-box" style="max-width: 200px; margin: 0 auto 15px auto;">
+            <img src="logo-cosmos.png" alt="CosmOmni Logo" style="width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 0 6px rgba(212,175,55,0.3));">
+        </div>
+        <p style="font-size: 0.75rem; opacity: 0.4; letter-spacing: 1px; margin: 0;">
+            © 2026 Cosmos Omni — Todos los derechos reservados.
+        </p>
+    </footer>
 
     <script src="data.js"></script>
     <script src="script.js"></script>
