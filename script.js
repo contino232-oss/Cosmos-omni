@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderizarTarot("mayores"); 
     renderizarHerbolario();
     renderizarAlmanaqueLunar();
+    renderizarRetrogradaciones(); // Inyección automatizada de retrogradaciones
 
     // Dibujar las Ruedas Zodiacales en el Canvas
     dibujarRuedaAstrologica();
@@ -70,14 +71,11 @@ function toggleModoLectura() {
 // --- RELOJES EN TIEMPO REAL (Formato Estricto 24 Horas) ---
 function actualizarRelojes() {
     const ahora = new Date();
-    
-    // Forzar visualización de 24 horas local sin AM/PM
     const Opciones24h = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
     
     const localStr = ahora.toLocaleTimeString('es-AR', Opciones24h);
     const utcStr = ahora.toISOString().substr(11, 8) + " UTC";
     
-    // Cálculo estimado de hora sidérea en formato 24 horas
     const hrs = ahora.getUTCHours();
     const mins = ahora.getUTCMinutes();
     const secs = ahora.getUTCSeconds();
@@ -98,9 +96,8 @@ function actualizarRelojes() {
 // --- CONEXIÓN GEONAMES API (Respaldo Robusto Offline) ---
 function obtenerGeolocalizacion() {
     const geoLabel = document.getElementById("geo-location");
-    const urlGeonames = "https://secure.geonames.org/postalCodeLookupJSON?postalcode=1878&country=AR&username=tano232";
+    const urlGeonames = "https://postalCodeLookupJSON?postalcode=1878&country=AR&username=tano232";
 
-    // Carga de datos base por defecto en caso de fallo de red
     const cargarClimaAstralPorDefecto = (mensajeUbicacion) => {
         if (geoLabel) geoLabel.innerText = mensajeUbicacion;
         
@@ -125,7 +122,6 @@ function obtenerGeolocalizacion() {
             }
         })
         .catch(() => {
-            // Manejo silencioso y seguro del estado Offline/Error de Credenciales
             cargarClimaAstralPorDefecto("📍 Conexión Cósmica Estándar (Quilmes, AR)");
         });
 }
@@ -145,7 +141,6 @@ function dibujarRuedaAstrologica() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Dibujar Anillo Exterior Zodiacal
     for (let i = 0; i < 12; i++) {
         let anguloInicio = (i * 30 * Math.PI) / 180;
         let anguloFin = ((i + 1) * 30 * Math.PI) / 180;
@@ -159,7 +154,6 @@ function dibujarRuedaAstrologica() {
         ctx.lineWidth = 1.5;
         ctx.stroke();
 
-        // Rotación de Tipografía para centrar nombres de Signos
         ctx.save();
         ctx.translate(X, Y);
         let anguloMedio = anguloInicio + (15 * Math.PI) / 180;
@@ -171,19 +165,12 @@ function dibujarRuedaAstrologica() {
         ctx.restore();
     }
 
-    // Dibujar Corona Central (Espacio de Casas Terrenales)
     ctx.beginPath();
     ctx.arc(X, Y, rMax - 70, 0, 2 * Math.PI);
     ctx.fillStyle = "rgba(5, 5, 10, 0.85)";
     ctx.fill();
     ctx.strokeStyle = "#d4af37";
     ctx.lineWidth = 2;
-    ctx.stroke();
-
-    // Núcleo Central de Aspectos Planetarios
-    ctx.beginPath();
-    ctx.arc(X, Y, 40, 0, 2 * Math.PI);
-    ctx.strokeStyle = "rgba(212, 175, 55, 0.4)";
     ctx.stroke();
 }
 
@@ -192,7 +179,6 @@ function renderizarDashboard() {
     const tbody = document.getElementById("render-dashboard-astros");
     if (!tbody) return;
 
-    // Datos locales maestros del Dashboard
     const astrosFicticios = [
         { nombre: "Sol ☀️", signo: "Tauro ♉", pos: "29° 12'", tipo: "mayores", din: "Directo 🟢" },
         { nombre: "Luna 🌙", signo: "Cáncer ♋", pos: "11° 04'", tipo: "mayores", din: "Rápida 🟢" },
@@ -233,7 +219,6 @@ function filtrarTablaCielo(evento, filtro) {
 }
 
 function renderizarEnciclopedias() {
-    // Validación de seguridad para la existencia global del objeto de datos local ASTRO_DATA
     if (typeof ASTRO_DATA === 'undefined') return;
 
     const gridSignos = document.getElementById("grid-signos");
@@ -243,7 +228,6 @@ function renderizarEnciclopedias() {
                 <summary class="signo-header">
                     <span class="signo-glifo">🌟</span>
                     <strong>${s.nombre}</strong> — <small>${s.sub}</small>
-                    <span class="signo-keyword">${s.keywords[0] || ''}</span>
                 </summary>
                 <div class="signo-content">
                     <p style="color:#d4af37; margin-bottom:4px; font-weight:600;">Esencia: "${s.frase_semilla}"</p>
@@ -285,7 +269,6 @@ function renderizarEnciclopedias() {
     }
 }
 
-// --- BUSCADOR EN TIEMPO REAL ---
 function filtrarEnciclopedia(idInput, claseCartas) {
     const input = document.getElementById(idInput);
     if (!input) return;
@@ -301,13 +284,12 @@ function filtrarEnciclopedia(idInput, claseCartas) {
     });
 }
 
-// --- RENDER DE TAROT (RIDER-WAITE) ---
+// --- RENDER DE TAROT COMPLETO ---
 function renderizarTarot(tipo) {
     if (typeof ASTRO_DATA === 'undefined' || !ASTRO_DATA.tarot) return;
     const grid = document.getElementById("grid-tarot");
     if (!grid) return;
 
-    // Filtrar Arcanos según el botón activo
     const filtrados = ASTRO_DATA.tarot.filter(c => tipo === 'todos' || c.tipo === tipo);
 
     grid.innerHTML = filtrados.map(c => `
@@ -346,11 +328,23 @@ function renderizarHerbolario() {
     `).join("");
 }
 
-// --- ALMANAQUE LUNAR AUTOMÁTICO ---
+// --- AUTOMATIZACIÓN DE RETROGRADACIONES 2026 ---
+function renderizarRetrogradaciones() {
+    const contenedor = document.getElementById("render-retrogradaciones-2026");
+    if (!contenedor || !ASTRO_DATA.retrogradaciones2026) return;
+
+    contenedor.innerHTML = ASTRO_DATA.retrogradaciones2026.map(r => `
+        <div class="retro-card" style="border-left: 4px solid #ff4d4d; padding: 10px; margin-bottom: 10px; background: rgba(20,20,30,0.8); border-radius:4px;">
+            <p style="color:#d4af37; font-weight:bold; margin-bottom:2px;">${r.planeta} en ${r.signo}</p>
+            <p style="font-size:0.85rem; opacity:0.7; font-style:italic; margin-bottom:4px;">Periodo: ${r.periodo}</p>
+            <p style="font-size:0.9rem; line-height:1.3;">⚠️ ${r.advertencia}</p>
+        </div>
+    `).join("");
+}
+
 function renderizarAlmanaqueLunar() {
     const contenedor = document.getElementById("render-almanaque-lunar");
     if (!contenedor) return;
-    // Espacio de contingencia para la automatización de fases lunares
     contenedor.innerHTML = `
         <div style="text-align:center; padding:15px; border:1px dashed #d4af37; border-radius:6px;">
             <p style="color:#d4af37; font-size:1.2rem; font-weight:600; margin-bottom:4px;">🌖 Fase Actual: Luna Menguante en Piscis</p>
@@ -359,7 +353,6 @@ function renderizarAlmanaqueLunar() {
     `;
 }
 
-// --- INTERFAZ DE MODAL PARA EL DASHBOARD ---
 function abrirModalAstro(nombre, signo, pos, din) {
     console.log(`Consulta Astral: ${nombre} en ${signo} (${pos}) - ${din}`);
 }
