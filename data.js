@@ -1,545 +1,164 @@
 const ASTRO_DATA = {
-    // --- LOS 22 ARCANOS MAYORES COMPLETOS (RIDER-WAITE) + 4 ASES ---
+    // --- LOS 78 ARCANOS DEL TAROT COMPLETOS (RIDER-WAITE) ---
     tarot: [
-        {
-            id: "loco",
-            nombre: "El Loco (0)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/0/0b/RWS_Tarot_02_The_Fool.jpg",
-            keywords: ["Inicios", "Espontaneidad", "Fe ciega", "Libertad"],
-            descripcion: "El alma pura que inicia su viaje evolutivo sin ataduras materiales ni miedos al vacío."
-        },
-        {
-            id: "mago",
-            nombre: "El Mago (I)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_The_Magician.jpg",
-            keywords: ["Manifestación", "Poder interior", "Habilidad", "Determinación"],
-            descripcion: "Posee todas las herramientas de los elementos sobre la mesa para canalizar la voluntad divina en la Tierra."
-        },
-        {
-            id: "sacerdotisa",
-            nombre: "La Sacerdotisa (II)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_The_High_Priestess.jpg",
-            keywords: ["Intuición", "Misterio", "Inconsciente", "Sabiduría pasiva"],
-            descripcion: "La guardiana del velo y de los secretos profundos. Invita al retiro y a escuchar la voz interior."
-        },
-        {
-            id: "emperatriz",
-            nombre: "La Emperatriz (III)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_The_Emperor.jpg",
-            keywords: ["Abundancia", "Naturaleza", "Creatividad", "Fertilidad"],
-            descripcion: "La Madre Tierra en pleno esplendor. Rige la gestación, la belleza sensual y la creación de vida."
-        },
-        {
-            id: "emperador",
-            nombre: "El Emperador (IV)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/c/c3/RWS_Tarot_04_The_Emperor.jpg",
-            keywords: ["Estructura", "Autoridad", "Estabilidad", "Límites firmes"],
-            descripcion: "Establece las bases sólidas, las leyes y el orden social a través del poder de la disciplina."
-        },
-        {
-            id: "hierofante",
-            nombre: "El Hierofante (V)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/8/8d/RWS_Tarot_05_The_Hierophant.jpg",
-            keywords: ["Tradición", "Guía espiritual", "Educación", "Ortodoxia"],
-            descripcion: "El maestro espiritual que transmite el conocimiento sagrado y los dogmas que unen a las comunidades."
-        },
-        {
-            id: "enamorados",
-            nombre: "Los Enamorados (VI)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/3/3a/RWS_Tarot_06_The_Lovers.jpg",
-            keywords: ["Elecciones", "Vínculos", "Alineación", "Valores duales"],
-            descripcion: "Representa encrucijadas de vida que deben resolverse desde el corazón, uniendo opuestos complementarios."
-        },
-        {
-            id: "carro",
-            nombre: "El Carro (VII)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/9/9b/RWS_Tarot_07_The_Chariot.jpg",
-            keywords: ["Victoria", "Fuerza de voluntad", "Dirección", "Control"],
-            descripcion: "Avance decidido hacia el éxito superando las tormentas emocionales mediante el enfoque mental."
-        },
-        {
-            id: "fuerza",
-            nombre: "La Fuerza (VIII)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/f/f5/RWS_Tarot_08_Strength.jpg",
-            keywords: ["Coraje", "Compasión", "Fortaleza interna", "Autocontrol"],
-            descripcion: "Domar las pasiones animales internas con amor, suavidad y resistencia espiritual en lugar de violencia bruta."
-        },
-        {
-            id: "ermitano",
-            nombre: "El Ermitaño (IX)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_The_Hermit.jpg",
-            keywords: ["Introspección", "Aislamiento", "Búsqueda interior", "Prudencia"],
-            descripcion: "Retirarse del ruido externo para encender la linterna de la propia verdad y asimilar las lecciones vividas."
-        },
-        {
-            id: "rueda",
-            nombre: "La Rueda de la Fortuna (X)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg",
-            keywords: ["Destino", "Ciclos", "Cambio inevitable", "Sincronicidad"],
-            descripcion: "El movimiento perpetuo del cosmos. Recuerda que las situaciones terrenales son transitorias: todo sube y baja."
-        },
-        {
-            id: "justicia",
-            nombre: "La Justicia (XI)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/e/e0/RWS_Tarot_11_Justice.jpg",
-            keywords: ["Karma", "Causa y efecto", "Verdad", "Equilibrio"],
-            descripcion: "Corta los engaños con la espada de la objetividad y pesa los actos con honestidad brutal y equilibrio."
-        },
-        {
-            id: "colgado",
-            nombre: "El Colgado (XII)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/2/2b/RWS_Tarot_12_The_Hanged_Man.jpg",
-            keywords: ["Sacrificio", "Perspectiva", "Pausa", "Rendición"],
-            descripcion: "Un momento de estancamiento voluntario que nos obliga a mirar el mundo desde otro ángulo para ganar sabiduría."
-        },
-        {
-            id: "muerte",
-            nombre: "La Muerte (XIII)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg",
-            keywords: ["Transmutación", "Finales", "Renacimiento", "Transición"],
-            descripcion: "El desapego absoluto de lo que ya no sirve. No es un fin físico, sino la muerte del ego para dar paso a lo nuevo."
-        },
-        {
-            id: "templanza",
-            nombre: "La Templanza (XIV)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/f/f8/RWS_Tarot_14_Temperance.jpg",
-            keywords: ["Alquimia", "Paciencia", "Moderación", "Fluidez"],
-            descripcion: "Mezcla de opuestos con calma divina. Sanación emocional y equilibrio a través del ritmo natural del alma."
-        },
-        {
-            id: "diablo",
-            nombre: "El Diablo (XV)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/5/55/RWS_Tarot_15_The_Devil.jpg",
-            keywords: ["Ataduras", "Materialismo", "Sombra", "Ilusión de control"],
-            descripcion: "Enfrentar los deseos ocultos, las adicciones o los apegos materiales que nos mantienen encadenados por miedo."
-        },
-        {
-            id: "torre",
-            nombre: "La Torre (XVI)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/5/53/RWS_Tarot_16_The_Tower.jpg",
-            keywords: ["Ruptura abrupta", "Revelación", "Caída del ego", "Liberación"],
-            descripcion: "El rayo de la verdad destruye las estructuras falsas y obsoletas construidas sobre bases débiles. Duele, pero libera."
-        },
-        {
-            id: "estrella",
-            nombre: "La Estrella (XVII)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_17_The_Star.jpg",
-            keywords: ["Esperanza", "Sanación", "Frecuencia cósmica", "Renovación"],
-            descripcion: "El bálsamo de paz que llega tras la tormenta. Conexión espiritual directa y fe ciega en el curso de tu destino."
-        },
-        {
-            id: "luna-tarot",
-            nombre: "La Luna (XVIII)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_The_Moon.jpg",
-            keywords: ["Ilusión", "Miedo atávico", "Fantasía", "Instinto profundo"],
-            descripcion: "Caminar de noche por senderos difusos. Rige el inconsciente salvaje, los engaños visuales y el miedo a lo desconocido."
-        },
-        {
-            id: "sol-tarot",
-            nombre: "El Sol (XIX)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_The_Sun.jpg",
-            keywords: ["Éxito", "Vitalidad", "Claridad", "Verdad expuesta"],
-            descripcion: "Luz absoluta que todo lo aclara. Alegría infantil, vitalidad física desbordante y éxito radiante en todo nivel."
-        },
-        {
-            id: "juicio",
-            nombre: "El Juicio (XX)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/d/dd/RWS_Tarot_20_The_Judgement.jpg",
-            keywords: ["Despertar", "Llamado del alma", "Absolución", "Redención"],
-            descripcion: "Escuchar la trompeta cósmica que te invita a levantarte del pasado, sanar el karma y asumir una nueva piel evolutiva."
-        },
-        {
-            id: "mundo",
-            nombre: "El Mundo (XXI)",
-            tipo: "mayores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/f/ff/RWS_Tarot_21_The_World.jpg",
-            keywords: ["Realización", "Cierre de ciclos", "Plenitud", "Integración"],
-            descripcion: "La culminación de la travesía del Loco. Integración total de los cuatro elementos y armonía cósmica alcanzada."
-        },
-        {
-            id: "as-bastos",
-            nombre: "As de Bastos",
-            tipo: "menores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/1/11/Wands01.jpg",
-            keywords: ["Chispa creativa", "Pasión", "Iniciativa", "Fuego"],
-            descripcion: "El inicio energético absoluto del elemento Fuego. Impulso vital para arrancar proyectos arriesgados."
-        },
-        {
-            id: "as-copas",
-            nombre: "As de Copas",
-            tipo: "menores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/3/36/Cups01.jpg",
-            keywords: ["Amor puro", "Intuición", "Afecto", "Agua"],
-            descripcion: "El cáliz que rebosa amor incondicional y sanación espiritual. Apertura completa del centro cardíaco."
-        },
-        {
-            id: "as-espadas",
-            nombre: "As de Espadas",
-            tipo: "menores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Swords01.jpg",
-            keywords: ["Claridad mental", "Corte drástico", "Verdad", "Aire"],
-            descripcion: "La fuerza del intelecto que corta las dudas de raíz. Una gran idea o revelación objetiva irrefutable."
-        },
-        {
-            id: "as-oros",
-            nombre: "As de Oros",
-            tipo: "menores",
-            imagen: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Pentalcles01.jpg",
-            keywords: ["Manifestación", "Prosperidad", "Salud", "Tierra"],
-            descripcion: "La semilla materializada del elemento Tierra. Oportunidades de dinero sólido, contratos duraderos o sanación física."
-        }
+        // --- ARCANOS MAYORES ---
+        { id: "loco", nombre: "El Loco (0)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/0/0b/RWS_Tarot_02_The_Fool.jpg", keywords: ["Inicios", "Espontaneidad", "Fe ciega", "Libertad"], descripcion: "El alma pura que inicia su viaje evolutivo sin ataduras materiales ni miedos al vacío." },
+        { id: "mago", nombre: "El Mago (I)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_The_Magician.jpg", keywords: ["Manifestación", "Poder interior", "Habilidad", "Determinación"], descripcion: "Posee todas las herramientas de los elementos sobre la mesa para canalizar la voluntad divina en la Tierra." },
+        { id: "sacerdotisa", nombre: "La Sacerdotisa (II)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_The_High_Priestess.jpg", keywords: ["Intuición", "Misterio", "Inconsciente", "Sabiduría pasiva"], descripcion: "La guardiana del velo y de los secretos profundos. Invita al retiro y a escuchar la voz interior." },
+        { id: "emperatriz", nombre: "La Emperatriz (III)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_The_Emperor.jpg", keywords: ["Abundancia", "Naturaleza", "Creatividad", "Fertilidad"], descripcion: "La Madre Tierra en pleno esplendor. Rige la gestación, la belleza sensual y la creación de vida." },
+        { id: "emperador", nombre: "El Emperador (IV)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/c/c3/RWS_Tarot_04_The_Emperor.jpg", keywords: ["Estructura", "Autoridad", "Estabilidad", "Límites firmes"], descripcion: "Establece las bases sólidas, las leyes y el orden social a través del poder de la disciplina." },
+        { id: "hierofante", nombre: "El Hierofante (V)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/8/8d/RWS_Tarot_05_The_Hierophant.jpg", keywords: ["Tradición", "Guía espiritual", "Educación", "Ortodoxia"], descripcion: "El maestro espiritual que transmite el conocimiento sagrado y los dogmas que unen a las comunidades." },
+        { id: "enamorados", nombre: "Los Enamorados (VI)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/3/3a/RWS_Tarot_06_The_Lovers.jpg", keywords: ["Elecciones", "Vínculos", "Alineación", "Valores duales"], descripcion: "Representa encrucijadas de vida que deben resolverse desde el corazón, uniendo opuestos complementarios." },
+        { id: "carro", nombre: "El Carro (VII)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/9/9b/RWS_Tarot_07_The_Chariot.jpg", keywords: ["Victoria", "Fuerza de voluntad", "Dirección", "Control"], descripcion: "Avance decidido hacia el éxito superando las tormentas emocionales mediante el enfoque mental." },
+        { id: "fuerza", nombre: "La Fuerza (VIII)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/f/f5/RWS_Tarot_08_Strength.jpg", keywords: ["Coraje", "Compasión", "Fortaleza interna", "Autocontrol"], descripcion: "Domar las pasiones animales internas con amor, suavidad y resistencia espiritual en lugar de violencia bruta." },
+        { id: "ermitano", nombre: "El Ermitaño (IX)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_The_Hermit.jpg", keywords: ["Introspección", "Aislamiento", "Búsqueda interior", "Prudencia"], descripcion: "Retirarse del ruido externo para encender la linterna de la propia verdad y asimilar las lecciones vividas." },
+        { id: "rueda", nombre: "La Rueda de la Fortuna (X)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg", keywords: ["Destino", "Ciclos", "Cambio inevitable", "Sincronicidad"], descripcion: "El movimiento perpetuo del cosmos. Recuerda que las situaciones terrenales son transitorias: todo sube y baja." },
+        { id: "justicia", nombre: "La Justicia (XI)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/e/e0/RWS_Tarot_11_Justice.jpg", keywords: ["Karma", "Causa y efecto", "Verdad", "Equilibrio"], descripcion: "Corta los engaños con la espada de la objetividad y pesa los actos con honestidad brutal y equilibrio." },
+        { id: "colgado", nombre: "El Colgado (XII)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/2/2b/RWS_Tarot_12_The_Hanged_Man.jpg", keywords: ["Sacrificio", "Perspectiva", "Pausa", "Rendición"], descripcion: "Un momento de estancamiento voluntario que nos obliga a mirar el mundo desde otro ángulo para ganar sabiduría." },
+        { id: "muerte", nombre: "La Muerte (XIII)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg", keywords: ["Transmutación", "Finales", "Renacimiento", "Transición"], descripcion: "El desapego absoluto de lo que ya no sirve. No es un fin físico, sino la muerte del ego para dar paso a lo nuevo." },
+        { id: "templanza", nombre: "La Templanza (XIV)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/f/f8/RWS_Tarot_14_Temperance.jpg", keywords: ["Alquimia", "Paciencia", "Moderación", "Fluidez"], descripcion: "Mezcla de opuestos con calma divina. Sanación emocional y equilibrio a través del ritmo natural del alma." },
+        { id: "diablo", nombre: "El Diablo (XV)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/5/55/RWS_Tarot_15_The_Devil.jpg", keywords: ["Ataduras", "Materialismo", "Sombra", "Ilusión de control"], descripcion: "Enfrentar los deseos ocultos, las adicciones o los apegos materiales que nos mantienen encadenados por miedo." },
+        { id: "torre", nombre: "La Torre (XVI)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/5/53/RWS_Tarot_16_The_Tower.jpg", keywords: ["Ruptura abrupta", "Revelación", "Caída del ego", "Liberación"], descripcion: "El rayo de la verdad destruye las estructuras falsas y obsoletas construidas sobre bases débiles. Duele, pero libera." },
+        { id: "estrella", nombre: "La Estrella (XVII)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_17_The_Star.jpg", keywords: ["Esperanza", "Sanación", "Frecuencia cósmica", "Renovación"], descripcion: "El bálsamo de paz que llega tras la tormenta. Conexión espiritual directa y fe ciega en el curso de tu destino." },
+        { id: "luna-tarot", nombre: "La Luna (XVIII)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_The_Moon.jpg", keywords: ["Ilusión", "Miedo atávico", "Fantasía", "Instinto profundo"], descripcion: "Caminar de noche por senderos difusos. Rige el inconsciente salvaje, los engaños visuales y el miedo a lo desconocido." },
+        { id: "sol-tarot", nombre: "El Sol (XIX)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_The_Sun.jpg", keywords: ["Éxito", "Vitalidad", "Claridad", "Verdad expuesta"], descripcion: "Luz absoluta que todo lo aclara. Alegría infantil, vitalidad física desbordante y éxito radiante en todo nivel." },
+        { id: "juicio", nombre: "El Juicio (XX)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/d/dd/RWS_Tarot_20_The_Judgement.jpg", keywords: ["Despertar", "Llamado del alma", "Absolución", "Redención"], descripcion: "Escuchar la trompeta cósmica que te invita a levantarte del pasado, sanar el karma y asumir una nueva piel evolutiva." },
+        { id: "mundo", nombre: "El Mundo (XXI)", tipo: "mayores", imagen: "https://upload.wikimedia.org/wikipedia/commons/f/ff/RWS_Tarot_21_The_World.jpg", keywords: ["Realización", "Cierre de ciclos", "Plenitud", "Integración"], descripcion: "La culminación de la travesía del Loco. Integración total de los cuatro elementos y armonía cósmica alcanzada." },
+
+        // --- ARCANOS MENORES: BASTOS (FUEGO) ---
+        { id: "as-bastos", nombre: "As de Bastos", tipo: "bastos", imagen: "https://upload.wikimedia.org/wikipedia/commons/1/11/Wands01.jpg", keywords: ["Chispa creativa", "Pasión", "Iniciativa", "Fuego"], descripcion: "El inicio energético absoluto del elemento Fuego. Impulso vital para arrancar proyectos." },
+        { id: "2-bastos", nombre: "Dos de Bastos", tipo: "bastos", imagen: "https://upload.wikimedia.org/wikipedia/commons/8/8f/Wands02.jpg", keywords: ["Planificación", "Visión", "Decisión", "Mirar al futuro"], descripcion: "Tener el mundo en tus manos mientras planificas el siguiente paso de expansión." },
+        { id: "3-bastos", nombre: "Tres de Bastos", tipo: "bastos", imagen: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Wands03.jpg", keywords: ["Espera activa", "Expansión", "Barcos mercantes", "Progreso"], descripcion: "Los proyectos e inversiones comienzan a dar sus primeros frutos en el horizonte." },
+        { id: "4-bastos", nombre: "Cuatro de Bastos", tipo: "bastos", imagen: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Wands04.jpg", keywords: ["Celebración", "Hogar", "Armonía", "Estabilidad"], descripcion: "Momento de regocijo, bases sólidas y bienvenida comunitaria o familiar." },
+        { id: "5-bastos", nombre: "Cinco de Bastos", tipo: "bastos", imagen: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Wands05.jpg", keywords: ["Competencia", "Conflicto", "Rivalidad", "Tensión"], descripcion: "Conflictos menores y luchas de egos. Una escaramuza necesaria para medir fuerzas." },
+        { id: "6-bastos", nombre: "Seis de Bastos", tipo: "bastos", imagen: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Wands06.jpg", keywords: ["Victoria", "Reconocimiento", "Éxito", "Orgullo"], descripcion: "Aclamación pública y triunfo tras superar las batallas. El líder victorioso." },
+        { id: "7-bastos", nombre: "Siete de Bastos", tipo: "bastos", imagen: "https://upload.wikimedia.org/wikipedia/commons/e/e4/Wands07.jpg", keywords: ["Defensa", "Resistencia", "Mantenerse firme", "Ventaja"], descripcion: "Defender tu posición elevada contra desafíos y críticas externas." },
+        { id: "8-bastos", nombre: "Ocho de Bastos", tipo: "bastos", imagen: "https://upload.wikimedia.org/wikipedia/commons/6/6b/Wands08.jpg", keywords: ["Velocidad", "Movimiento", "Viajes", "Mensajes rápidos"], descripcion: "Acontecimientos veloces que se precipitan por el aire sin detenerse." },
+        { id: "9-bastos", nombre: "Nueve de Bastos", tipo: "bastos", imagen: "https://upload.wikimedia.org/wikipedia/commons/4/4d/Wands09.jpg", keywords: ["Último esfuerzo", "Resiliencia", "Alerta", "Cansancio"], descripcion: "El guerrero herido pero tenaz que custodia sus logros antes de la meta final." },
+        { id: "10-bastos", nombre: "Diez de Bastos", tipo: "bastos", imagen: "https://upload.wikimedia.org/wikipedia/commons/0/0b/Wands10.jpg", keywords: ["Sobrecarga", "Responsabilidad", "Agobio", "Opresión"], descripcion: "Cargar con un peso excesivo en la espalda. Es necesario delegar." },
+        { id: "sota-bastos", nombre: "Sota de Bastos", tipo: "bastos", imagen: "https://upload.wikimedia.org/wikipedia/commons/6/6a/Wands11.jpg", keywords: ["Explorador", "Entusiasmo", "Malas noticias", "Nuevas ideas"], descripcion: "El mensajero apasionado que trae noticias de aventuras o proyectos." },
+        { id: "caballero-bastos", nombre: "Caballero de Bastos", tipo: "bastos", imagen: "https://upload.wikimedia.org/wikipedia/commons/1/16/Wands12.jpg", keywords: ["Impulsividad", "Audacia", "Acción rápida", "Pasión"], descripcion: "Avanzar al galope hacia la batalla con un fuego incontrolable." },
+        { id: "reina-bastos", nombre: "Reina de Bastos", tipo: "bastos", imagen: "https://upload.wikimedia.org/wikipedia/commons/0/0d/Wands13.jpg", keywords: ["Magnetismo", "Calidez", "Independencia", "Confianza"], descripcion: "Liderazgo carismático, extroversión y fuerza creadora desbordante." },
+        { id: "rey-bastos", nombre: "Rey de Bastos", tipo: "bastos", imagen: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Wands14.jpg", keywords: ["Visión", "Autoridad", "Emprendimiento", "Inspiración"], descripcion: "El soberano del fuego que gobierna con sabiduría ejecutiva e inspiración." },
+
+        // --- ARCANOS MENORES: COPAS (AGUA) ---
+        { id: "as-copas", nombre: "As de Copas", tipo: "copas", imagen: "https://upload.wikimedia.org/wikipedia/commons/3/36/Cups01.jpg", keywords: ["Amor puro", "Intuición", "Afecto", "Agua"], descripcion: "El cáliz que rebosa amor incondicional y sanación espiritual. Apertura completa." },
+        { id: "2-copas", nombre: "Dos de Copas", tipo: "copas", imagen: "https://upload.wikimedia.org/wikipedia/commons/f/f8/Cups02.jpg", keywords: ["Conexión", "Alianza", "Atracción", "Reciprocidad"], descripcion: "Unión armónica de dos almas, romance correspondido o pacto de mutua simpatía." },
+        { id: "3-copas", nombre: "Tres de Copas", tipo: "copas", imagen: "https://upload.wikimedia.org/wikipedia/commons/c/cbd/Cups03.jpg", keywords: ["Celebración", "Amistad", "Comunidad", "Brindis"], descripcion: "Compartir la alegría con tu círculo íntimo. Apoyo emocional y mutua felicidad." },
+        { id: "4-copas", nombre: "Cuatro de Copas", tipo: "copas", imagen: "https://upload.wikimedia.org/wikipedia/commons/3/35/Cups04.jpg", keywords: ["Apatía", "Descontento", "Meditación", "Oportunidad perdida"], descripcion: "Aburrimiento o ensimismamiento que impide ver los nuevos cálices que ofrece el universo." },
+        { id: "5-copas", nombre: "Cinco de Copas", tipo: "copas", imagen: "https://upload.wikimedia.org/wikipedia/commons/d/d7/Cups05.jpg", keywords: ["Lamento", "Pérdida", "Arrepentimiento", "Esperanza oculta"], descripcion: "Llorar sobre las copas derramadas del pasado olvidando que aún quedan dos de pie a la espalda." },
+        { id: "6-copas", nombre: "Seis de Copas", tipo: "copas", imagen: "https://upload.wikimedia.org/wikipedia/commons/1/17/Cups06.jpg", keywords: ["Nostalgia", "Infancia", "Recuerdos", "Inocencia"], descripcion: "Mirar con ternura el ayer, el reencuentro con viejos amigos o regalos nostálgicos." },
+        { id: "7-copas", nombre: "Siete de Copas", tipo: "copas", imagen: "https://upload.wikimedia.org/wikipedia/commons/a/ae/Cups07.jpg", keywords: ["Ilusiones", "Fantasía", "Opciones múltiples", "Confusión"], descripcion: "Castillos en el aire y espejismos del deseo. Cuidado con elegir bajo engaño." },
+        { id: "8-copas", nombre: "Ocho de Copas", tipo: "copas", imagen: "https://upload.wikimedia.org/wikipedia/commons/6/60/Cups08.jpg", keywords: ["Abandono voluntario", "Búsqueda espiritual", "Dejar atrás"], descripcion: "Caminar hacia las montañas dejando atrás lo construido en busca de un sentido superior." },
+        { id: "9-copas", nombre: "Nueve de Copas", tipo: "copas", imagen: "https://upload.wikimedia.org/wikipedia/commons/2/24/Cups09.jpg", keywords: ["Satisfacción", "Placer", "Deseo cumplido", "Autocomplacencia"], descripcion: "La carta del bienestar material y emocional. El banquete personal." },
+        { id: "10-copas", nombre: "Diez de Copas", tipo: "copas", imagen: "https://upload.wikimedia.org/wikipedia/commons/a/a2/Cups10.jpg", keywords: ["Felicidad familiar", "Plenitud", "Paz interior", "Arcoíris"], descripcion: "El clímax de la felicidad emocional compartida en el hogar o comunidad." },
+        { id: "sota-copas", nombre: "Sota de Copas", tipo: "copas", imagen: "https://upload.wikimedia.org/wikipedia/commons/a/ad/Cups11.jpg", keywords: ["Mensaje intuitivo", "Sensibilidad", "Creatividad", "Sorpresa"], descripcion: "Un joven sensible que ve un pez brotar de su copa. Mensajes del inconsciente." },
+        { id: "caballero-copas", nombre: "Caballero de Copas", tipo: "copas", imagen: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Cups12.jpg", keywords: ["Invitación romántica", "Idealismo", "Propuesta", "Soñador"], descripcion: "El caballero pacífico que avanza ofreciendo su amor e ideales elevados." },
+        { id: "reina-copas", nombre: "Reina de Copas", tipo: "copas", imagen: "https://upload.wikimedia.org/wikipedia/commons/6/62/Cups13.jpg", keywords: ["Empatía", "Intuición psíquica", "Madre afectiva", "Refugio"], descripcion: "Contemplar los misterios del alma a través de un cáliz hermético." },
+        { id: "rey-copas", nombre: "Rey de Copas", tipo: "copas", imagen: "https://upload.wikimedia.org/wikipedia/commons/0/04/Cups14.jpg", keywords: ["Control emocional", "Sabiduría", "Compasión", "Templanza"], descripcion: "El trono que flota sobre aguas turbulentas manteniendo la calma soberana." },
+
+        // --- ARCANOS MENORES: ESPADAS (AIRE) ---
+        { id: "as-espadas", nombre: "As de Espadas", tipo: "espadas", imagen: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Swords01.jpg", keywords: ["Claridad mental", "Corte drástico", "Verdad", "Aire"], descripcion: "La fuerza del intelecto que corta las dudas de raíz. Una gran revelación." },
+        { id: "2-espadas", nombre: "Dos de Espadas", tipo: "espadas", imagen: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Swords02.jpg", keywords: ["Indecisión", "Bloqueo emocional", "Punto muerto", "Tregua"], descripcion: "Cerrar los ojos al conflicto externo cruzando las espadas en perfecto equilibrio tenso." },
+        { id: "3-espadas", nombre: "Tres de Espadas", tipo: "espadas", imagen: "https://upload.wikimedia.org/wikipedia/commons/0/02/Swords03.jpg", keywords: ["Desamor", "Dolor", "Traición", "Pérdida"], descripcion: "Un corazón atravesado por tres espadas bajo la tormenta. Duelo mental y afectivo." },
+        { id: "4-espadas", nombre: "Cuatro de Espadas", tipo: "espadas", imagen: "https://upload.wikimedia.org/wikipedia/commons/b/bf/Swords04.jpg", keywords: ["Reposo", "Recuperación", "Convalecencia", "Santuario"], descripcion: "Retiro temporal del campo de batalla para sanar la mente y reponer fuerzas." },
+        { id: "5-espadas", nombre: "Cinco de Espadas", tipo: "espadas", imagen: "https://upload.wikimedia.org/wikipedia/commons/2/23/Swords05.jpg", keywords: ["Victoria pírrica", "Degradación", "Discordia", "Egoísmo"], descripcion: "Ganar una discusión perdiendo la relación. Orgullo vacío que fragmenta vínculos." },
+        { id: "6-espadas", nombre: "Seis de Espadas", tipo: "espadas", imagen: "https://upload.wikimedia.org/wikipedia/commons/2/29/Swords06.jpg", keywords: ["Transición", "Viaje mental", "Dejar la tormenta", "Resignación"], descripcion: "Cruzar en barca hacia aguas calmas llevando las cargas del pasado." },
+        { id: "7-espadas", nombre: "Siete de Espadas", tipo: "espadas", imagen: "https://upload.wikimedia.org/wikipedia/commons/3/34/Swords07.jpg", keywords: ["Estrategia oculta", "Engaño", "Robo", "Evadir el conflicto"], descripcion: "Llevarse las espadas del campamento enemigo a escondidas. Astucia o traición." },
+        { id: "8-espadas", nombre: "Ocho de Espadas", tipo: "espadas", imagen: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Swords08.jpg", keywords: ["Prisión mental", "Ceguera autoimpuesta", "Restricción", "Indefensión"], descripcion: "Estar atado e indefenso rodeado de espadas, ignorando que las ligaduras son débiles." },
+        { id: "9-espadas", nombre: "Nueve de Espadas", tipo: "espadas", imagen: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Swords09.jpg", keywords: ["Ansiedad", "Pesadillas", "Angustia", "Insomnio"], descripcion: "Despertar llorando en la noche preso de fantasmas mentales magnificados por el miedo." },
+        { id: "10-espadas", nombre: "Diez de Espadas", tipo: "espadas", imagen: "https://upload.wikimedia.org/wikipedia/commons/d/d4/Swords10.jpg", keywords: ["Final absoluto", "Tocar fondo", "Derrota", "Nuevo amanecer"], descripcion: "El cuerpo postrado bocabajo perforado por diez espadas. El fin del dolor mental." },
+        { id: "sota-espadas", nombre: "Sota de Espadas", tipo: "espadas", imagen: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Swords11.jpg", keywords: ["Vigilancia", "Curiosidad", "Espionaje", "Mente aguda"], descripcion: "El guardián joven listo para desenvainar ante cualquier agresión verbal." },
+        { id: "caballero-espadas", nombre: "Caballero de Espadas", tipo: "espadas", imagen: "https://upload.wikimedia.org/wikipedia/commons/b/b0/Swords12.jpg", keywords: ["Impetición", "Ataque directo", "Fanatismo", "Lógica implacable"], descripcion: "Cabalgar cortando el viento en defensa de una idea racional, sin medir consecuencias." },
+        { id: "reina-espadas", nombre: "Reina de Espadas", tipo: "espadas", imagen: "https://upload.wikimedia.org/wikipedia/commons/d/d4/Swords13.jpg", keywords: ["Objetividad", "Escepticismo", "Duelo asimilado", "Independencia"], descripcion: "La reina que empuña la espada con la mirada fría y justa del discernimiento severo." },
+        { id: "rey-espadas", nombre: "Rey de Espadas", tipo: "espadas", imagen: "https://upload.wikimedia.org/wikipedia/commons/3/33/Swords14.jpg", keywords: ["Leyes", "Intelecto supremo", "Estratega", "Imparcialidad"], descripcion: "El juez supremo que decide con base en la verdad abstracta y el orden analítico." },
+
+        // --- ARCANOS MENORES: OROS (TIERRA) ---
+        { id: "as-oros", nombre: "As de Oros", tipo: "oros", imagen: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Pentalcles01.jpg", keywords: ["Manifestación", "Prosperidad", "Salud", "Tierra"], descripcion: "La semilla materializada del elemento Tierra. Dinero sólido o contratos duraderos." },
+        { id: "2-oros", nombre: "Dos de Oros", tipo: "oros", imagen: "https://upload.wikimedia.org/wikipedia/commons/9/9f/Pentalcles02.jpg", keywords: ["Malabarismo", "Adaptabilidad", "Altibajos", "Prioridades"], descripcion: "Balancear dos grandes monedas en un infinito de vaivenes económicos o prácticos." },
+        { id: "3-oros", nombre: "Tres de Oros", tipo: "oros", imagen: "https://upload.wikimedia.org/wikipedia/commons/4/42/Pentalcles03.jpg", keywords: ["Trabajo en equipo", "Maestría", "Colaboración", "Arquitectura"], descripcion: "El artesano que expone su maestría ante el arquitecto y el monje en el templo." },
+        { id: "4-oros", nombre: "Cuatro de Oros", tipo: "oros", imagen: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Pentalcles04.jpg", keywords: ["Avaricia", "Apego", "Tacañería", "Seguridad rígida"], descripcion: "Aferrarse a las monedas materiales por miedo a la carencia, bloqueando el flujo." },
+        { id: "5-oros", nombre: "Cinco de Oros", tipo: "oros", imagen: "https://upload.wikimedia.org/wikipedia/commons/9/96/Pentalcles05.jpg", keywords: ["Escasez", "Pobreza", "Exclusión", "Refugio cercano"], descripcion: "Caminar descalzo bajo la nieve frente al vitral iluminado de una iglesia salvadora." },
+        { id: "6-oros", nombre: "Seis de Oros", tipo: "oros", imagen: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Pentalcles06.jpg", keywords: ["Generosidad", "Caridad", "Balanza económica", "Mecenazgo"], descripcion: "El comerciante generoso que distribuye monedas pesándolas con justicia." },
+        { id: "7-oros", nombre: "Siete de Oros", tipo: "oros", imagen: "https://upload.wikimedia.org/wikipedia/commons/6/6a/Pentalcles07.jpg", keywords: ["Paciencia", "Evaluación de cosecha", "Frutos", "Espera"], descripcion: "Contemplar los pentáculos que crecen en el viñedo evaluando si el esfuerzo valió la pena." },
+        { id: "8-oros", nombre: "Ocho de Oros", tipo: "oros", imagen: "https://upload.wikimedia.org/wikipedia/commons/4/49/Pentalcles08.jpg", keywords: ["Disciplina", "Detalle", "Oficio", "Aprendizaje regular"], descripcion: "El grabador minucioso que repite su técnica para alcanzar la perfección práctica." },
+        { id: "9-oros", nombre: "Nueve de Oros", tipo: "oros", imagen: "https://upload.wikimedia.org/wikipedia/commons/f/f0/Pentalcles09.jpg", keywords: ["Autonomía", "Abundancia individual", "Refinamiento", "Éxito"], descripcion: "Una dama refinada en su viñedo con un halcón domesticado. Plenitud material." },
+        { id: "10-oros", nombre: "Diez de Oros", tipo: "oros", imagen: "https://upload.wikimedia.org/wikipedia/commons/c/c4/Pentalcles10.jpg", keywords: ["Legado ancestral", "Patrimonio", "Estabilidad familiar", "Riqueza"], descripcion: "Tres generaciones reunidas en el castillo familiar rodeados de abundancia perpetua." },
+        { id: "sota-oros", nombre: "Sota de Oros", tipo: "oros", imagen: "https://upload.wikimedia.org/wikipedia/commons/2/23/Pentalcles11.jpg", keywords: ["Estudiante", "Nueva oportunidad económica", "Foco práctico"], descripcion: "Un joven que contempla absorto la moneda flotante. Inicios de un aprendizaje real." },
+        { id: "caballero-oros", nombre: "Caballero de Oros", tipo: "oros", imagen: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Pentalcles12.jpg", keywords: ["Metodicidad", "Lentitud", "Fiabilidad", "Trabajador"], descripcion: "El único caballero estático sobre su caballo negro, planificando el arado fértil." },
+        { id: "reina-oros", nombre: "Reina de Oros", tipo: "oros", imagen: "https://upload.wikimedia.org/wikipedia/commons/8/88/Pentalcles13.jpg", keywords: ["Fertilidad comercial", "Seguridad", "Madre nutricia", "Confort"], descripcion: "La reina protectora de la materia rodeada de naturaleza y opulencia orgánica." },
+        { id: "rey-oros", nombre: "Rey de Oros", tipo: "oros", imagen: "https://upload.wikimedia.org/wikipedia/commons/1/1c/Pentalcles14.jpg", keywords: ["Éxito comercial", "Solidez", "Soberanía material", "Riqueza"], descripcion: "El monarca de la Tierra cuyo trono ostenta cabezas de toro, símbolo de consolidación." }
     ],
 
-    // --- HERBOLARIO SAGRADO EXPANDIDO ---
+    // --- HERBOLARIO SAGRADO TOTALMENTE EXPANDIDO ---
     herbolario: [
-        {
-            nombre: "Jazmín (Jasminum officinale)",
-            regente: "Luna 🌙 / Agua",
-            keywords: ["Calma", "Sueños", "Psiquismo", "Sanación"],
-            propiedades: "Propicia estados de relajación nerviosa profunda, esencias de calma, estimula los sueños proféticos y equilibra mareas psíquicas.",
-            uso: "Infusiones rituales nocturnas o sahúmo de descarga áurica delicada."
-        },
-        {
-            nombre: "Orégano (Origanum vulgare)",
-            regente: "Venus ♀️ / Tierra",
-            keywords: ["Protección", "Alegría", "Limpieza", "Arraigo"],
-            propiedades: "Crea muros energéticos protectores en el hogar, repele bajas frecuencias y transmuta la melancolía estancada.",
-            uso: "Infusión alcohólica para consagrar herramientas mágicas o esparcido perimetral."
-        },
-        {
-            nombre: "Romero (Salvia rosmarinus)",
-            regente: "Sol ☀️ / Fuego",
-            keywords: ["Foco mental", "Claridad", "Purificación", "Vigor"],
-            propiedades: "Estimulante intelectual inmediato. Destruye larvas astrales y devuelve el magnetismo vital a cuerpos debilitados.",
-            uso: "Sahumerio directo en áreas de estudio o baños rituales al amanecer."
-        },
-        {
-            nombre: "Lavanda (Lavandula angustifolia)",
-            regente: "Mercurio ☿ / Aire",
-            keywords: ["Paz", "Armonía", "Comunicación", "Ansiedad"],
-            propiedades: "Neutraliza las frecuencias de fricción mental o discusiones familiares, induciendo armonía de palabra.",
-            uso: "Aceite esencial en sienes o almohadas, e infusión relajante."
-        },
-        {
-            nombre: "Ruda (Ruta graveolens)",
-            regente: "Marte ♂️ / Fuego",
-            keywords: ["Corte radical", "Exorcismo", "Defensa", "Envidia"],
-            propiedades: "Planta guerrera por excelencia. Quiebra maleficios, envidias y bloqueos pesados externos de forma contundente.",
-            uso: "Ramillete para limpieza áurica en seco o sahúmo pesado de esquinas corporales."
-        },
-        {
-            nombre: "Menta (Mentha piperita)",
-            regente: "Júpiter ♃ / Aire",
-            keywords: ["Abundancia", "Frescura", "Prosperidad", "Apertura"],
-            propiedades: "Limpia los caminos de la mente para atraer abundancia, frescura en las ideas comerciales y renovación áurica.",
-            uso: "Baños de descarga del cuello hacia abajo para apertura de caminos económicos."
-        }
+        { nombre: "Jazmín (Jasminum officinale)", regente: "Luna 🌙 / Agua", keywords: ["Calma", "Sueños", "Psiquismo", "Sanación"], propiedades: "Propicia estados de relajación nerviosa profunda, esencias de calma, estimula los sueños proféticos y equilibra mareas psíquicas.", uso: "Infusiones rituales nocturnas o sahúmo de descarga áurica delicada." },
+        { nombre: "Orégano (Origanum vulgare)", regente: "Venus ♀️ / Tierra", keywords: ["Protección", "Alegría", "Limpieza", "Arraigo"], propiedades: "Crea muros energéticos protectores en el hogar, repele bajas frecuencias y transmuta la melancolía estancada.", uso: "Infusión alcohólica para consagrar herramientas mágicas o esparcido perimetral." },
+        { nombre: "Romero (Salvia rosmarinus)", regente: "Sol ☀️ / Fuego", keywords: ["Foco mental", "Claridad", "Purificación", "Vigor"], propiedades: "Estimulante intelectual inmediato. Destruye larvas astrales y devuelve el magnetismo vital a cuerpos debilitados.", uso: "Sahumerio directo en áreas de estudio o baños rituales al amanecer." },
+        { nombre: "Lavanda (Lavandula angustifolia)", regente: "Mercurio ☿ / Aire", keywords: ["Paz", "Armonía", "Comunicación", "Ansiedad"], propiedades: "Neutraliza las frecuencias de fricción mental o discusiones familiares, induciendo armonía de palabra.", uso: "Aceite esencial en sienes o almohadas, e infusión relajante." },
+        { nombre: "Ruda (Ruta graveolens)", regente: "Marte ♂️ / Fuego", keywords: ["Corte radical", "Exorcismo", "Defensa", "Envidia"], propiedades: "Planta guerrera por excelencia. Quiebra maleficios, envidias y bloqueos pesados externos de forma contundente.", uso: "Ramillete para limpieza áurica en seco o sahúmo pesado de esquinas corporales." },
+        { nombre: "Menta (Mentha piperita)", regente: "Júpiter ♃ / Aire", keywords: ["Abundancia", "Frescura", "Prosperidad", "Apertura"], propiedades: "Limpia los caminos de la mente para atraer abundancia, frescura en las ideas comerciales y renovación áurica.", uso: "Baños de descarga del cuello hacia abajo para apertura de caminos económicos." },
+        { nombre: "Albahaca (Ocimum basilicum)", regente: "Marte ♂️ / Fuego", keywords: ["Dinero", "Simpatía", "Protección", "Éxito"], propiedades: "Atrae la buena fortuna a los negocios, disuelve enemistades y estimula la vitalidad psíquica.", uso: "Lavados de pisos comerciales o sahúmo combinado con incienso resinósico." },
+        { nombre: "Salvia Blanca (Salvia apiana)", regente: "Júpiter ♃ / Aire", keywords: ["Sabiduría", "Gran Limpieza", "Consagración"], propiedades: "Limpia los espacios a nivel celular espiritual, ahuyentando presencias estancadas kármicas de vibración densa.", uso: "Atado de sahúmo seco ventilado en dirección de las agujas del reloj." },
+        { nombre: "Tomillo (Thymus vulgaris)", regente: "Venus ♀️ / Agua", keywords: ["Coraje", "Purificación", "Salud", "Luz"], propiedades: "Otorga valor ante crisis emocionales complejas y purifica el aparato respiratorio sutil.", uso: "Baño reparador o infusión sagrada protectora." },
+        { nombre: "Manzanilla (Matricaria chamomilla)", regente: "Sol ☀️ / Agua", keywords: ["Abundancia solar", "Paz interior", "Niño interno"], propiedades: "Sana las heridas del plexo solar, reconectando con el optimismo puro del niño interno.", uso: "Lavado de manos ritual antes de transacciones monetarias." }
     ],
 
-    // --- LOS 12 SIGNOS CON FRASES SEMILLA, ANATOMÍA Y MITO ---
+    // --- LOS 12 SIGNOS DEL ZODIACO ---
     signos: [
-        { 
-            id: "aries", 
-            nombre: "Aries ♈", 
-            sub: "Fuego Cardinal", 
-            frase_semilla: "Yo Actúo / Yo Soy",
-            cuerpo_regente: "Cabeza, cerebro, ojos y cráneo.",
-            keywords: ["marte", "iniciación", "coraje", "impulso", "líder", "acción", "pionero", "deseo"],
-            mitologia: "Asociado al Carnero del vellocino de oro que salvó a Frixo y Hele. En la mitología griega encarna a Ares, dios de la guerra indómita, la fuerza bruta y el impulso instintivo de supervivencia.",
-            det: "Regente: Marte. Fuerza pura de arranque, valentía competitiva, impaciencia innata y liderazgo audaz." 
-        },
-        { 
-            id: "tauro", 
-            nombre: "Tauro ♉", 
-            sub: "Tierra Fijo", 
-            frase_semilla: "Yo Tengo / Yo Consolido",
-            cuerpo_regente: "Cuello, garganta, cuerdas vocales, tiroides y cervicales.",
-            keywords: ["venus", "estabilidad", "placer", "materia", "cuerpo", "paciencia", "perseverancia", "acumulación"],
-            mitologia: "Representa a Zeus transformado en el majestuoso Toro Blanco de Creta para seducir y raptar a la princesa Europa, simbolizando el deseo de posesión, la fertilidad de la tierra y los placeres terrenales.",
-            det: "Regente: Venus. Procesamiento lento, acumulación orgánica, disfrute de los sentidos, perseverancia y enraizamiento." 
-        },
-        { 
-            id: "geminis", 
-            nombre: "Géminis ♊", 
-            sub: "Aire Mutable", 
-            frase_semilla: "Yo Pienso / Yo Comunico",
-            cuerpo_regente: "Brazos, manos, hombros, pulmones y sistema nervioso.",
-            keywords: ["mercurio", "curiosidad", "redes", "mente", "comunicación", "dualidad", "gemelos", "versatilidad"],
-            mitologia: "Encarna a los Dioscuros, Cástor (mortal) and Pólux (inmortal). Al morir Cástor, Pólux comparte su inmortalidad, alternando un día en el Olimpo y otro en el Hades. El mito de la dualidad alma-cuerpo y el puente mental.",
-            det: "Regente: Mercurio. Vinculación de ideas disímiles, juego de polaridades, agilidad verbal e intercambio constante." 
-        },
-        { 
-            id: "cancer", 
-            nombre: "Cáncer ♋", 
-            sub: "Agua Cardinal", 
-            frase_semilla: "Yo Siento / Yo Protejo",
-            cuerpo_regente: "Estómago, senos, matriz, pecho y fluidos digestivos.",
-            keywords: ["luna", "nutrición", "hogar", "raíces", "familia", "emoción", "inconsciente", "memoria"],
-            mitologia: "Asociado a Carcinos, el cangrejo gigante enviado por la diosa Hera para distraer y atacar a Heracles mientras luchaba contra la Hidra de Lerna. Un símbolo del instinto feroz de proteger lo que se ama hasta la muerte.",
-            det: "Regente: Luna. Construcción de caparazones defensivos, memoria del linaje, sensibilidad oceánica y cuidado mutuo." 
-        },
-        { 
-            id: "leo", 
-            nombre: "Leo ♌", 
-            sub: "Fuego Fijo", 
-            frase_semilla: "Yo Quiero / Yo Irradio",
-            cuerpo_regente: "Corazón, columna vertebral, aorta y espalda superior.",
-            keywords: ["sol", "expresión", "soberanía", "corazón", "orgullo", "brillo", "creatividad", "ego"],
-            mitologia: "Inspirado en el León de Nemea, una bestia mitológica con piel impenetrable estrangulada por Heracles en su primer trabajo. Al ser colocado en el firmamento, representa la nobleza, el fuego interno incorruptible y el ego purificado.",
-            det: "Regente: Sol. Centro de gravedad creativo, irradiación de identidad pura, magnetismo personal y dignidad regia." 
-        },
-        { 
-            id: "virgo", 
-            nombre: "Virgo ♍", 
-            sub: "Tierra Mutable", 
-            frase_semilla: "Yo Analizo / Yo Sirvo",
-            cuerpo_regente: "Intestinos, abdomen, sistema digestivo bajo y bazo.",
-            keywords: ["mercurio", "análisis", "salud", "servicio", "detalle", "orden", "purificación", "crítica"],
-            mitologia: "Encarna a Astrea, diosa de la justicia cósmica y la pureza, la última inmortal que abandonó la Tierra al terminar la Edad de Oro humana. Simboliza la búsqueda de la perfección perdida y el discernimiento sagrado.",
-            det: "Regente: Mercurio (analítico). Fragmentación de la realidad para su cura, purificación de procesos, humildad y técnica." 
-        },
-        { 
-            id: "libra", 
-            nombre: "Libra ♎", 
-            sub: "Aire Cardinal", 
-            frase_semilla: "Yo Equilibro / Yo Me Vinculo",
-            cuerpo_regente: "Riñones, región lumbar, sistema urinario y glándulas suprarrenales.",
-            keywords: ["venus", "armonía", "vínculos", "espejo", "justicia", "estética", "diplomacia", "balanza"],
-            mitologia: "Representa la Balanza de Temis (o de su hija Dice), sostenedora de la justicia y el orden cósmico. Es el único signo del zodíaco que no está representado por un animal o ser vivo, enfatizando la búsqueda racional del equilibrio y la equidad relacional.",
-            det: "Regente: Venus (social). Búsqueda de equilibrio estético y relacional, mediación ecuánime y el arte de la alteridad." 
-        },
-        { 
-            id: "escorpio", 
-            nombre: "Escorpio ♏", 
-            sub: "Agua Fijo", 
-            frase_semilla: "Yo Deseo / Yo Transmuto",
-            cuerpo_regente: "Órganos genitales, sistema reproductor, próstata y colon.",
-            keywords: ["plutón", "marte", "sombras", "crisis", "regeneración", "inteligencia", "poder", "secreto"],
-            mitologia: "El escorpión gigante enviado por Gaia para castigar la soberbia del gigante cazador Orión, logrando matarlo con su aguijón. Refleja las fuerzas primordiales del inconsciente, las crisis profundas necesarias para la mutación celular y el poder de renacer.",
-            det: "Regente: Plutón / Marte. Fusión alquímica en las profundidades de la psique, poder de resiliencia y transmutación radical." 
-        },
-        { 
-            id: "sagitario", 
-            nombre: "Sagitario ♐", 
-            sub: "Fuego Mutable", 
-            frase_semilla: "Yo Veo / Yo Comprendo",
-            cuerpo_regente: "Caderas, muslos, nervio ciático e hígado.",
-            keywords: ["júpiter", "filosofía", "verdad", "expansión", "viajes", "fe", "maestro", "búsqueda"],
-            mitologia: "Representa al centauro Quirón (o a Croto), sabio médico, astrónomo y arquero. Al ser herido accidentalmente por una flecha con veneno de la Hidra, renuncia a su inmortalidad para salvar a Prometeo, fundando el arquetipo del sanador herido y la búsqueda de sentido superior.",
-            det: "Regente: Júpiter. Dirección de la flecha hacia el sentido de la existence, optimismo incorruptible y maestría docente." 
-        },
-        { 
-            id: "capricornio", 
-            nombre: "Capricornio ♑", 
-            sub: "Tierra Cardinal", 
-            frase_semilla: "Yo Uso / Yo Estructuro",
-            cuerpo_regente: "Huesos, articulaciones, rodillas, dientes y la piel.",
-            keywords: ["saturno", "estructura", "tiempo", "límites", "maestría", "deber", "ambición", "ley"],
-            mitologia: "Ligado a la cabra Amaltea, que amamantó a Zeus en la isla de Creta, o a Pricus, el dios original del mar con cola de pez y torso de cabra que podía controlar el tiempo. Encarna la paciencia kármica para escalar desde el abismo húmedo hasta la cumbre de la montaña.",
-            det: "Regente: Saturno. Ascenso a la cumbre de la montaña mediante esfuerzo, maduración kármica y consolidación institucional." 
-        },
-        { 
-            id: "acuario", 
-            nombre: "Acuario ♒", 
-            sub: "Aire Fijo", 
-            frase_semilla: "Yo Sé / Yo Colectivizo",
-            cuerpo_regente: "Pantorrillas, tobillos, sistema circulatorio y tendón de Aquiles.",
-            keywords: ["urano", "saturno", "comunidad", "disrupción", "libertad", "redes", "futuro", "humanidad"],
-            mitologia: "Representa a Ganimedes, el hermoso príncipe troyano raptado por Zeus en forma de águila para convertirse en el copero de los dioses del Olimpo, el encargado de verter el néctar del conocimiento cósmico y la sabiduría líquida sobre la humanidad.",
-            det: "Regente: Urano / Saturno. Visión de vanguardia colectiva, desapego intelectual, saltos cuánticos y rebeldía arquetípica." 
-        },
-        { 
-            id: "piscis", 
-            nombre: "Piscis ♓", 
-            sub: "Agua Mutable", 
-            frase_semilla: "Yo Creo / Yo Me Disuelvo",
-            cuerpo_regente: "Pies, sistema linfático y sistema inmunológico.",
-            keywords: ["neptuno", "júpiter", "misticismo", "océano", "compasión", "disolución", "empatía", "sacrificio"],
-            mitologia: "Representa a Afrodita y a su hijo Eros huyendo del monstruo Tifón. Para escapar, se transformaron en dos peces atados por un cordón de plata inextinguible para no perderse en la inmensidad del océano primordial del alma.",
-            det: "Regente: Neptuno / Júpiter. Disolución total del Yo en la matriz colectiva, empatía ilimitada, arte místico y amor universal." 
-        }
+        { id: "aries", nombre: "Aries ♈", sub: "Fuego Cardinal", frase_semilla: "Yo Actúo / Yo Soy", cuerpo_regente: "Cabeza, cerebro, ojos y cráneo.", keywords: ["marte", "iniciación", "coraje", "impulso", "líder", "acción"], mitologia: "Asociado al Carnero del vellocino de oro que salvó a Frixo y Hele. En la mitología griega encarna a Ares, dios de la guerra indómita.", det: "Regente: Marte. Fuerza pura de arranque, valentía competitiva, impaciencia innata y liderazgo audaz." },
+        { id: "tauro", nombre: "Tauro ♉", sub: "Tierra Fijo", frase_semilla: "Yo Tengo / Yo Consolido", cuerpo_regente: "Cuello, garganta, cuerdas vocales, tiroides y cervicales.", keywords: ["venus", "estabilidad", "placer", "materia", "cuerpo"], mitologia: "Representa a Zeus transformado en el majestuoso Toro Blanco de Creta para seducir a Europa, simbolizando la fertilidad de la tierra.", det: "Regente: Venus. Procesamiento lento, acumulación orgánica, disfrute de los sentidos y enraizamiento." },
+        { id: "geminis", nombre: "Géminis ♊", sub: "Aire Mutable", frase_semilla: "Yo Pienso / Yo Comunico", cuerpo_regente: "Brazos, manos, hombros, pulmones y sistema nervioso.", keywords: ["mercurio", "curiosidad", "redes", "mente", "comunicación"], mitologia: "Encarna a los Dioscuros, Cástor y Pólux. El mito de la dualidad alma-cuerpo y el puente mental.", det: "Regente: Mercurio. Vinculación de ideas disímiles, juego de polaridades, agilidad verbal e intercambio." },
+        { id: "cancer", nombre: "Cáncer ♋", sub: "Agua Cardinal", frase_semilla: "Yo Siento / Yo Protejo", cuerpo_regente: "Estómago, senos, matriz, pecho y fluidos digestivos.", keywords: ["luna", "nutrición", "hogar", "raíces", "familia"], mitologia: "Asociado a Carcinos, el cangrejo gigante enviado por Hera. Un símbolo del instinto feroz de proteger lo que se ama.", det: "Regente: Luna. Construcción de caparazones defensivos, memoria del linaje y sensibilidad oceánica." },
+        { id: "leo", nombre: "Leo ♌", sub: "Fuego Fijo", frase_semilla: "Yo Quiero / Yo Irradio", cuerpo_regente: "Corazón, columna vertebral, aorta y espalda superior.", keywords: ["sol", "expresión", "soberanía", "corazón", "orgullo"], mitologia: "Inspirado en el León de Nemea, bestia estrangulada por Heracles. Representa la nobleza e identidad incorruptible.", det: "Regente: Sol. Centro de gravedad creativo, irradiación de identidad pura y dignidad regia." },
+        { id: "virgo", nombre: "Virgo ♍", sub: "Tierra Mutable", frase_semilla: "Yo Analizo / Yo Sirvo", cuerpo_regente: "Intestinos, abdomen, sistema digestivo bajo y bazo.", keywords: ["mercurio", "análisis", "salud", "servicio", "detalle"], mitologia: "Encarna a Astrea, diosa de la justicia cósmica y la pureza. Simboliza el discernimiento sagrado.", det: "Regente: Mercurio (analítico). Fragmentación de la realidad para su cura, purificación, humildad y técnica." },
+        { id: "libra", nombre: "Libra ♎", sub: "Aire Cardinal", frase_semilla: "Yo Equilibro / Yo Me Vinculo", cuerpo_regente: "Riñones, región lumbar, sistema urinario y glándulas suprarrenales.", keywords: ["venus", "armonía", "vínculos", "espejo", "justicia"], mitologia: "Representa la Balanza de Temis. Único signo inanimado, enfatiza la búsqueda racional del equilibrio relacional.", det: "Regente: Venus (social). Búsqueda de equilibrio estético y relacional, mediación ecuánime." },
+        { id: "escorpio", nombre: "Escorpio ♏", sub: "Agua Fijo", frase_semilla: "Yo Deseo / Yo Transmuto", cuerpo_regente: "Órganos genitales, sistema reproductor, próstata y colon.", keywords: ["plutón", "marte", "sombras", "crisis", "regeneración"], mitologia: "El escorpión gigante enviado por Gaia para castigar la soberbia de Orión. Refleja las crisis profundas para transmutar.", det: "Regente: Plutón / Marte. Fusión alquímica en las profundidades de la psique, resiliencia y transmutación." },
+        { id: "sagitario", nombre: "Sagitario ♐", sub: "Fuego Mutable", frase_semilla: "Yo Veo / Yo Comprendo", cuerpo_regente: "Caderas, muslos, nervio ciático e hígado.", keywords: ["júpiter", "filosofía", "verdad", "expansión", "viajes"], mitologia: "Representa al centauro Quirón, sabio médico y arquero. Arquetipo del sanador herido y búsqueda de sentido.", det: "Regente: Júpiter. Dirección de la flecha hacia el sentido de la existencia y optimismo incorruptible." },
+        { id: "capricornio", nombre: "Capricornio ♑", sub: "Tierra Cardinal", frase_semilla: "Yo Uso / Yo Estructuro", cuerpo_regente: "Huesos, articulaciones, rodillas, dientes y la piel.", keywords: ["saturno", "estructura", "tiempo", "límites", "maestría"], mitologia: "Ligado a la cabra Amaltea o a Pricus, dios del mar con cola de pez. Encarna la paciencia kármica para escalar.", det: "Regente: Saturno. Ascenso a la cumbre de la montaña mediante esfuerzo y maduración kármica." },
+        { id: "acuario", nombre: "Acuario ♒", sub: "Aire Fijo", frase_semilla: "Yo Sé / Yo Colectivizo", cuerpo_regente: "Pantorrillas, tobillos, sistema circulatorio.", keywords: ["urano", "saturno", "comunidad", "disrupción", "libertad"], mitologia: "Representa a Ganimedes, copero de los dioses encargado de verter el néctar del conocimiento sobre la humanidad.", det: "Regente: Urano / Saturno. Visión de vanguardia colectiva, desapego intelectual y saltos cuánticos." },
+        { id: "piscis", nombre: "Piscis ♓", sub: "Agua Mutable", frase_semilla: "Yo Creo / Yo Me Disuelvo", cuerpo_regente: "Pies, sistema linfático y sistema inmunológico.", keywords: ["neptuno", "júpiter", "misticismo", "océano", "compasión"], mitologia: "Afrodita y Eros huyendo del monstruo Tifón transformados en dos peces unidos por un cordón de plata.", det: "Regente: Neptuno / Júpiter. Disolución total del Yo en la matriz colectiva, arte místico y amor universal." }
     ],
 
-    // --- LAS 12 CASAS COMPLETAS ---
+    // --- LAS 12 CASAS ---
     casas: [
-        { id: "casa1", nombre: "Casa I (Ascendente)", sub: "Angular / Fuego", keywords: ["yo", "cuerpo", "inicio", "personalidad"], det: "La puerta de encarnación, temperamento nativo, físico y cómo irrumpe el individuo ante el entorno." },
-        { id: "casa2", nombre: "Casa II", sub: "Sucedánea / Tierra", keywords: ["recursos", "dinero", "autoestima", "valores"], det: "Plano material propio, talentos innatos comercializables, seguridad financiera y autovaloración." },
-        { id: "casa3", nombre: "Casa III", sub: "Cadente / Aire", keywords: ["mente", "hermanos", "comunicación", "viajes"], det: "Pensamiento lógico concreto, entorno vecinal, lenguaje cotidiano y vínculos de paridad (hermanos)." },
-        { id: "casa4", nombre: "Casa IV (Fondo Cielo)", sub: "Angular / Agua", keywords: ["raíces", "hogar", "familia", "intimidad"], det: "La base de la carta. Intimidad doméstica, linaje familiar, condicionamientos de la infancia temprana." },
-        { id: "casa5", nombre: "Casa V", sub: "Sucedánea / Fuego", keywords: ["creatividad", "hijos", "romances", "gozo"], det: "Autoexpresión lúdica, pasiones del corazón, hijos físicos o artísticos, y el arte de brillar sin juicios." },
-        { id: "casa6", nombre: "Casa VI", sub: "Cadente / Tierra", keywords: ["salud", "rutina", "trabajo", "servicio"], det: "Cuidado del templo físico (cuerpo), dinámicas laborales diarias, servicio metódico y mascotas." },
-        { id: "casa7", nombre: "Casa VII (Descendiente)", sub: "Angular / Aire", keywords: ["pareja", "socios", "espejo", "otros"], det: "El encuentro formal de a dos: matrimonios, contratos legales, enemigos declarados y proyecciones del espejo." },
-        { id: "casa8", nombre: "Casa VIII", sub: "Sucedánea / Agua", keywords: ["tabú", "transformación", "herencias", "crisis"], det: "Bienes compartidos con otros, finanzas mutuas, sexualidad sagrada, crisis psicológicas y muertes/renacimientos." },
-        { id: "casa9", nombre: "Casa IX", sub: "Cadente / Fuego", keywords: ["viajes largos", "estudios", "religión", "creencia"], det: "Estudios superiores, dogmas filosóficos o espirituales, cosmovisión de vida y cruce de fronteras físicas lejanas." },
-        { id: "casa10", nombre: "Casa X (Medio Cielo)", sub: "Angular / Tierra", keywords: ["profesión", "estatus", "vocación", "público"], det: "El punto más alto visible del cielo. Destino profesional, estatus civil, reputación y realización pública." },
-        { id: "casa11", nombre: "Casa XI", sub: "Sucedánea / Aire", keywords: ["amigos", "grupos", "proyectos", "colectivo"], det: "Asociaciones de ideales comunes, amistades intelectuales, planes hacia el futuro y redes de contención comunitaria." },
-        { id: "casa12", nombre: "Casa XII", sub: "Cadente / Agua", keywords: ["karma", "aislamiento", "inconsciente colectivo", "útero"], det: "El gran océano invisible. Memoria intrauterina, encierros crónicos, karma pendiente y disolución en la totalidad divinal." }
+        { id: "casa1", nombre: "Casa I (Ascendente)", sub: "Angular / Fuego", keywords: ["yo", "cuerpo", "inicio"], det: "La puerta de encarnación, temperamento nativo, físico y cómo irrumpe el individuo ante el entorno." },
+        { id: "casa2", nombre: "Casa II", sub: "Sucedánea / Tierra", keywords: ["recursos", "dinero", "autoestima"], det: "Plano material propio, talentos innatos comercializables, seguridad financiera y autovaloración." },
+        { id: "casa3", nombre: "Casa III", sub: "Cadente / Aire", keywords: ["mente", "hermanos", "comunicación"], det: "Pensamiento lógico concreto, entorno vecinal, lenguaje cotidiano y vínculos de paridad (hermanos)." },
+        { id: "casa4", nombre: "Casa IV (Fondo Cielo)", sub: "Angular / Agua", keywords: ["raíces", "hogar", "familia"], det: "La base de la carta. Intimidad doméstica, linaje familiar, condicionamientos de la infancia temprana." },
+        { id: "casa5", nombre: "Casa V", sub: "Sucedánea / Fuego", keywords: ["creatividad", "hijos", "romances"], det: "Autoexpresión lúdica, pasiones del corazón, hijos físicos o artísticos, y el arte de brillar." },
+        { id: "casa6", nombre: "Casa VI", sub: "Cadente / Tierra", keywords: ["salud", "rutina", "trabajo"], det: "Cuidado del templo físico (cuerpo), dinámicas laborales diarias, servicio metódico y mascotas." },
+        { id: "casa7", nombre: "Casa VII (Descendiente)", sub: "Angular / Aire", keywords: ["pareja", "socios", "espejo"], det: "El encuentro formal de a dos: matrimonios, contratos legales y proyecciones del espejo." },
+        { id: "casa8", nombre: "Casa VIII", sub: "Sucedánea / Agua", keywords: ["tabú", "transformación", "crisis"], det: "Bienes compartidos, finanzas mutuas, sexualidad sagrada, crisis psicológicas y renacimientos." },
+        { id: "casa9", nombre: "Casa IX", sub: "Cadente / Fuego", keywords: ["viajes", "estudios", "creencia"], det: "Estudios superiores, dogmas filosóficos o espirituales, cosmovisión de vida y fronteras lejanas." },
+        { id: "casa10", nombre: "Casa X (Medio Cielo)", sub: "Angular / Tierra", keywords: ["profesión", "estatus", "vocación"], det: "El punto más alto visible. Destino profesional, estatus civil, reputación y realización pública." },
+        { id: "casa11", nombre: "Casa XI", sub: "Sucedánea / Aire", keywords: ["amigos", "grupos", "proyectos"], det: "Asociaciones de ideales comunes, amistades intelectuales y redes de contención comunitaria." },
+        { id: "casa12", nombre: "Casa XII", sub: "Cadente / Agua", keywords: ["karma", "aislamiento", "inconsciente"], det: "El gran océano invisible. Memoria intrauterina, encierros crónicos y disolución en la totalidad." }
     ],
 
-    // --- MANUAL DE ASTROS EXTENDIDO (PLANETAS + ASTEROIDES + PUNTOS EVOLUTIVOS) ---
+    // --- MANUAL DE ASTROS ---
     astros: [
-        { 
-            nombre: "El Sol ☀️", 
-            rol: "El Núcleo Identitario", 
-            frase_semilla: "Yo Soy",
-            keywords: ["conciencia", "propósito", "vitalidad", "soberanía", "esencia", "ego", "centro"], 
-            desc: "Eje de gravedad individual. Representa el centro de la conciencia despierta, la energía de recarga del cuerpo físico y el camino evolutivo del Yo real hacia su propia iluminación." 
-        },
-        { 
-            nombre: "La Luna 🌙", 
-            rol: "El Refugio Reactivo", 
-            frase_semilla: "Yo Siento",
-            keywords: ["emoción", "inconsciente", "madre", "somático", "memoria", "raíces", "miedo"], 
-            desc: "Rige las necesidades emocionales básicas, los mecanismos automáticos de autodefensa, la intuición innata y la manera en que el niño interno busca nutrición y cobijo." 
-        },
-        { 
-            nombre: "Mercurio ☿", 
-            rol: "El Enlace de Datos", 
-            frase_semilla: "Yo Comunico / Yo Vinculo",
-            keywords: ["intelecto", "comunicación", "lógica", "comercio", "enlace", "palabra", "aprendizaje"], 
-            desc: "La red de comunicación neuronal. Rige la capacidad de procesar señales lógicas, el habla, los idiomas escritos, la mente racional operativa y el comercio diario." 
-        },
-        { 
-            nombre: "Venus ♀️", 
-            rol: "La Frecuencia de Atracción", 
-            frase_semilla: "Yo Deseo / Yo Valoro",
-            keywords: ["deseo", "armonía", "amor", "dinero", "valoración", "estética", "placer"], 
-            desc: "Rige el deseo de vinculación complementaria con el Otro, los patrones estéticos de seducción, la autoestima personal y el magnetismo para atraer recursos económicos." 
-        },
-        { 
-            nombre: "Marte ♂️", 
-            rol: "El Impulso de Conquista", 
-            frase_semilla: "Yo Conquisto / Yo Ejecuto",
-            keywords: ["acción", "deseo", "fuerza", "coraje", "corte", "guerra", "libido"], 
-            desc: "La espada del guerrero cósmico. Gobierna la capacidad de asertividad frente al peligro, la energía competitiva pura, la libido activa y la fuerza bruta necesaria para romper la inercia del plano material." 
-        },
-        { 
-            nombre: "Júpiter ♃", 
-            rol: "El Expansor de Horizontes", 
-            frase_semilla: "Yo Expando / Yo Confío",
-            keywords: ["abundancia", "suerte", "sabiduría", "fe", "crecimiento", "filosofía", "viaje"], 
-            desc: "El gran arquetipo protector y mentor. Rige los saltos al vacío desde la confianza plena, el optimismo existencial incorruptible, la búsqueda filosófica de la verdad y la riqueza material y espiritual." 
-        },
-        { 
-            nombre: "Saturno ♄", 
-            rol: "El Arquitecto del Karma", 
-            frase_semilla: "Yo Estructuro / Yo Limito",
-            keywords: ["límite", "estructura", "tiempo", "madurez", "ley", "karma", "disciplina"], 
-            desc: "El señor del tiempo crudo y las formas sólidas. Trae el principio de realidad, la necesidad de establecer límites sanos, la cristalización de proyectos y la recolección de las siembras pasadas (karma)." 
-        },
-        { 
-            nombre: "Urano ♅", 
-            rol: "El Despertador Disruptivo", 
-            frase_semilla: "Yo Libero / Yo Innovo",
-            keywords: ["rayo", "libertad", "mutación", "tecnología", "redes", "disrupción", "genio"], 
-            desc: "Frecuencia eléctrica transpersonal. Produce quiebres violentos de estructuras vetustas, revelaciones intuitivas inmediatas, revoluciones ideológicas de corte humanitario y conexión con el futuro." 
-        },
-        { 
-            nombre: "Neptuno ♆", 
-            rol: "El Océano Alquímico", 
-            frase_semilla: "Yo Transciendo / Yo Sueño",
-            keywords: ["ilusión", "misticismo", "empatía", "arte", "disolución", "sacrificio", "engaño"], 
-            desc: "Rige la disolución absoluta de las fronteras defensivas del ego. Conexión psíquica telepática, misticismo devocional, inspiración artística infinita e hipersensibilidad al dolor colectivo." 
-        },
-        { 
-            nombre: "Plutón ♇", 
-            rol: "El Transmutador Atómico", 
-            frase_semilla: "Yo Destruyo para Renacer",
-            keywords: ["poder", "sombras", "tabú", "muerte", "renacimiento", "control", "alquimia"], 
-            desc: "El pulso del inframundo psíquico. Saca a la luz de la conciencia el material reprimido (los tabúes y miedos), destruyendo de raíz las formas psicológicas corruptas para liberar el verdadero poder chamánico interno." 
-        },
-        // --- LOS NUEVOS ELEMENTOS REQUERIDOS ---
-        {
-            nombre: "Quirón ⚷",
-            rol: "El Sanador Herido",
-            frase_semilla: "Yo Sano a través de mi Fractura",
-            keywords: ["vulnerabilidad", "maestría", "herida kármica", "compasión", "resiliencia", "puente"],
-            desc: "Asteroide centauro que representa nuestra fractura original incorregible. Allí donde fuimos heridos injustamente reside el don transpersonal para sanar a los demás y transformarnos en maestros de la resiliencia."
-        },
-        {
-            nombre: "Lilith ⚸ (Luna Negra)",
-            rol: "La Sombra Reprimida",
-            frase_semilla: "Yo Despierto mi Poder Salvaje",
-            keywords: ["tabú", "rebeldía", "instinto", "exilio", "liberación", "magnetismo", "autonomía"],
-            desc: "El apogeo lunar. Representa la energía instintiva visceral exiliada, los deseos profundos censurados por la sociedad, el poder de emancipación absoluta y el magnetismo crudo de la Sombra."
-        },
-        {
-            nombre: "Ceres 🌾",
-            rol: "La Madre Nutricia",
-            frase_semilla: "Yo Cultivo y Sustento",
-            keywords: ["nutrición", "apego", "pérdida", "duelo", "productividad", "agricultura", "cuidado"],
-            desc: "Planeta enano que rige los procesos de pérdida, transiciones cíclicas de duelo y las formas orgánicas en las que alimentamos nuestra autoestima y cuidamos del cuerpo físico."
-        },
-        {
-            nombre: "Palas Atenea ⚳",
-            rol: "La Guerrera Estratégica",
-            frase_semilla: "Yo Planifico con Claridad",
-            keywords: ["estrategia", "justicia", "inteligencia", "patrones", "defensa", "mente artística"],
-            desc: "Representa la sabiduría aplicada a la resolución de conflictos complejos, la visión geopolítica y de patrones lógicos, y el intelecto desapegado al servicio de causas nobles."
-        },
-        {
-            nombre: "Juno ⚵",
-            rol: "El Compromiso Sagrado",
-            frase_semilla: "Yo Consagro mi Vínculo",
-            keywords: ["matrimonio", "lealtad", "equidad", "celos", "sociedad", "pacto"],
-            desc: "Rige la dinámica de los compromisos a largo plazo, los pactos de lealtad, los reclamos de equidad dentro de las relaciones formales y la transmutación de los celos corporativos."
-        },
-        {
-            nombre: "Vesta ⚴",
-            rol: "El Fuego Interno Sacro",
-            frase_semilla: "Yo Preservo mi Foco Sagrado",
-            keywords: ["devoción", "purificación", "foco", "soledad voluntaria", "sacrificio", "fuego sagrado"],
-            desc: "El asteroide del hogar interno. Gobierna la capacidad de enfoque unidireccional, el fuego sagrado de la espiritualidad solitaria, los rituales de purificación personal y la abstinencia enfocada en metas superiores."
-        },
-        {
-            nombre: "Nodo Norte ☊",
-            rol: "La Brújula del Destino",
-            frase_semilla: "Yo Evoluciono hacia lo Desconocido",
-            keywords: ["futuro", "misión", "incomodidad", "aprendizaje", "propósito kármico"],
-            desc: "Punto astronómico matemático de intersección orbital. Representa la dirección evolutiva desconocida de la carta, la zona de máximo aprendizaje y el propósito kármico que incomoda pero expande el alma."
-        },
-        {
-            nombre: "Nodo Sur ☋",
-            rol: "El Talento Heredado",
-            frase_semilla: "Yo Descomprimo el Pasado",
-            keywords: ["pasado", "zona de confort", "talento innato", "inercia", "karma antiguo"],
-            desc: "El polo opuesto al Nodo Norte. Encarna las inercias conductuales del pasado, las vidas anteriores o herencias genéticas donde el nativo tiene talentos innatos pero corre riesgo de estancamiento confortable."
-        }
+        { nombre: "El Sol ☀️", rol: "El Núcleo Identitario", frase_semilla: "Yo Soy", keywords: ["conciencia", "propósito"], desc: "Eje de gravedad individual. Representa la conciencia despierta y el camino del Yo real." },
+        { nombre: "La Luna 🌙", rol: "El Refugio Reactivo", frase_semilla: "Yo Siento", keywords: ["emoción", "inconsciente"], desc: "Rige las necesidades emocionales básicas y los mecanismos automáticos de autodefensa." },
+        { nombre: "Mercurio ☿", rol: "El Enlace de Datos", frase_semilla: "Yo Comunico", keywords: ["intelecto", "lógica"], desc: "Rige la capacidad de procesar señales lógicas, el habla, los idiomas escritos y la mente racional." },
+        { nombre: "Venus ♀️", rol: "La Frecuencia de Atracción", frase_semilla: "Yo Deseo", keywords: ["armonía", "amor", "dinero"], desc: "Rige el deseo de vinculación complementaria con el Otro, patrones estéticos y autoestima." },
+        { nombre: "Marte ♂️", rol: "El Impulso de Conquista", frase_semilla: "Yo Conquisto", keywords: ["acción", "fuerza", "coraje"], desc: "La espada del guerrero. Gobierna la asertividad ante el peligro y la libido activa." },
+        { nombre: "Júpiter ♃", rol: "El Expansor de Horizontes", frase_semilla: "Yo Expando", keywords: ["abundancia", "sabiduría"], desc: "El gran protector. Rige saltos al vacío, optimismo y riqueza material o espiritual." },
+        { nombre: "Saturno ♄", rol: "El Arquitecto del Karma", frase_semilla: "Yo Estructuro", keywords: ["límite", "tiempo", "ley"], desc: "El señor del tiempo. Trae principio de realidad, límites sanos y cristalización kármica." },
+        { nombre: "Urano ♅", rol: "El Despertador Disruptivo", frase_semilla: "Yo Libero", keywords: ["rayo", "libertad", "mutación"], desc: "Produce quiebres violentos de estructuras obsoletas y revoluciones ideológicas." },
+        { nombre: "Neptuno ♆", rol: "El Océano Alquímico", frase_semilla: "Yo Transciendo", keywords: ["misticismo", "empatía", "arte"], desc: "Rige la disolución absoluta de las fronteras defensivas del ego y la inspiración infinita." },
+        { nombre: "Plutón ♇", rol: "El Transmutador Atómico", frase_semilla: "Yo Destruyo para Renacer", keywords: ["poder", "sombras", "tabú"], desc: "Saca a la luz el material reprimido destruyendo formas psicológicas corruptas." },
+        { nombre: "Quirón ⚷", rol: "El Sanador Herido", frase_semilla: "Yo Sano a través de mi Fractura", keywords: ["vulnerabilidad", "herida"], desc: "Representa nuestra fractura kármica original. Donde fuimos heridos reside el don de sanar." },
+        { nombre: "Lilith ⚸ (Luna Negra)", rol: "La Sombra Reprimida", frase_semilla: "Yo Despierto mi Poder Salvaje", keywords: ["tabú", "rebeldía"], desc: "Representa la energía instintiva visceral exiliada y censurada por la sociedad." }
     ],
 
-    regenciasDiccionario: {
-        aries: "Marte (Tradicional y Moderno)",
-        tauro: "Venus (Tradicional y Moderno)",
-        geminis: "Mercurio (Tradicional y Moderno)",
-        cancer: "Luna (Tradicional y Moderna)",
-        leo: "Sol (Tradicional y Moderno)",
-        virgo: "Mercurio (Tradicional y Moderno)",
-        libra: "Venus (Tradicional y Moderno)",
-        escorpio: "Tradicional: Marte | Moderno: Plutón 🔥 Transmutación interna profunda.",
-        sagitario: "Júpiter (Tradicional y Moderno)",
-        capricornio: "Saturno (Tradicional y Moderno)",
-        acuario: "Tradicional: Saturno | Moderno: Urano ⚡ Conciencia de red colectiva.",
-        piscis: "Tradicional: Júpiter | Moderno: Neptuno 🌊 Disolución infinita."
-    }
+    // --- CALENDARIO ANUAL DE RETROGRADACIONES 2026 ---
+    retrogradaciones2026: [
+        { planeta: "Mercurio ☿", periodo: "26 de Febrero al 20 de Mar", signo: "Piscis ♓", advertencia: "Confusión extrema en acuerdos, malentendidos y fallos de software. Evitar contratos formales." },
+        { planeta: "Mercurio ☿", periodo: "29 de Junio al 23 de Julio", signo: "Cáncer ♋", advertencia: "Afloramiento de nostalgias pesadas del pasado familiar. Revisar tuberías y seguridad del hogar." },
+        { planeta: "Mercurio ☿", periodo: "24 de Octubre al 13 de Nov", signo: "Escorpio ♏ / Libra ♎", advertencia: "Secretos del pasado que ven la luz. Crisis de sospechas relacionales. Pensar antes de hablar." },
+        { planeta: "Marte ♂️", periodo: "Inicia el 24 de Diciembre de 2025", signo: "Leo ♌ / Cáncer ♋", advertencia: "Baja drástica de energía física, frustración contenida e ira reactiva. Cuidar el sistema cardíaco." },
+        { planeta: "Saturno ♄", periodo: "08 de Junio al 28 de Octubre", signo: "Aries ♈", advertencia: "Sensación de frenazo estructural absoluto. Los proyectos individuales exigen paciencia kármica o colapsan." },
+        { planeta: "Plutón ♇", periodo: "27 de Abril al 02 de Octubre", signo: "Acuario ♒", advertencia: "Reestructuración profunda de redes comunitarias globales, caídas sistémicas en tecnologías e internet." }
+    ]
 };
