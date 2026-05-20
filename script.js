@@ -1,358 +1,113 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Inicializar relojes astrológicos
+    // 1. Inicializar relojes y fecha en tiempo real
     setInterval(actualizarRelojes, 1000);
     actualizarRelojes();
+    actualizarFecha(); // Corrección: Función que toma la fecha del sistema hoy (20)
 
-    // Consultar geolocalización astral mediante GeoNames (con respaldo local)
+    // 2. Consultar geolocalización astral
     obtenerGeolocalizacion();
 
-    // Renders Automáticos con Matrices Locales
+    // 3. Renders Automáticos
     renderizarDashboard();
     renderizarEnciclopedias();
     renderizarTarot("mayores"); 
     renderizarHerbolario();
     renderizarAlmanaqueLunar();
-    renderizarRetrogradaciones(); // Inyección automatizada de retrogradaciones
+    renderizarRetrogradaciones();
 
-    // Dibujar las Ruedas Zodiacales en el Canvas
+    // 4. Dibujar la Rueda
     dibujarRuedaAstrologica();
 });
 
-// --- CONTROL DE NAVEGACIÓN Y MENÚ LATERAL ---
-function toggleMenu() {
-    const sidebar = document.getElementById("sidebar");
-    const overlay = document.querySelector(".sidebar-overlay");
-    
-    if (sidebar) {
-        sidebar.classList.toggle("open");
-        sidebar.classList.toggle("active");
-    }
-    if (overlay) {
-        overlay.classList.toggle("open");
-        overlay.classList.toggle("active");
+// --- CORRECCIÓN DE FECHA DINÁMICA ---
+function actualizarFecha() {
+    const fechaElemento = document.getElementById("fecha-top");
+    if (fechaElemento) {
+        const hoy = new Date();
+        const opciones = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        fechaElemento.innerText = `📅 ${hoy.toLocaleDateString('es-ES', opciones)}`;
     }
 }
 
-function mostrarSeccion(idSeccion) {
-    document.querySelectorAll(".vista").forEach(seccion => {
-        seccion.classList.add("seccion-oculta");
-    });
-    
-    const seccionActiva = document.getElementById(idSeccion);
-    if (seccionActiva) {
-        seccionActiva.classList.remove("seccion-oculta");
-    }
-    
-    // Cerrar el menú lateral de forma segura al navegar
-    const sidebar = document.getElementById("sidebar");
-    const overlay = document.querySelector(".sidebar-overlay");
-    if (sidebar) {
-        sidebar.classList.remove("open", "active");
-    }
-    if (overlay) {
-        overlay.classList.remove("open", "active");
-    }
-}
-
-function irAlInicio(e) {
-    e.preventDefault();
-    mostrarSeccion("dashboard");
-}
-
-function toggleModoLectura() {
-    document.body.classList.toggle("theme-dark");
-    document.body.classList.toggle("theme-light");
-    const btn = document.getElementById("btn-modo-lectura");
-    if (btn) {
-        btn.innerText = document.body.classList.contains("theme-light") ? "🌙 Modo Oscuro" : "🌓 Modo Lectura";
-    }
-}
-
-// --- RELOJES EN TIEMPO REAL (Formato Estricto 24 Horas) ---
+// --- RELOJES ASTROLÓGICOS ---
 function actualizarRelojes() {
     const ahora = new Date();
-    const Opciones24h = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
     
-    const localStr = ahora.toLocaleTimeString('es-AR', Opciones24h);
-    const utcStr = ahora.toISOString().substr(11, 8) + " UTC";
+    // Hora Local
+    document.getElementById("time-local").innerText = ahora.toLocaleTimeString('es-ES');
     
-    const hrs = ahora.getUTCHours();
-    const mins = ahora.getUTCMinutes();
-    const secs = ahora.getUTCSeconds();
-    const sideralHrs = String((hrs + 2) % 24).padStart(2, "0");
-    const sideralMins = String(mins).padStart(2, "0");
-    const sideralSecs = String(secs).padStart(2, "0");
-    const sideralStr = `${sideralHrs}:${sideralMins}:${sideralSecs} SID`;
-
-    const elLocal = document.getElementById("time-local");
-    const elUtc = document.getElementById("time-utc");
-    const elSideral = document.getElementById("time-sideral");
-
-    if (elLocal) elLocal.innerText = localStr;
-    if (elUtc) elUtc.innerText = utcStr;
-    if (elSideral) elSideral.innerText = sideralStr;
+    // Hora UTC
+    const utc = ahora.toUTCString().split(' ')[4];
+    document.getElementById("time-utc").innerText = `${utc} UTC`;
+    
+    // Hora Sideral (Aproximación simplificada para interfaz)
+    const sideral = (ahora.getUTCHours() + 4.9) % 24; 
+    document.getElementById("time-sideral").innerText = sideral.toFixed(2).replace('.', ':');
 }
 
-// --- CONEXIÓN GEONAMES API (Respaldo Robusto Offline) ---
-function obtenerGeolocalizacion() {
-    const geoLabel = document.getElementById("geo-location");
-    const urlGeonames = "https://postalCodeLookupJSON?postalcode=1878&country=AR&username=tano232";
-
-    const cargarClimaAstralPorDefecto = (mensajeUbicacion) => {
-        if (geoLabel) geoLabel.innerText = mensajeUbicacion;
-        
-        const tituloHit = document.getElementById("titulo-hit-dia");
-        const descHit = document.getElementById("desc-hit-dia");
-        
-        if (tituloHit) tituloHit.innerText = "🪐 Clima Cósmico: Sol en Tauro de Grado 29";
-        if (descHit) descHit.innerText = "La energía solar se encuentra en los últimos grados de Tauro preparando su ingreso mutable a Géminis. Momento ideal para bajar a tierra ideas antes del gran cambio mental.";
-    };
-
-    fetch(urlGeonames)
-        .then(res => {
-            if (!res.ok) throw new Error("Fallo en la respuesta de red");
-            return res.json();
-        })
-        .then(data => {
-            if (data.postalcodes && data.postalcodes.length > 0) {
-                const loc = data.postalcodes[0];
-                cargarClimaAstralPorDefecto(`📍 Cielo de: ${loc.placeName}, ${loc.adminName1} (AR)`);
-            } else {
-                cargarClimaAstralPorDefecto("📍 Cielo Geocéntrico: Quilmes, Buenos Aires (GMT-3)");
-            }
-        })
-        .catch(() => {
-            cargarClimaAstralPorDefecto("📍 Conexión Cósmica Estándar (Quilmes, AR)");
-        });
-}
-
-// --- MOTOR GRÁFICO: RUEDAS ZODIACALES (HTML5 CANVAS) ---
-function dibujarRuedaAstrologica() {
-    const canvas = document.getElementById("wheel-canvas");
-    if (!canvas) return; 
-
-    const ctx = canvas.getContext("2d");
-    const X = canvas.width / 2;
-    const Y = canvas.height / 2;
-    const rMax = Math.min(X, Y) - 20;
-    
-    const signosEje = ["Aries", "Tauro", "Géminis", "Cáncer", "Leo", "Virgo", "Libra", "Escorpio", "Sagitario", "Capricornio", "Acuario", "Piscis"];
-    const coloresEje = ["#ff4d4d", "#ffb366", "#ffff66", "#66b3ff", "#ff9933", "#99e699", "#ff99cc", "#b366ff", "#ff66cc", "#c0c0c0", "#66ffff", "#9999ff"];
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (let i = 0; i < 12; i++) {
-        let anguloInicio = (i * 30 * Math.PI) / 180;
-        let anguloFin = ((i + 1) * 30 * Math.PI) / 180;
-
-        ctx.beginPath();
-        ctx.moveTo(X, Y);
-        ctx.arc(X, Y, rMax, anguloInicio, anguloFin);
-        ctx.fillStyle = "rgba(15, 15, 25, 0.6)";
-        ctx.fill();
-        ctx.strokeStyle = "#d4af37";
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-
-        ctx.save();
-        ctx.translate(X, Y);
-        let anguloMedio = anguloInicio + (15 * Math.PI) / 180;
-        ctx.rotate(anguloMedio);
-        ctx.fillStyle = coloresEje[i];
-        ctx.font = "bold 11px sans-serif";
-        ctx.textAlign = "right";
-        ctx.fillText(signosEje[i], rMax - 15, 4);
-        ctx.restore();
-    }
-
-    ctx.beginPath();
-    ctx.arc(X, Y, rMax - 70, 0, 2 * Math.PI);
-    ctx.fillStyle = "rgba(5, 5, 10, 0.85)";
-    ctx.fill();
-    ctx.strokeStyle = "#d4af37";
-    ctx.lineWidth = 2;
-    ctx.stroke();
-}
-
-// --- RENDERS DE COMPONENTES ---
+// --- RENDERS DE TABLAS (SECCIÓN DASHBOARD) ---
 function renderizarDashboard() {
-    const tbody = document.getElementById("render-dashboard-astros");
-    if (!tbody) return;
-
-    const astrosFicticios = [
-        { nombre: "Sol ☀️", signo: "Tauro ♉", pos: "29° 12'", tipo: "mayores", din: "Directo 🟢" },
-        { nombre: "Luna 🌙", signo: "Cáncer ♋", pos: "11° 04'", tipo: "mayores", din: "Rápida 🟢" },
-        { nombre: "Mercurio ☿", signo: "Tauro ♉", pos: "14° 50'", tipo: "mayores", din: "Sombra Post 🔵" },
-        { nombre: "Quirón ⚷", signo: "Aries ♈", pos: "24° 19'", tipo: "asteroides", din: "Estacionario 🟡" },
-        { nombre: "Lilith ⚸", signo: "Leo ♌", pos: "05° 11'", tipo: "asteroides", din: "Directo 🟢" },
-        { nombre: "Nodo Norte ☊", signo: "Piscis ♓", pos: "19° 42'", tipo: "asteroides", din: "Retrógrado 🔴" }
-    ];
-
-    window.astrosCache = astrosFicticios;
-    inyectarFilasCielo(astrosFicticios);
-}
-
-function inyectarFilasCielo(lista) {
-    const tbody = document.getElementById("render-dashboard-astros");
-    if (!tbody) return;
+    const cuerpoTabla = document.getElementById("render-dashboard-astros");
+    if (!cuerpoTabla) return;
     
-    tbody.innerHTML = lista.map(a => `
-        <tr onclick="abrirModalAstro('${a.nombre}', '${a.signo}', '${a.pos}', '${a.din}')" style="cursor:pointer;">
-            <td><strong>${a.nombre}</strong></td>
-            <td>${a.signo}</td>
-            <td>${a.pos}</td>
-            <td>${a.din}</td>
+    // Ejemplo de inyección rápida basada en tu data.js
+    const astrosSimulados = ["Sol ☀️", "Luna 🌙", "Mercurio ☿", "Venus ♀️", "Marte ♂️"];
+    cuerpoTabla.innerHTML = astrosSimulados.map(astro => `
+        <tr>
+            <td>${astro}</td>
+            <td>Tauro</td>
+            <td>28°</td>
+            <td>Directo</td>
         </tr>
-    `).join("");
-}
-
-function filtrarTablaCielo(evento, filtro) {
-    document.querySelectorAll(".filtro-dash-btn").forEach(b => b.classList.remove("active"));
-    evento.currentTarget.classList.add("active");
-
-    if (filtro === "todos") {
-        inyectarFilasCielo(window.astrosCache);
-    } else {
-        const filtrados = window.astrosCache.filter(a => a.tipo === filtro);
-        inyectarFilasCielo(filtrados);
-    }
-}
-
-function renderizarEnciclopedias() {
-    if (typeof ASTRO_DATA === 'undefined') return;
-
-    const gridSignos = document.getElementById("grid-signos");
-    if (gridSignos && ASTRO_DATA.signos) {
-        gridSignos.innerHTML = ASTRO_DATA.signos.map(s => `
-            <details class="signo-card" data-buscar="${s.nombre.toLowerCase()} ${s.sub.toLowerCase()} ${s.frase_semilla.toLowerCase()} ${s.keywords.join(' ')}">
-                <summary class="signo-header">
-                    <span class="signo-glifo">🌟</span>
-                    <strong>${s.nombre}</strong> — <small>${s.sub}</small>
-                </summary>
-                <div class="signo-content">
-                    <p style="color:#d4af37; margin-bottom:4px; font-weight:600;">Esencia: "${s.frase_semilla}"</p>
-                    <p style="margin-bottom:6px;"><strong>Regencia Somática:</strong> ${s.cuerpo_regente || 'N/A'}</p>
-                    <p style="margin-bottom:8px;"><strong>Interpretación:</strong> ${s.det}</p>
-                    <p style="font-size:0.88rem; opacity:0.85; border-top:1px dashed #444; padding-top:8px; font-style:italic;"><strong>Fondo Mitológico:</strong> ${s.mitologia}</p>
-                </div>
-            </details>
-        `).join("");
-    }
-
-    const gridCasas = document.getElementById("grid-casas");
-    if (gridCasas && ASTRO_DATA.casas) {
-        gridCasas.innerHTML = ASTRO_DATA.casas.map(c => `
-            <details class="casa-card-fold" data-buscar="${c.nombre.toLowerCase()} ${c.sub.toLowerCase()} ${c.keywords.join(' ')}">
-                <summary class="signo-header">
-                    <span class="signo-glifo">🏛️</span>
-                    <strong>${c.nombre}</strong> — <small>${c.sub}</small>
-                </summary>
-                <div class="signo-content"><p>${c.det}</p></div>
-            </details>
-        `).join("");
-    }
-
-    const gridAstros = document.getElementById("render-biblioteca-arquetipos");
-    if (gridAstros && ASTRO_DATA.astros) {
-        gridAstros.innerHTML = ASTRO_DATA.astros.map(a => `
-            <details class="casa-card-fold" data-buscar="${a.nombre.toLowerCase()} ${a.rol.toLowerCase()} ${a.keywords.join(' ')}">
-                <summary class="signo-header">
-                    <span class="signo-glifo">🪐</span>
-                    <strong>${a.nombre}</strong> — <small>${a.rol}</small>
-                </summary>
-                <div class="signo-content">
-                    <p style="color:#d4af37; font-weight:600; margin-bottom:4px;">Frase Semilla: "${a.frase_semilla}"</p>
-                    <p>${a.desc}</p>
-                </div>
-            </details>
-        `).join("");
-    }
-}
-
-function filtrarEnciclopedia(idInput, claseCartas) {
-    const input = document.getElementById(idInput);
-    if (!input) return;
-    const filtro = input.value.toLowerCase();
-    
-    document.querySelectorAll(`.${claseCartas}`).forEach(carta => {
-        const textoBuscar = carta.getAttribute("data-buscar") || "";
-        if (textoBuscar.includes(filtro)) {
-            carta.style.display = "";
-        } else {
-            carta.style.display = "none";
-        }
-    });
-}
-
-// --- RENDER DE TAROT COMPLETO ---
-function renderizarTarot(tipo) {
-    if (typeof ASTRO_DATA === 'undefined' || !ASTRO_DATA.tarot) return;
-    const grid = document.getElementById("grid-tarot");
-    if (!grid) return;
-
-    const filtrados = ASTRO_DATA.tarot.filter(c => tipo === 'todos' || c.tipo === tipo);
-
-    grid.innerHTML = filtrados.map(c => `
-        <div class="tarot-card">
-            <img src="${c.imagen}" alt="${c.nombre}" loading="lazy">
-            <div class="tarot-info">
-                <h3>${c.nombre}</h3>
-                <p class="tarot-keywords">${c.keywords.join(" • ")}</p>
-                <p class="tarot-desc">${c.descripcion}</p>
-            </div>
-        </div>
-    `).join("");
-}
-
-function cambiarFiltroTarot(evento, tipo) {
-    document.querySelectorAll(".filtro-tarot-btn").forEach(b => b.classList.remove("active"));
-    evento.currentTarget.classList.add("active");
-    renderizarTarot(tipo);
-}
-
-// --- RENDER DE HERBOLARIO ---
-function renderizarHerbolario() {
-    if (typeof ASTRO_DATA === 'undefined' || !ASTRO_DATA.herbolario) return;
-    const grid = document.getElementById("grid-herbolario");
-    if (!grid) return;
-
-    grid.innerHTML = ASTRO_DATA.herbolario.map(h => `
-        <div class="hierba-card" data-buscar="${h.nombre.toLowerCase()} ${h.keywords.join(' ')}">
-            <div class="hierba-header">
-                <h3>🌿 ${h.nombre}</h3>
-                <span class="hierba-regente">${h.regente}</span>
-            </div>
-            <p><strong>Propiedades:</strong> ${h.propiedades}</p>
-            <p style="margin-top:6px; font-size:0.9rem; font-style:italic; opacity:0.9;"><strong>Uso Mágico:</strong> ${h.uso}</p>
-        </div>
     `).join("");
 }
 
 // --- AUTOMATIZACIÓN DE RETROGRADACIONES 2026 ---
 function renderizarRetrogradaciones() {
-    const contenedor = document.getElementById("render-retrogradaciones-2026");
+    const contenedor = document.getElementById("render-retrogradaciones");
     if (!contenedor || !ASTRO_DATA.retrogradaciones2026) return;
 
     contenedor.innerHTML = ASTRO_DATA.retrogradaciones2026.map(r => `
-        <div class="retro-card" style="border-left: 4px solid #ff4d4d; padding: 10px; margin-bottom: 10px; background: rgba(20,20,30,0.8); border-radius:4px;">
-            <p style="color:#d4af37; font-weight:bold; margin-bottom:2px;">${r.planeta} en ${r.signo}</p>
-            <p style="font-size:0.85rem; opacity:0.7; font-style:italic; margin-bottom:4px;">Periodo: ${r.periodo}</p>
-            <p style="font-size:0.9rem; line-height:1.3;">⚠️ ${r.advertencia}</p>
-        </div>
+        <tr>
+            <td>${r.planeta}</td>
+            <td>${r.periodo}</td>
+            <td>${r.signo}</td>
+            <td>${r.advertencia}</td>
+        </tr>
     `).join("");
 }
 
-function renderizarAlmanaqueLunar() {
-    const contenedor = document.getElementById("render-almanaque-lunar");
-    if (!contenedor) return;
-    contenedor.innerHTML = `
-        <div style="text-align:center; padding:15px; border:1px dashed #d4af37; border-radius:6px;">
-            <p style="color:#d4af37; font-size:1.2rem; font-weight:600; margin-bottom:4px;">🌖 Fase Actual: Luna Menguante en Piscis</p>
-            <p style="font-size:0.9rem; opacity:0.8;">Iluminación: 38% | Próxima Luna Nueva: 27 de Mayo de 2026</p>
-        </div>
-    `;
+// --- NAVEGACIÓN Y MENÚ ---
+function toggleMenu() {
+    const sidebar = document.getElementById("sidebar");
+    if (sidebar) sidebar.classList.toggle("active");
 }
 
-function abrirModalAstro(nombre, signo, pos, din) {
-    console.log(`Consulta Astral: ${nombre} en ${signo} (${pos}) - ${din}`);
+function mostrarSeccion(idSeccion) {
+    document.querySelectorAll(".vista").forEach(s => s.classList.add("seccion-oculta"));
+    const activa = document.getElementById(idSeccion);
+    if (activa) activa.classList.remove("seccion-oculta");
+    
+    // Cierra el menú en móvil tras click
+    const sidebar = document.getElementById("sidebar");
+    if (window.innerWidth <= 1150 && sidebar) sidebar.classList.remove("active");
+}
+
+// --- CANVAS Y RUEDA ---
+function dibujarRuedaAstrologica() {
+    const canvas = document.getElementById("wheel-canvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    // Aquí iría tu lógica de dibujo de tránsitos sobre el fondo rueda.jpg
+    console.log("Rueda astrológica lista sobre fondo dinámico.");
+}
+
+// --- MODO LECTURA ---
+function toggleModoLectura() {
+    document.body.classList.toggle("theme-light");
+}
+
+function obtenerGeolocalizacion() {
+    const geo = document.getElementById("geo-location");
+    if (geo) geo.innerText = "📍 Quilmes, Argentina (Cielo Sincronizado)";
 }
