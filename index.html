@@ -10,109 +10,122 @@
 <body class="theme-dark"> 
     
     <nav id="sidebar" class="sidebar">
-        <button class="close-btn" onclick="toggleMenu()">×</button>
-        <div class="menu-content">
-            <h2 class="menu-logo">COSMOS OMNI</h2>
-            <a href="#" onclick="mostrarSeccion('dashboard')">📊 DASHBOARD ASTRAL</a>
-            <a href="#" onclick="mostrarSeccion('calendario-lunar')">🌙 CALENDARIO LUNAR</a>
-            <a href="#" onclick="mostrarSeccion('cronograma')">📅 CRONOGRAMA & HITOS</a>
-            
-            <div class="menu-category">BIBLIOTECA DIVINA</div>
-            <a href="#" onclick="mostrarSeccion('enciclopedia-zodiacal')">♈ EL CÍRCULO ZODIACAL</a>
-            <a href="#" onclick="mostrarSeccion('enciclopedia-casas')">🏠 LAS 12 CASAS</a>
-            <a href="#" onclick="mostrarSeccion('enciclopedia-astros')">🪐 MANUAL DE ASTROS</a>
-            <a href="#" onclick="mostrarSeccion('efemerides')">⏳ EFEMÉRIDES HISTÓRICAS</a>
-            
-            <div class="menu-category">SECCIÓN MÍSTICA</div>
-            <a href="#" onclick="mostrarSeccion('tarot')">🃏 TAROT Y ARCANOS</a>
-            <a href="#" onclick="mostrarSeccion('herbolario')">🌿 HERBOLARIO MÍSTICO</a>
-            <a href="#" onclick="mostrarSeccion('guias-manuales')">📚 GUÍAS Y COMPATIBILIDAD</a>
-            
-            <a href="#" onclick="mostrarSeccion('contacto')" class="menu-footer-link">📩 CONTACTO</a>
+        <div class="menu-toggle-container" style="padding: 15px 20px;">
+            <button class="hamburger-btn" onclick="toggleMenu()" style="background: none; border: none; color: var(--oro); font-size: 1.5rem; cursor: pointer;">☰</button>
+        </div>
 
-            <div class="sidebar-memorial-section">
-                <img src="Screenshot_20260519-012949.png" alt="Naza - Mi otra mitad" style="width: 100%; max-width: 180px; border-radius: 8px; border: 1px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.5); margin-bottom: 8px;" onerror="this.style.display='none'">
-                <p style="font-family: 'Cinzel', serif; font-size: 0.8rem; color: #d4af37; letter-spacing: 1px; margin: 0;">Naza, mi hermano, mi otra mitad</p>
-                <p style="font-size: 0.7rem; opacity: 0.6; margin: 4px 0 0 0;">Siempre en el mapa cósmico</p>
+        <div class="menu-content">
+            <div class="logo-container" style="text-align: center; padding: 10px 20px; margin-bottom: 25px;">
+                <img src="mini-logo.jpg" alt="🌙" id="mini-logo-img" style="width: 55px; height: auto; margin: 0 auto 10px auto; display: block; border-radius: 50%; box-shadow: 0 0 10px rgba(212,175,55,0.3);"
+                     onerror="this.style.display='none'; document.getElementById('fallback-glifo').style.display='block';">
+                
+                <div id="fallback-glifo" style="display: none; font-size: 1.5rem; color: var(--oro); margin-bottom: 5px;">🌙✨</div>
+                <h2 class="menu-logo" style="font-family: 'Cinzel', serif; color: var(--oro); letter-spacing: 3px; font-size: 1.4rem; margin: 0;">COSMOS OMNI</h2>
+            </div>
+            
+            <div class="navigation-links" style="display: flex; flex-direction: column; gap: 5px;">
+                <a href="#" class="nav-link-item" onclick="mostrarSeccion('dashboard')">DASHBOARD</a>
+                <a href="#" class="nav-link-item" onclick="mostrarSeccion('calendario-lunar')">LUNAR</a>
+                <a href="#" class="nav-link-item" onclick="mostrarSeccion('cronograma')">TRANSITOS</a>
+                <a href="#" class="nav-link-item" onclick="mostrarSeccion('tarot')">ORÁCULO</a>
+                <a href="#" class="nav-link-item" onclick="mostrarSeccion('contacto')">CONTACTO</a>
+            </div>
+
+            <div class="sidebar-memorial-section" style="margin-top: auto; padding: 20px 15px; text-align: center; border-top: 1px solid var(--borde);">
+                <img src="Screenshot_20260519-012949.png" alt="Naza - Mi otra mitad" style="width: 100%; max-width: 140px; border-radius: 8px; border: 1px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.5); margin-bottom: 8px;" onerror="this.style.display='none'">
+                <p style="font-family: 'Cinzel', serif; font-size: 0.75rem; color: #d4af37; letter-spacing: 1px; margin: 0;">Naza, mi hermano, mi otra mitad</p>
+                <p style="font-size: 0.65rem; opacity: 0.6; margin: 4px 0 0 0;">Siempre en el mapa cósmico</p>
             </div>
         </div>
     </nav>
 
-    <header class="main-header-wrapper">
-        <div class="header-banner-area">
-            <button class="hamburguesa-btn" onclick="toggleMenu()">☰ MENU</button>
-            
-            <a href="#" onclick="irAlInicio(event)" class="logo-link" title="Ir al Inicio">
-                <div class="logo-container">
-                    <img src="logo-cosmos.png" alt="COSMOS OMNI" class="web-logo" onerror="this.src='https://placehold.co/120x40/1c1a17/d4af37?text=COSMOS+OMNI'">
-                </div>
-            </a>
-            
-            <button id="btn-modo-lectura" class="btn-utilidad" onclick="toggleModoLectura()">🌓 Modo Lectura</button>
+    <header class="main-header-wrapper" style="margin-left: 260px; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; background: var(--fondo-barra); border-bottom: 1px solid var(--borde);">
+        <div class="logo-link">
+            <img src="logo.jpg" alt="COSMOS OMNI" class="web-logo" style="max-height: 35px; width: auto;" onerror="this.src='https://placehold.co/120x40/1c1a17/d4af37?text=COSMOS+OMNI'">
         </div>
-
-        <div class="astro-data-bar">
-            <div class="data-item location">
-                <span id="geo-location">📍 Buscando cielo...</span>
-            </div>
-            <div class="data-item clocks">
-                <span class="time-box">L: <span id="time-local">00:00:00</span></span>
-                <span class="spacer">|</span>
-                <span class="time-box" style="color: #81D4FA;">U: <span id="time-utc">00:00:00 UTC</span></span>
-                <span class="spacer">|</span>
-                <span class="time-box">S: <span id="time-sideral">00:00:00</span></span>
-            </div>
-            <div class="data-item date">
-                <span id="fecha-top">📅 19/05/2026</span>
-            </div>
-        </div>
+        <button id="btn-modo-lectura" class="btn-utilidad" onclick="toggleModoLectura()" style="background: rgba(255,255,255,0.05); border: 1px solid var(--borde); color: var(--texto); padding: 8px 15px; border-radius: 6px; cursor: pointer;">🌓 Modo Lectura</button>
     </header>
 
-    <main>
+    <div id="dropdown-menu" class="hamburguesa-panel seccion-oculta" style="position: fixed; top: 0; left: 0; height: 100%; width: 280px; background: var(--fondo-barra); z-index: 1500; padding: 20px; box-shadow: 5px 0 15px rgba(0,0,0,0.5); border-right: 1px solid var(--borde); transition: all 0.3s ease;">
+        <button class="close-panel-btn" onclick="toggleMenu()" style="background: none; border: none; color: var(--oro); font-size: 1.8rem; cursor: pointer; float: right;">×</button>
+        <div class="panel-content" style="clear: both; margin-top: 20px; display: flex; flex-direction: column; gap: 12px;">
+            <h3 style="font-family: 'Cinzel', serif; color: var(--oro); border-bottom: 1px solid var(--borde); padding-bottom: 8px; margin-bottom: 5px; font-size: 1.1rem; letter-spacing: 1px;">BIBLIOTECA DIVINA</h3>
+            <a href="#" onclick="mostrarSeccion('enciclopedia-zodiacal')" style="color: var(--texto); text-decoration: none; font-size: 0.9rem; padding: 5px 0; display: block;">EL CÍRCULO ZODIACAL</a>
+            <a href="#" onclick="mostrarSeccion('enciclopedia-casas')" style="color: var(--texto); text-decoration: none; font-size: 0.9rem; padding: 5px 0; display: block;">LAS 12 CASAS</a>
+            <a href="#" onclick="mostrarSeccion('enciclopedia-astros')" style="color: var(--texto); text-decoration: none; font-size: 0.9rem; padding: 5px 0; display: block;">MANUAL DE ASTROS</a>
+            <a href="#" onclick="mostrarSeccion('herbolario')" style="color: var(--texto); text-decoration: none; font-size: 0.9rem; padding: 5px 0; display: block;">HERBOLARIO MÍSTICO</a>
+            <a href="#" onclick="mostrarSeccion('guias-manuales')" style="color: var(--texto); text-decoration: none; font-size: 0.9rem; padding: 5px 0; display: block;">GUÍAS Y COMPATIBILIDAD</a>
+            <a href="#" onclick="mostrarSeccion('efemerides')" style="color: var(--texto); text-decoration: none; font-size: 0.9rem; padding: 5px 0; display: block;">EFEMÉRIDES HISTÓRICAS</a>
+        </div>
+    </div>
+
+    <div class="sidebar-overlay" onclick="toggleMenu()"></div>
+
+    <main class="main-content">
         
-        <section id="dashboard" class="vista">
-            <div class="card-hit-del-dia" id="card-principal-dia">
-                <div class="hit-badge">⚡ TRÁNSITO CLAVE</div>
-                <div id="transito-clave-clima">
-                    <h2 id="titulo-hit-dia">Cargando clima cósmico...</h2>
-                    <p id="desc-hit-dia"></p>
+        <section id="dashboard" class="vista dashboard-grid-layout">
+            
+            <div class="columna-izquierda-paneles">
+                <div class="panel-box">
+                    <span id="geo-location">📍 Buscando cielo...</span>
+                </div>
+                
+                <div class="panel-box relojes-container">
+                    <div class="reloj-row"><span>LOCAL:</span> <strong id="time-local">00:00:00</strong></div>
+                    <div class="reloj-row"><span>UTC:</span> <strong id="time-utc">00:00:00 UTC</strong></div>
+                    <div class="reloj-row"><span>SIDERAL:</span> <strong id="time-sideral">00:00:00</strong></div>
+                    <div class="reloj-row" style="border:none; padding: 0; margin-top: 5px;"><span id="fecha-top">📅 19/05/2026</span></div>
+                </div>
+
+                <div class="panel-box clima-mini" id="card-principal-dia">
+                    <div class="hit-badge" style="color: var(--oro); font-weight: 600; font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 5px;">⚡ TRÁNSITO CLAVE</div>
+                    <div id="transito-clave-clima">
+                        <h4 id="titulo-hit-dia" style="margin: 0 0 5px 0; font-family: 'Cinzel', serif; color: #fff;">Cargando clima cósmico...</h4>
+                        <p id="desc-hit-dia" style="font-size: 0.8rem; opacity: 0.8; margin: 0; line-height: 1.4;"></p>
+                    </div>
+                </div>
+
+                <div class="panel-box card-alertas-lunares">
+                    <div class="badge-alerta" style="color: #ff6b6b; font-weight: 600; font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 5px;">⚠️ ALERTA DE INTENSIDAD</div>
+                    <h4 style="margin: 0 0 5px 0; font-size: 0.95rem; color: #fff !important;">Eclipses Activos & Lunaciones</h4>
+                    <p style="margin: 0; font-size: 0.8rem; opacity: 0.8; line-height: 1.4;">
+                        Próximo hito de alta carga emocional e histórica en el eje Virgo-Piscis. Revisa los aspectos partiles en tu sección de hitos.
+                    </p>
                 </div>
             </div>
 
-            <div class="rueda-astral-container">
-                <h3 style="margin-top: 0; margin-bottom: 15px;">Rueda Astral</h3>
-                <canvas id="wheel-canvas" width="360" height="360"></canvas>
+            <div class="columna-central-grafico">
+                <div class="canvas-wrapper">
+                    <canvas id="wheel-canvas" width="360" height="360"></canvas>
+                </div>
             </div>
 
-            <div class="card card-alertas-lunares" style="margin-bottom: 25px;">
-                <div class="badge-alerta">⚠️ ALERTA DE INTENSIDAD</div>
-                <h3 style="margin: 0 0 8px 0; font-size: 1.1rem; color: #fff !important;">Eclipses Activos & Lunaciones</h3>
-                <p style="margin: 0; font-size: 0.88rem; opacity: 0.9; line-height: 1.4;">
-                    Próximo hito de alta carga emocional e histórica en el eje Virgo-Piscis. Revisa los aspectos partiles en tu sección de hitos.
-                </p>
+            <div class="columna-derecha-tabla">
+                <div class="panel-box-tabla">
+                    <h3 style="font-family: 'Cinzel', serif; color: var(--oro); font-size: 1.1rem; letter-spacing: 1px; margin-top: 0; margin-bottom: 12px; border-bottom: 1px solid var(--borde); padding-bottom: 6px;">EL CIELO EN VIVO</h3>
+                    
+                    <div class="filtro-dashboard-box" style="display: flex; gap: 5px; margin-bottom: 12px; flex-wrap: wrap;">
+                        <button class="filtro-dash-btn active" onclick="filtrarTablaCielo(event, 'todos')">Todo</button>
+                        <button class="filtro-dash-btn" onclick="filtrarTablaCielo(event, 'mayores')">Planetas</button>
+                        <button class="filtro-dash-btn" onclick="filtrarTablaCielo(event, 'asteroides')">☄️ Puntos</button>
+                    </div>
+
+                    <div class="tabla-scroll" style="max-height: 400px; overflow-y: auto;">
+                        <table class="dashboard-table" style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="text-align: left; font-size: 0.75rem; color: var(--oro);">
+                                    <th style="padding-bottom: 8px;">Astro</th>
+                                    <th style="padding-bottom: 8px;">Signo</th>
+                                    <th style="padding-bottom: 8px;">Posición</th>
+                                    <th style="padding-bottom: 8px;">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="render-dashboard-astros" style="font-size: 0.8rem;"></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
-            <h3>El Cielo en Vivo</h3>
-            
-            <div class="filtro-dashboard-box">
-                <button class="filtro-dash-btn active" onclick="filtrarTablaCielo(event, 'todos')">Todo el Cielo</button>
-                <button class="filtro-dash-btn" onclick="filtrarTablaCielo(event, 'mayores')">Planetas Mayores</button>
-                <button class="filtro-dash-btn" onclick="filtrarTablaCielo(event, 'asteroides')">☄️ Asteroides y Puntos</button>
-            </div>
-
-            <div class="tabla-scroll">
-                <table class="dashboard-table">
-                    <thead>
-                        <tr>
-                            <th>Astro / Cuerpo</th>
-                            <th>Signo Actual</th>
-                            <th>Posición</th>
-                            <th>Estado Dinámico</th>
-                        </tr>
-                    </thead>
-                    <tbody id="render-dashboard-astros"></tbody>
-                </table>
-            </div>
         </section>
 
         <section id="calendario-lunar" class="vista seccion-oculta">
@@ -212,6 +225,16 @@
             <div id="render-clima" class="clima-container" style="margin-top:20px;"></div>
         </section>
 
+        <section id="tarot" class="vista seccion-oculta">
+            <h2>Tarot & Arcanos del Destino</h2>
+            <p class="instruccion">Explora la simbología arquetípica del mazo Rider-Waite.</p>
+            <div class="tarot-nav">
+                <button class="tab-btn active" onclick="filtrarTarot(event, 'mayores')">Arcanos Mayores</button>
+                <button class="tab-btn" onclick="filtrarTarot(event, 'menores')">Arcanos Menores (Ases)</button>
+            </div>
+            <div id="galeria-tarot" class="grid-tarot-container"></div>
+        </section>
+
         <section id="enciclopedia-zodiacal" class="vista seccion-oculta">
             <h2>El Círculo Zodiacal</h2>
             <div class="buscador-box">
@@ -229,18 +252,8 @@
         </section>
 
         <section id="enciclopedia-astros" class="vista seccion-oculta">
-            <h2>Manual de Astros e Interpretación</h2>
+            <h2>Manual de Astros e Interpretation</h2>
             <div id="render-biblioteca-arquetipos" class="grid-plegables-container"></div>
-        </section>
-
-        <section id="tarot" class="vista seccion-oculta">
-            <h2>Tarot & Arcanos del Destino</h2>
-            <p class="instruccion">Explora la simbología arquetípica del mazo Rider-Waite.</p>
-            <div class="tarot-nav">
-                <button class="tab-btn active" onclick="filtrarTarot(event, 'mayores')">Arcanos Mayores</button>
-                <button class="tab-btn" onclick="filtrarTarot(event, 'menores')">Arcanos Menores (Ases)</button>
-            </div>
-            <div id="galeria-tarot" class="grid-tarot-container"></div>
         </section>
 
         <section id="herbolario" class="vista seccion-oculta">
@@ -313,9 +326,9 @@
         </div>
     </div>
 
-    <footer style="text-align: center; padding: 50px 20px; background: #06040d; border-top: 1px solid var(--oro); margin-top: 60px;">
+    <footer style="text-align: center; padding: 50px 20px; background: #06040d; border-top: 1px solid var(--oro); margin-top: 60px; margin-left: 260px;">
         <div class="logo-final-footer-box" style="max-width: 200px; margin: 0 auto 15px auto;">
-            <img src="logo-cosmos.png" alt="CosmOmni Logo" style="width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 0 6px rgba(212,175,55,0.3));">
+            <img src="logo.jpg" alt="CosmOmni Logo" style="width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 0 6px rgba(212,175,55,0.3));">
         </div>
         <p style="font-size: 0.75rem; opacity: 0.4; letter-spacing: 1px; margin: 0;">
             © 2026 Cosmos Omni — Todos los derechos reservados.
