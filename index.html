@@ -10,12 +10,13 @@
 
     <header class="main-header">
         <div class="header-logo">
-            <img src="mini-logo.jpg" alt="Icono Cosmos" class="logo-mini">
+            <img src="mini-logo.jpg" alt="Icono" class="logo-mini">
         </div>
         
-        <nav class="nav-desktop">
-            <a href="#" onclick="cambiarVista('dashboard')">DASHBOARD</a>
-        </nav>
+        <div class="header-info">
+            <span id="fecha-top"></span> | 
+            <span id="geo-location">Cargando...</span>
+        </div>
 
         <button class="hamburger-btn" onclick="toggleMenu()">☰ MENU</button>
     </header>
@@ -23,22 +24,40 @@
     <nav id="menu-drawer" class="drawer">
         <button class="close-btn" onclick="toggleMenu()">✕ CERRAR</button>
         <div class="drawer-content">
-            <ul id="menu-list">
-                <li><a href="#" onclick="cambiarVista('dashboard')">Dashboard</a></li>
+            <ul>
+                <li><a href="#" onclick="mostrarSeccion('dashboard')">Dashboard</a></li>
+                <li><a href="#" onclick="mostrarSeccion('seccion-tarot')">Tarot</a></li>
                 </ul>
         </div>
     </nav>
 
     <main id="app-viewport">
-        <h1>Bienvenido a Cosmos Omni</h1>
-        <p>Selecciona una opción del menú para comenzar.</p>
+        
+        <section id="dashboard" class="vista">
+            <div class="relojes">
+                <p>Local: <span id="time-local"></span></p>
+                <p>UTC: <span id="time-utc"></span></p>
+                <p>Sideral: <span id="time-sideral"></span></p>
+            </div>
+            
+            <canvas id="wheel-canvas"></canvas>
+            
+            <table id="render-dashboard-astros">
+                </table>
+            
+            <table id="render-retrogradaciones">
+                </table>
+        </section>
+
+        <section id="seccion-tarot" class="vista seccion-oculta">
+            <h1>Oráculo</h1>
+            <div id="render-tarot"></div>
+        </section>
+
     </main>
 
     <footer class="main-footer">
-        <div class="footer-logo">
-            <img src="logo.jpg" alt="Logo Cosmos Omni" class="logo-footer">
-        </div>
-        <p>Quilmes, Argentina | 2026</p>
+        <img src="logo.jpg" alt="Logo" class="logo-footer">
     </footer>
 
     <script src="script.js"></script>
