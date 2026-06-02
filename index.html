@@ -1,22 +1,46 @@
-<header class="main-header">
-    <div class="header-logo">
-        <img src="mini-logo.jpg" alt="Cosmos Omni Icon" class="logo-mini">
-    </div>
-    
-    <nav class="nav-menu">
-        </nav>
-    
-    <button class="menu-hamburguesa">☰</button>
-</header>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmos Omni 2026</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-<main class="content-area">
+    <header class="main-header">
+        <div class="header-logo">
+            <img src="mini-logo.jpg" alt="Icono Cosmos" class="logo-mini">
+        </div>
+        
+        <nav class="nav-desktop">
+            <a href="#" onclick="cambiarVista('dashboard')">DASHBOARD</a>
+        </nav>
+
+        <button class="hamburger-btn" onclick="toggleMenu()">☰ MENU</button>
+    </header>
+
+    <nav id="menu-drawer" class="drawer">
+        <button class="close-btn" onclick="toggleMenu()">✕ CERRAR</button>
+        <div class="drawer-content">
+            <ul id="menu-list">
+                <li><a href="#" onclick="cambiarVista('dashboard')">Dashboard</a></li>
+                </ul>
+        </div>
+    </nav>
+
+    <main id="app-viewport">
+        <h1>Bienvenido a Cosmos Omni</h1>
+        <p>Selecciona una opción del menú para comenzar.</p>
     </main>
 
-<footer class="main-footer">
-    <div class="footer-logo">
-        <img src="logo.jpg" alt="Cosmos Omni Logo" class="logo-footer">
-    </div>
-    <div class="footer-info">
-        <p>Cosmos Omni 2026 | Quilmes, AR</p>
-    </div>
-</footer>
+    <footer class="main-footer">
+        <div class="footer-logo">
+            <img src="logo.jpg" alt="Logo Cosmos Omni" class="logo-footer">
+        </div>
+        <p>Quilmes, Argentina | 2026</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
