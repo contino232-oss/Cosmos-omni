@@ -1,66 +1,128 @@
+/* 1. RESET Y VARIABLES */
 :root {
     --bg-color: #06040d;
     --gold: #d4af37;
     --text-white: #ffffff;
+    --header-height: 70px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-white);
-    margin: 0;
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
 }
 
-/* Header Sticky */
+/* 2. LAYOUT - HEADER */
 .main-header {
+    height: var(--header-height);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
+    padding: 0 20px;
     border-bottom: 1px solid var(--gold);
     position: sticky;
     top: 0;
     background: var(--bg-color);
-    z-index: 10;
+    z-index: 100;
 }
 
-.logo-mini { height: 40px; width: auto; }
+.logo-mini {
+    height: 40px;
+    width: auto;
+}
 
-/* Drawer (Hamburguesa) */
+.hamburger-btn {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 8px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* 3. MENÚ LATERAL (DRAWER) */
 .drawer {
     position: fixed;
     top: 0;
-    right: -100%; /* Oculto por defecto */
+    right: -300px; /* Oculto inicialmente */
     width: 300px;
     height: 100%;
     background: #0b0717;
     z-index: 1000;
-    transition: 0.4s;
+    transition: 0.4s ease;
     border-left: 2px solid var(--gold);
-    overflow-y: auto; /* Scroll interno para menús largos */
+    overflow-y: auto;
     padding: 20px;
 }
 
-.drawer.active { right: 0; }
+.drawer.active {
+    right: 0; /* Aparece */
+}
 
-/* Footer */
+.drawer ul {
+    list-style: none;
+    margin-top: 50px;
+}
+
+.drawer li {
+    padding: 15px 0;
+    border-bottom: 1px solid #222;
+}
+
+.drawer a {
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+/* 4. CONTENIDO PRINCIPAL (MAIN) */
+#app-viewport {
+    flex: 1; /* Esto hace que ocupe todo el espacio sobrante */
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.seccion-oculta {
+    display: none;
+}
+
+/* 5. FOOTER */
 .main-footer {
     text-align: center;
     padding: 40px 20px;
     border-top: 1px solid var(--gold);
-    margin-top: auto;
+    background: #06040d;
 }
 
 .logo-footer {
     width: 200px;
     max-width: 80%;
     height: auto;
+    display: block;
+    margin: 0 auto 15px;
 }
 
-/* Responsividad */
-@media (max-width: 600px) {
-    .logo-footer { width: 150px; }
+/* 6. TABLAS Y DATOS (Estilo para tus renders) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    color: #ccc;
 }
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #333;
+    text-align: left
