@@ -1,46 +1,22 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Cosmos Omni</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="layout-wrapper">
-        <nav id="sidebar" class="sidebar">
-            <div class="header-sidebar">
-                <button class="hamburger" onclick="toggleMenu()">☰</button>
-                <img src="mini-logo.jpg" class="logo-main" alt="Logo">
-            </div>
-            
-            <div class="menu-content">
-                <a href="#" onclick="mostrarSeccion('dashboard')">📊 DASHBOARD</a>
-                <a href="#" onclick="mostrarSeccion('calendario-lunar')">🌙 LUNAR</a>
-                <a href="#" onclick="mostrarSeccion('herbolario')">🌿 HERBOLARIO</a>
-                <a href="#" onclick="mostrarSeccion('tarot')">🃏 TAROT</a>
-                <a href="#" onclick="mostrarSeccion('arquetipos')">🎭 ARQUETIPOS</a>
-                <a href="#" onclick="mostrarSeccion('retrogradaciones')">⏳ RETROGRADACIONES</a>
-            </div>
-
-            <div id="naza-bloque" class="naza-footer">
-                <img src="naza.jpg" alt="Naza">
-                <p>Naza, mi otra mitad</p>
-            </div>
-        </nav>
-
-        <main id="main-content">
-            <section id="dashboard" class="vista"><canvas id="wheel-canvas"></canvas></section>
-            <section id="calendario-lunar" class="vista seccion-oculta"><div id="render-almanaque-lunar"></div></section>
-            </main>
-
-        <aside id="side-table">
-            <h3>EL CIELO EN VIVO</h3>
-            <div id="render-dashboard-astros"></div>
-        </aside>
-
-        <footer class="footer-final">
-            <img src="logo.jpg" alt="Cosmos Omni">
-        </footer>
+<header class="main-header">
+    <div class="header-logo">
+        <img src="mini-logo.jpg" alt="Cosmos Omni Icon" class="logo-mini">
     </div>
-</body>
-</html>
+    
+    <nav class="nav-menu">
+        </nav>
+    
+    <button class="menu-hamburguesa">☰</button>
+</header>
+
+<main class="content-area">
+    </main>
+
+<footer class="main-footer">
+    <div class="footer-logo">
+        <img src="logo.jpg" alt="Cosmos Omni Logo" class="logo-footer">
+    </div>
+    <div class="footer-info">
+        <p>Cosmos Omni 2026 | Quilmes, AR</p>
+    </div>
+</footer>
