@@ -1,53 +1,77 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Verificación de seguridad
-    if (typeof ASTRO_DATA === 'undefined') {
-        console.error("ERROR: data.js no se ha cargado. Verifica el orden en el HTML.");
-        return;
-    }
-
-    // 2. Ejecutar funciones
-    renderizarDashboard();
-    renderizarRetrogradaciones();
+    // 1. Iniciar reloj y fechas
+    setInterval(actualizarRelojes, 1000);
     actualizarRelojes();
     actualizarFecha();
     obtenerGeolocalizacion();
+
+    // 2. Renderizar contenido (Aseguramos que no falte nada)
+    renderizarAstros();
+    renderizarRetrogradaciones();
+    renderizarArquetipos(); // Nuevo
+    dibujarRuedaAstrologica();
 });
 
-// Renderiza usando los datos reales de data.js
-function renderizarDashboard() {
+// --- RENDERIZADO DE DATOS ---
+
+function renderizarAstros() {
     const tabla = document.getElementById("render-dashboard-astros");
-    if (!tabla) return;
+    if (!tabla || typeof ASTRO_DATA === 'undefined') return;
     
-    // Construcción de filas basada en ASTRO_DATA.astros
-    const filas = ASTRO_DATA.astros.map(astro => `
-        <tr>
-            <td><strong>${astro.nombre}</strong></td>
-            <td>${astro.desc}</td>
-        </tr>
-    `).join("");
-    
-    tabla.innerHTML = `<thead><tr><th>Astro</th><th>Esencia</th></tr></thead><tbody>${filas}</tbody>`;
+    // Asumiendo que ASTRO_DATA tiene un array 'astros'
+    const datos = ASTRO_DATA.astros || [];
+    tabla.innerHTML = `<thead><tr><th>Astro</th><th>Rol</th></tr></thead>` +
+        `<tbody>${datos.map(a => `<tr><td>${a.nombre}</td><td>${a.rol || a.desc}</td></tr>`).join("")}</tbody>`;
 }
 
-// Renderiza las retrogradaciones de 2026
 function renderizarRetrogradaciones() {
     const tabla = document.getElementById("render-retrogradaciones");
-    if (!tabla) return;
-    
-    const filas = ASTRO_DATA.retrogradaciones2026.map(r => `
-        <tr>
-            <td>${r.planeta}</td>
-            <td>${r.periodo}</td>
-        </tr>
-    `).join("");
-    
-    tabla.innerHTML = `<thead><tr><th>Planeta</th><th>Periodo</th></tr></thead><tbody>${filas}</tbody>`;
+    if (!tabla || typeof ASTRO_DATA === 'undefined') return;
+
+    const retro = ASTRO_DATA.retrogradaciones2026 || [];
+    tabla.innerHTML = `<thead><tr><th>Planeta</th><th>Periodo</th><th>Nota</th></tr></thead>` +
+        `<tbody>${retro.map(r => `<tr><td>${r.planeta}</td><td>${r.periodo}</td><td>${r.advertencia || r.nota}</td></tr>`).join("")}</tbody>`;
 }
 
-// Funciones de utilidad
-function actualizarFecha() {
-    const el = document.getElementById("fecha-top");
-    if (el) el.innerText = `📅 ${new Date().toLocaleDateString('es-ES')}`;
+function renderizarArquetipos() {
+    const contenedor = document.getElementById("render-zodiaco");
+    if (!contenedor || typeof ASTRO_DATA === 'undefined') return;
+
+    // Aquí renderizamos los arquetipos presentes en ASTRO_DATA.astros (o la lista que tengas)
+    const lista = ASTRO_DATA.astros || [];
+    contenedor.innerHTML = lista.map(a => `
+        <div class="card-arquetipo">
+            <h3>${a.nombre}</h3>
+            <p><strong>${a.rol || ""}</strong></p>
+            <small>${a.desc || ""}</small>
+        </div>
+    `).join("");
+}
+
+// --- UTILIDADES ---
+
+function dibujarRuedaAstrologica() {
+    const canvas = document.getElementById("wheel-canvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#d4af37";
+    ctx.beginPath();
+    ctx.arc(150, 150, 50, 0, 2 * Math.PI);
+    ctx.stroke();
+    // Aquí iría tu lógica de dibujo real
+}
+
+function toggleMenu() {
+    const drawer = document.getElementById("menu-drawer");
+    if (drawer) drawer.classList.toggle("active");
+}
+
+function mostrarSeccion(idSeccion) {
+    document.querySelectorAll(".vista").forEach(s => s.classList.add("seccion-oculta"));
+    const activa = document.getElementById(idSeccion);
+    if (activa) activa.classList.remove("seccion-oculta");
+    const drawer = document.getElementById("menu-drawer");
+    if (drawer) drawer.classList.remove("active");
 }
 
 function actualizarRelojes() {
@@ -60,11 +84,16 @@ function actualizarRelojes() {
     if(sid) sid.innerText = ((ahora.getUTCHours() + 4.9) % 24).toFixed(2).replace('.', ':');
 }
 
+function actualizarFecha() {
+    const el = document.getElementById("fecha-top");
+    if (el) el.innerText = `📅 ${new Date().toLocaleDateString('es-ES')}`;
+}
+
 function obtenerGeolocalizacion() {
     const geo = document.getElementById("geo-location");
-    if (navigator.geolocation) {
+    if (geo && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-            (pos) => geo.innerText = `📍 Lat: ${pos.coords.latitude.toFixed(1)}`,
+            (pos) => geo.innerText = `📍 ${pos.coords.latitude.toFixed(1)}, ${pos.coords.longitude.toFixed(1)}`,
             () => geo.innerText = "📍 Quilmes"
         );
     }
