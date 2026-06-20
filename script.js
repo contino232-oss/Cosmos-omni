@@ -1,63 +1,50 @@
 document.addEventListener("DOMContentLoaded", () => {
-    setInterval(actualizarRelojes, 1000);
+    // 1. Verificación de seguridad
+    if (typeof ASTRO_DATA === 'undefined') {
+        console.error("ERROR: data.js no se ha cargado. Verifica el orden en el HTML.");
+        return;
+    }
+
+    // 2. Ejecutar funciones
+    renderizarDashboard();
+    renderizarRetrogradaciones();
     actualizarRelojes();
     actualizarFecha();
     obtenerGeolocalizacion();
-
-    // Inyección de datos
-    renderizarDashboard();
-    renderizarRetrogradaciones();
-    dibujarRuedaAstrologica();
 });
 
-// --- LÓGICA DE UI ---
-function toggleMenu() {
-    const drawer = document.getElementById("menu-drawer");
-    if (drawer) drawer.classList.toggle("active");
-}
-
-function mostrarSeccion(idSeccion) {
-    document.querySelectorAll(".vista").forEach(s => s.classList.add("seccion-oculta"));
-    const activa = document.getElementById(idSeccion);
-    if (activa) activa.classList.remove("seccion-oculta");
-    const drawer = document.getElementById("menu-drawer");
-    if (window.innerWidth <= 1150 && drawer) drawer.classList.remove("active");
-}
-
-// --- FUNCIONES DE DATOS ---
+// Renderiza usando los datos reales de data.js
 function renderizarDashboard() {
-    const cuerpoTabla = document.getElementById("render-dashboard-astros");
-    if (!cuerpoTabla) return;
-
-    // Inyectamos los datos desde ASTRO_DATA
-    cuerpoTabla.innerHTML = ASTRO_DATA.astros.map(astro => `
+    const tabla = document.getElementById("render-dashboard-astros");
+    if (!tabla) return;
+    
+    // Construcción de filas basada en ASTRO_DATA.astros
+    const filas = ASTRO_DATA.astros.map(astro => `
         <tr>
             <td><strong>${astro.nombre}</strong></td>
-            <td>${astro.keywords.join(", ")}</td>
             <td>${astro.desc}</td>
         </tr>
     `).join("");
-}
-
-function renderizarRetrogradaciones() {
-    const tablaRetro = document.getElementById("render-retrogradaciones");
-    if (!tablaRetro) return;
     
-    tablaRetro.innerHTML = `
-        <thead><tr><th>Planeta</th><th>Periodo</th><th>Advertencia</th></tr></thead>
-        <tbody>
-            ${ASTRO_DATA.retrogradaciones2026.map(r => `
-                <tr>
-                    <td>${r.planeta}</td>
-                    <td>${r.periodo}</td>
-                    <td>${r.advertencia}</td>
-                </tr>
-            `).join("")}
-        </tbody>
-    `;
+    tabla.innerHTML = `<thead><tr><th>Astro</th><th>Esencia</th></tr></thead><tbody>${filas}</tbody>`;
 }
 
-// --- RELOJES Y GEO ---
+// Renderiza las retrogradaciones de 2026
+function renderizarRetrogradaciones() {
+    const tabla = document.getElementById("render-retrogradaciones");
+    if (!tabla) return;
+    
+    const filas = ASTRO_DATA.retrogradaciones2026.map(r => `
+        <tr>
+            <td>${r.planeta}</td>
+            <td>${r.periodo}</td>
+        </tr>
+    `).join("");
+    
+    tabla.innerHTML = `<thead><tr><th>Planeta</th><th>Periodo</th></tr></thead><tbody>${filas}</tbody>`;
+}
+
+// Funciones de utilidad
 function actualizarFecha() {
     const el = document.getElementById("fecha-top");
     if (el) el.innerText = `📅 ${new Date().toLocaleDateString('es-ES')}`;
@@ -75,18 +62,10 @@ function actualizarRelojes() {
 
 function obtenerGeolocalizacion() {
     const geo = document.getElementById("geo-location");
-    if (geo) {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (pos) => geo.innerText = `📍 Lat: ${pos.coords.latitude.toFixed(2)}`,
-                () => geo.innerText = "📍 Quilmes (Default)"
-            );
-        } else {
-            geo.innerText = "📍 Quilmes";
-        }
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (pos) => geo.innerText = `📍 Lat: ${pos.coords.latitude.toFixed(1)}`,
+            () => geo.innerText = "📍 Quilmes"
+        );
     }
-}
-
-function dibujarRuedaAstrologica() {
-    console.log("Canvas listo para renderizar tránsitos reales.");
 }
